@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "zucca-site",
+      "runtimeExecutable": "powershell.exe",
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "zucca-shibuya/serve.ps1", "-Port", "5173"],
+      "port": 5173
+    },
+    {
+      "name": "colt-site",
+      "runtimeExecutable": "powershell.exe",
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "colt-jujo/serve.ps1", "-Port", "5174"],
+      "port": 5174
+    }
+  ]
+}
