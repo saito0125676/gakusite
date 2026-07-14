@@ -28,6 +28,28 @@ section {
   margin-bottom: 60px;
 }
 
+#hero {
+  background-color: #f4f4fb;
+  padding: 60px 40px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#hero h2 {
+  font-size: 1.8em;
+  color: #1a1a2e;
+}
+
+#hero p {
+  max-width: 640px;
+  margin: 16px auto 0;
+  line-height: 1.8;
+}
+
+section ul {
+  line-height: 2;
+}
+
 footer {
   text-align: center;
   padding: 20px;
