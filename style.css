@@ -733,27 +733,27 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--blue);
+  background-color: #16a34a;
   color: white;
   text-decoration: none;
   padding: 12px 20px;
   border-radius: 999px;
   font-weight: bold;
   font-size: 0.9em;
-  box-shadow: 0 4px 12px rgba(20, 40, 63, 0.25);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .consult-float:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(20, 40, 63, 0.32);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.45);
 }
 
 .consult-float-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #4ade80;
+  background-color: white;
   flex-shrink: 0;
   animation: consult-float-pulse 1.6s ease-in-out infinite;
 }
@@ -770,4 +770,51 @@ footer {
     padding: 10px 16px;
     font-size: 0.8em;
   }
+}
+
+.faq-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid var(--blue-light);
+  border-radius: 8px;
+  padding: 4px 20px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 16px 0;
+  font-weight: bold;
+  color: var(--blue-dark);
+  list-style: none;
+  position: relative;
+  padding-right: 28px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 14px;
+  color: var(--blue);
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin: 0 0 16px;
+  line-height: 1.8;
+  color: #444;
 }
