@@ -288,7 +288,7 @@ section {
 }
 
 #hero {
-  background-color: var(--blue-light);
+  background-color: #fff;
   background-image: url("assets/hero-bg.jpg");
   background-size: cover;
   background-position: center bottom;
