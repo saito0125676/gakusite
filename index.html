@@ -74,6 +74,54 @@
       </figure>
     </section>
 
+    <section id="palette">
+      <h2>配色も、業種に合わせて自由自在。</h2>
+      <p>同じ構成でも、色を変えるだけで印象はガラッと変わります。スクロールして見比べてみてください。</p>
+      <div class="palette-scroller">
+        <div class="palette-sticky">
+          <div class="hero-art palette-mockup palette-mockup--navy" aria-hidden="true">
+            <div class="hero-art-bar">
+              <span class="hero-art-dot"></span><span class="hero-art-dot"></span><span class="hero-art-dot"></span>
+            </div>
+            <div class="hero-art-body">
+              <div class="hero-art-nav"></div>
+              <div class="hero-art-hero">
+                <div class="hero-art-line hero-art-line--title"></div>
+                <div class="hero-art-line hero-art-line--accent"><span class="hero-art-cursor"></span></div>
+              </div>
+              <div class="hero-art-content">
+                <div class="hero-art-card"></div>
+                <div class="hero-art-card"></div>
+                <div class="hero-art-card"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="palette-steps">
+          <div class="palette-step" data-palette="navy">
+            <span class="palette-swatch palette-swatch--navy" aria-hidden="true"></span>
+            <h3>ネイビー</h3>
+            <p>信頼感のある王道カラー。学習塾など、真面目な印象を伝えたい業種に。</p>
+          </div>
+          <div class="palette-step" data-palette="coral">
+            <span class="palette-swatch palette-swatch--coral" aria-hidden="true"></span>
+            <h3>コーラル</h3>
+            <p>温かみのあるやさしい配色。音楽教室や子ども向けレッスンに人気です。</p>
+          </div>
+          <div class="palette-step" data-palette="forest">
+            <span class="palette-swatch palette-swatch--forest" aria-hidden="true"></span>
+            <h3>フォレスト</h3>
+            <p>自然を感じるアクティブな配色。スポーツ・アウトドア系の教室に。</p>
+          </div>
+          <div class="palette-step" data-palette="mono">
+            <span class="palette-swatch palette-swatch--mono" aria-hidden="true"></span>
+            <h3>モノトーン</h3>
+            <p>上質で落ち着いた大人の雰囲気。ダンスや個人レッスンなどに。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="works">
       <h2>こんなサイトを作れます</h2>
       <p>塾・教室の魅力が伝わるホームページの一例です。業種やご要望に合わせてデザインをご提案します。</p>
@@ -231,6 +279,26 @@
 
       startAutoplay();
     })();
+
+    var paletteSteps = document.querySelectorAll('.palette-step');
+    var paletteMockup = document.querySelector('.palette-mockup');
+    if (paletteSteps.length && paletteMockup && 'IntersectionObserver' in window) {
+      var paletteObserver = new IntersectionObserver(function (entries) {
+        var best = null;
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && (!best || entry.intersectionRatio > best.intersectionRatio)) {
+            best = entry;
+          }
+        });
+        if (best) {
+          paletteMockup.classList.remove('palette-mockup--navy', 'palette-mockup--coral', 'palette-mockup--forest', 'palette-mockup--mono');
+          paletteMockup.classList.add('palette-mockup--' + best.target.getAttribute('data-palette'));
+          paletteSteps.forEach(function (s) { s.classList.remove('is-active'); });
+          best.target.classList.add('is-active');
+        }
+      }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+      paletteSteps.forEach(function (step) { paletteObserver.observe(step); });
+    }
   </script>
 </body>
 </html>
