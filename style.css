@@ -49,6 +49,14 @@ section {
   text-align: center;
 }
 
+.hero-catch {
+  font-size: 1.15em;
+  font-weight: bold;
+  line-height: 1.9;
+  color: var(--blue-dark);
+  margin-bottom: 20px;
+}
+
 #hero h2 {
   font-size: 1.8em;
   color: var(--blue-dark);
