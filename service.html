@@ -35,12 +35,12 @@
   <main>
     <section id="service" class="section-card">
       <h2>サービス</h2>
-      <ul>
-        <li>ホームページ新規制作（企業サイト・お店サイト・LPなど）</li>
-        <li>デザイン・コーディング</li>
-        <li>既存サイトの修正・保守運用サポート</li>
-        <li>SNSやチラシと連動した情報発信のご提案</li>
-      </ul>
+      <div class="bubble-list" id="serviceBubbles">
+        <span class="bubble">ホームページ新規制作（企業サイト・<br>お店サイト・LPなど）</span>
+        <span class="bubble">デザイン・コーディング</span>
+        <span class="bubble">既存サイトの修正・保守運用サポート</span>
+        <span class="bubble">SNSやチラシと連動した情報発信の<br>ご提案</span>
+      </div>
     </section>
 
     <section id="flow">
@@ -110,6 +110,21 @@
   </a>
 
   <script>
+    var serviceBubbles = document.getElementById('serviceBubbles');
+    if (serviceBubbles && 'IntersectionObserver' in window) {
+      var bubbleObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            serviceBubbles.classList.add('is-floating');
+            bubbleObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      bubbleObserver.observe(serviceBubbles);
+    } else if (serviceBubbles) {
+      serviceBubbles.classList.add('is-floating');
+    }
+
     var flowSteps = document.querySelector('.flow-steps');
     if (flowSteps && 'IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function (entries) {
