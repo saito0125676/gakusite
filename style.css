@@ -97,6 +97,60 @@ section ul {
   line-height: 2;
 }
 
+.contact-links {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-links li {
+  margin-bottom: 16px;
+}
+
+.contact-links a {
+  color: var(--blue);
+}
+
+.app-links {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.app-icon-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.15s ease;
+}
+
+.app-icon-link:hover {
+  transform: translateY(-2px);
+}
+
+.app-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-icon--instagram {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+
+.app-icon--line {
+  background-color: #06c755;
+}
+
+.app-icon-label {
+  font-size: 0.85em;
+}
+
 footer {
   text-align: center;
   padding: 20px;
