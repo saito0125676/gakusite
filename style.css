@@ -11,10 +11,22 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "Zen Kaku Gothic New", "Helvetica Neue", Arial, sans-serif;
   margin: 0;
   padding: 0;
   color: #333;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+  font-weight: 900;
+  color: var(--blue-dark);
+  letter-spacing: 0.02em;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-weight: 700;
 }
 
 header {
@@ -22,8 +34,16 @@ header {
   color: white;
   padding: 20px 40px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.no-intro .intro-splash {
+  display: none;
 }
 
 .intro-splash {
@@ -137,13 +157,74 @@ header h1.logo .logo-svg {
 }
 
 nav a {
+  position: relative;
   color: white;
   margin-left: 20px;
   text-decoration: none;
+  padding-bottom: 4px;
 }
 
-nav a:hover {
-  text-decoration: underline;
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.25s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.nav-toggle-input {
+  display: none;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  header {
+    padding: 16px 20px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  nav {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 16px;
+  }
+
+  nav a {
+    margin-left: 0;
+    padding: 10px 0;
+  }
+
+  .nav-toggle-input:checked ~ nav {
+    display: flex;
+  }
 }
 
 main {
@@ -152,6 +233,7 @@ main {
 
 section {
   margin-bottom: 60px;
+  text-align: center;
 }
 
 #hero {
@@ -170,8 +252,8 @@ section {
 }
 
 #hero h2 {
-  font-size: 1.8em;
-  color: var(--blue-dark);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  line-height: 1.4;
 }
 
 #hero p {
@@ -291,16 +373,38 @@ section {
 
 section ul {
   line-height: 2;
+  list-style-position: inside;
+}
+
+#service h2 {
+  text-align: center;
 }
 
 .speed-badge {
-  display: inline-block;
+  display: table;
   background-color: var(--blue-light);
   color: var(--blue-dark);
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 999px;
-  margin: 8px 0 32px;
+  margin: 8px auto 32px;
+  opacity: 0;
+  animation: badge-fade-in 0.8s ease-out 0.2s forwards;
+}
+
+#flow {
+  text-align: center;
+}
+
+@keyframes badge-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .flow-steps {
@@ -308,6 +412,7 @@ section ul {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: flex-start;
   gap: 32px 0;
 }
@@ -433,6 +538,7 @@ section ul {
 .works-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 32px;
   margin-top: 24px;
 }
@@ -680,6 +786,7 @@ section ul {
 
 .app-links {
   display: flex;
+  justify-content: center;
   gap: 32px;
   margin-top: 24px;
 }

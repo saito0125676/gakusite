@@ -4,7 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>学サイト | 学生チームによるホームページ制作</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    if (sessionStorage.getItem('introSeen')) {
+      document.documentElement.classList.add('no-intro');
+    } else {
+      sessionStorage.setItem('introSeen', '1');
+    }
+  </script>
 </head>
 <body>
   <div class="intro-splash" aria-hidden="true">
@@ -23,6 +33,10 @@
         <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
       </svg>
     </a></h1>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </label>
     <nav>
       <a href="index.html">ホーム</a>
       <a href="about.html">私たちについて</a>
