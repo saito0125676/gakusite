@@ -220,31 +220,33 @@ section ul {
   font-size: 0.9em;
 }
 
-.pricing-plans {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 24px;
 }
 
-.pricing-plan {
-  flex: 1 1 240px;
+.pricing-table th,
+.pricing-table td {
   border: 1px solid var(--blue-light);
-  border-radius: 8px;
-  padding: 24px;
-  text-align: center;
+  padding: 12px 16px;
+  text-align: left;
 }
 
-.pricing-plan h3 {
-  margin: 0 0 12px;
-  color: var(--blue-dark);
+.pricing-table th {
+  background-color: var(--blue);
+  color: white;
 }
 
-.pricing-plan-price {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: var(--blue);
-  margin: 0 0 12px;
+.pricing-table td:last-child,
+.pricing-table th:last-child {
+  white-space: nowrap;
+}
+
+.pricing-guarantee {
+  margin-top: 16px;
+  color: #666;
+  font-size: 0.9em;
 }
 
 .contact-links {
