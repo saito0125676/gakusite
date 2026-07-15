@@ -4,6 +4,10 @@
   --blue-light: #eaf1ff;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
   margin: 0;
