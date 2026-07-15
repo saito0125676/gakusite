@@ -252,13 +252,48 @@ section ul {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--blue);
-  color: white;
+  background-color: #cfd6de;
+  color: #8993a1;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   margin-bottom: 12px;
+  box-shadow: none;
+  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.flow-steps.is-lit li .flow-step-num {
+  animation: bulb-on 0.7s ease forwards;
+}
+
+.flow-steps.is-lit li:nth-child(1) .flow-step-num { animation-delay: 0s; }
+.flow-steps.is-lit li:nth-child(2) .flow-step-num { animation-delay: 0.25s; }
+.flow-steps.is-lit li:nth-child(3) .flow-step-num { animation-delay: 0.5s; }
+.flow-steps.is-lit li:nth-child(4) .flow-step-num { animation-delay: 0.75s; }
+.flow-steps.is-lit li:nth-child(5) .flow-step-num { animation-delay: 1s; }
+.flow-steps.is-lit li:nth-child(6) .flow-step-num { animation-delay: 1.25s; }
+.flow-steps.is-lit li:nth-child(7) .flow-step-num { animation-delay: 1.5s; }
+
+@keyframes bulb-on {
+  0% {
+    background-color: #cfd6de;
+    color: #8993a1;
+    box-shadow: none;
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(1.18);
+    background-color: var(--blue);
+    color: white;
+    box-shadow: 0 0 0 8px rgba(255, 205, 90, 0.3), 0 0 26px 8px rgba(255, 205, 90, 0.55);
+  }
+  100% {
+    transform: scale(1);
+    background-color: var(--blue);
+    color: white;
+    box-shadow: 0 0 14px 3px rgba(255, 205, 90, 0.45);
+  }
 }
 
 .flow-step-body h3 {

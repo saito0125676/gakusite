@@ -95,5 +95,22 @@
   <footer>
     <p>&copy; 2026 学サイト</p>
   </footer>
+
+  <script>
+    var flowSteps = document.querySelector('.flow-steps');
+    if (flowSteps && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            flowSteps.classList.add('is-lit');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(flowSteps);
+    } else if (flowSteps) {
+      flowSteps.classList.add('is-lit');
+    }
+  </script>
 </body>
 </html>
