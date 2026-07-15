@@ -289,13 +289,13 @@ section {
 }
 
 #hero {
-  background-color: var(--blue-light);
-  background-image: url("assets/hero-visual-bg.svg");
+  background-color: #fff;
+  background-image: url("assets/hero-bg.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   padding: 60px 40px;
-  border-radius: 8px;
+  margin: -40px -40px 0;
   text-align: center;
 }
 
