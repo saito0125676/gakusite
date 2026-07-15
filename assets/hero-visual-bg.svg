@@ -1,0 +1,11 @@
+<svg viewBox="0 0 1320 720" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <rect x="0" y="0" width="1320" height="720" fill="#e7ebf1"/>
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round" style="mix-blend-mode: multiply;">
+    <polyline points="195,-30 285,525 825,428" stroke="#a7b1c2" stroke-width="14" opacity="0.85"/>
+    <polyline points="705,-30 638,695 -30,600" stroke="#3fc1c9" stroke-width="14" opacity="0.85"/>
+    <polyline points="1030,340 1345,300 1345,470" stroke="#a7b1c2" stroke-width="14" opacity="0.85"/>
+    <polyline points="1005,440 1345,458" stroke="#3fc1c9" stroke-width="14" opacity="0.85"/>
+    <polyline points="990,455 985,745" stroke="#3fc1c9" stroke-width="14" opacity="0.85"/>
+    <polyline points="1150,745 1160,470" stroke="#a7b1c2" stroke-width="14" opacity="0.85"/>
+  </g>
+</svg>

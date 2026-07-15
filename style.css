@@ -260,6 +260,10 @@ section {
 
 #hero {
   background-color: var(--blue-light);
+  background-image: url("assets/hero-visual-bg.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 60px 40px;
   border-radius: 8px;
   text-align: center;
@@ -282,115 +286,6 @@ section {
   max-width: 640px;
   margin: 16px auto 0;
   line-height: 1.8;
-}
-
-.hero-photo {
-  margin: 32px auto 0;
-  max-width: 640px;
-}
-
-.hero-art {
-  aspect-ratio: 16 / 9;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: var(--blue-dark);
-  box-shadow: 0 12px 28px rgba(20, 40, 63, 0.18);
-  text-align: left;
-}
-
-.hero-art-bar {
-  background-color: var(--blue-dark);
-  padding: 10px 14px;
-  display: flex;
-  gap: 6px;
-}
-
-.hero-art-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.35);
-}
-
-.hero-art-body {
-  height: calc(100% - 34px);
-  background-color: #fff;
-  padding: clamp(16px, 3vw, 32px);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2.5vw, 20px);
-}
-
-.hero-art-nav {
-  height: 10px;
-  width: 40%;
-  border-radius: 4px;
-  background-color: var(--blue-light);
-}
-
-.hero-art-hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-}
-
-.hero-art-line {
-  height: 12px;
-  border-radius: 4px;
-  background-color: var(--blue-light);
-}
-
-.hero-art-line--title {
-  height: 18px;
-  width: 70%;
-  background-color: var(--blue);
-  opacity: 0.9;
-}
-
-.hero-art-line--accent {
-  width: 45%;
-  background-color: var(--accent-light);
-  display: flex;
-  align-items: center;
-}
-
-.hero-art-cursor {
-  width: 2px;
-  height: 12px;
-  margin-left: 4px;
-  background-color: var(--accent);
-  animation: hero-cursor-blink 1.1s step-end infinite;
-}
-
-@keyframes hero-cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.hero-art-content {
-  display: flex;
-  gap: 10px;
-}
-
-.hero-art-card {
-  flex: 1;
-  height: clamp(28px, 5vw, 44px);
-  border-radius: 6px;
-  background-color: var(--blue-light);
-}
-
-.hero-art-card:first-child {
-  background-color: var(--accent-light);
-  border: 1px solid var(--accent);
-}
-
-.hero-photo figcaption {
-  margin-top: 12px;
-  font-size: 0.9em;
-  color: #666;
-  text-align: center;
 }
 
 section ul {
