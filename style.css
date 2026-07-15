@@ -102,6 +102,81 @@ section ul {
   line-height: 2;
 }
 
+.flow-steps {
+  list-style: none;
+  padding: 0;
+  max-width: 720px;
+}
+
+.flow-steps li {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--blue-light);
+}
+
+.flow-steps li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.flow-step-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.flow-step-body h3 {
+  margin: 0 0 8px;
+  color: var(--blue-dark);
+}
+
+.flow-step-body p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.pricing-note {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.pricing-plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.pricing-plan {
+  flex: 1 1 240px;
+  border: 1px solid var(--blue-light);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+.pricing-plan h3 {
+  margin: 0 0 12px;
+  color: var(--blue-dark);
+}
+
+.pricing-plan-price {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--blue);
+  margin: 0 0 12px;
+}
+
 .contact-links {
   list-style: none;
   padding: 0;
