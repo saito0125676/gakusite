@@ -24,6 +24,11 @@ header {
   align-items: center;
 }
 
+header h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
 nav a {
   color: white;
   margin-left: 20px;
