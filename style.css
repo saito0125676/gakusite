@@ -221,6 +221,7 @@ main {
 
 section {
   margin-bottom: 60px;
+  text-align: center;
 }
 
 #hero {
@@ -360,16 +361,38 @@ section {
 
 section ul {
   line-height: 2;
+  list-style-position: inside;
+}
+
+#service h2 {
+  text-align: center;
 }
 
 .speed-badge {
-  display: inline-block;
+  display: table;
   background-color: var(--blue-light);
   color: var(--blue-dark);
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 999px;
-  margin: 8px 0 32px;
+  margin: 8px auto 32px;
+  opacity: 0;
+  animation: badge-fade-in 0.8s ease-out 0.2s forwards;
+}
+
+#flow {
+  text-align: center;
+}
+
+@keyframes badge-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .flow-steps {
@@ -377,6 +400,7 @@ section ul {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: flex-start;
   gap: 32px 0;
 }
@@ -502,6 +526,7 @@ section ul {
 .works-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 32px;
   margin-top: 24px;
 }
@@ -749,6 +774,7 @@ section ul {
 
 .app-links {
   display: flex;
+  justify-content: center;
   gap: 32px;
   margin-top: 24px;
 }
