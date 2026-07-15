@@ -294,7 +294,7 @@ section {
   background-position: center;
   background-repeat: no-repeat;
   padding: 60px 40px;
-  border-radius: 8px;
+  margin: -40px -40px 0;
   text-align: center;
 }
 
