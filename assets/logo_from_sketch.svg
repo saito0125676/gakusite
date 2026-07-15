@@ -1,0 +1,17 @@
+<svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="500" fill="#F5F7FA"/>
+
+  <!-- ===== Base: two overlapping tilted squares, based on user's sketch ===== -->
+  <g>
+    <!-- Navy square (slightly tilted, top-left) -->
+    <rect x="120" y="140" width="180" height="180" fill="none" stroke="#1A2B4C" stroke-width="14"
+          stroke-linejoin="round" transform="rotate(-4 210 230)"/>
+
+    <!-- Turquoise square (slightly tilted, offset bottom-right, overlapping) -->
+    <rect x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14"
+          stroke-linejoin="round" transform="rotate(3 320 290)"/>
+
+    <text x="215" y="440" font-family="sans-serif" font-size="20" fill="#1A2B4C" font-weight="bold"
+          text-anchor="middle" letter-spacing="3">GAKU SITE</text>
+  </g>
+</svg>

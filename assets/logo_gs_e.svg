@@ -1,7 +1,0 @@
-<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
-  <rect width="500" height="220" fill="#F5F7FA"/>
-
-  <rect x="40" y="50" width="120" height="120" rx="60" fill="#1A2B4C"/>
-  <text x="100" y="133" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#3FC1C9" text-anchor="middle">GS</text>
-  <text x="180" y="120" font-family="sans-serif" font-size="26" fill="#1A2B4C" font-weight="bold">GAKU SITE</text>
-</svg>
