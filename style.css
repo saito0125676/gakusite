@@ -25,8 +25,30 @@ h2 {
   margin: 0 0 24px;
 }
 
+h2::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent);
+  margin: 0 auto 14px;
+}
+
 h3 {
   font-weight: 700;
+}
+
+.section-card {
+  background-color: var(--blue-light);
+  padding: clamp(28px, 6vw, 48px) clamp(20px, 6vw, 40px);
+  border-radius: 8px;
+}
+
+.section-card > p {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 header {
@@ -381,13 +403,15 @@ section ul {
 }
 
 .speed-badge {
-  display: table;
-  background-color: var(--blue-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--accent-light);
   color: var(--blue-dark);
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 999px;
-  margin: 8px auto 32px;
+  margin: 8px 0 32px;
   opacity: 0;
   animation: badge-fade-in 0.8s ease-out 0.2s forwards;
 }
@@ -405,6 +429,15 @@ section ul {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.speed-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  flex-shrink: 0;
 }
 
 .flow-steps {
@@ -507,6 +540,8 @@ section ul {
   }
 
   .flow-steps li {
+    flex: none;
+    min-width: 0;
     flex-direction: row;
     text-align: left;
     align-items: flex-start;
@@ -723,6 +758,7 @@ section ul {
   border: 1px solid var(--blue-light);
   padding: 12px 16px;
   text-align: left;
+  background-color: #fff;
 }
 
 .pricing-table th {
@@ -731,7 +767,9 @@ section ul {
 }
 
 .pricing-table td:last-child,
-.pricing-table th:last-child {
+.pricing-table th:last-child,
+.pricing-table td:first-child,
+.pricing-table th:first-child {
   white-space: nowrap;
 }
 
@@ -741,9 +779,9 @@ section ul {
   gap: 16px;
   margin-top: 24px;
   padding: 20px 24px;
-  border: 2px solid var(--blue);
+  border: 2px solid var(--accent);
   border-radius: 8px;
-  background-color: var(--blue-light);
+  background-color: var(--accent-light);
 }
 
 .pricing-guarantee-icon {
@@ -751,7 +789,7 @@ section ul {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--blue);
+  background-color: var(--accent);
   color: white;
   display: flex;
   align-items: center;
@@ -782,6 +820,10 @@ section ul {
 
 .contact-links a {
   color: var(--blue);
+}
+
+.contact-links a:hover {
+  color: var(--accent);
 }
 
 .app-links {
