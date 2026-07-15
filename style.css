@@ -1,3 +1,9 @@
+:root {
+  --blue: #0057ff;
+  --blue-dark: #0041c4;
+  --blue-light: #eaf1ff;
+}
+
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
   margin: 0;
@@ -6,7 +12,7 @@ body {
 }
 
 header {
-  background-color: #1a1a2e;
+  background-color: var(--blue);
   color: white;
   padding: 20px 40px;
   display: flex;
@@ -20,6 +26,10 @@ nav a {
   text-decoration: none;
 }
 
+nav a:hover {
+  text-decoration: underline;
+}
+
 main {
   padding: 40px;
 }
@@ -29,7 +39,7 @@ section {
 }
 
 #hero {
-  background-color: #f4f4fb;
+  background-color: var(--blue-light);
   padding: 60px 40px;
   border-radius: 8px;
   text-align: center;
@@ -37,13 +47,38 @@ section {
 
 #hero h2 {
   font-size: 1.8em;
-  color: #1a1a2e;
+  color: var(--blue-dark);
 }
 
 #hero p {
   max-width: 640px;
   margin: 16px auto 0;
   line-height: 1.8;
+}
+
+.hero-photo {
+  margin: 32px auto 0;
+  max-width: 640px;
+}
+
+.photo-placeholder {
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      var(--blue) 0px,
+      var(--blue) 14px,
+      var(--blue-dark) 14px,
+      var(--blue-dark) 28px
+    );
+  opacity: 0.85;
+}
+
+.hero-photo figcaption {
+  margin-top: 8px;
+  font-size: 0.85em;
+  color: #666;
 }
 
 section ul {
@@ -54,4 +89,4 @@ footer {
   text-align: center;
   padding: 20px;
   background-color: #f4f4f4;
-} 
+}
