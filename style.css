@@ -11,10 +11,22 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "Zen Kaku Gothic New", "Helvetica Neue", Arial, sans-serif;
   margin: 0;
   padding: 0;
   color: #333;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+  font-weight: 900;
+  color: var(--blue-dark);
+  letter-spacing: 0.02em;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-weight: 700;
 }
 
 header {
@@ -240,8 +252,8 @@ section {
 }
 
 #hero h2 {
-  font-size: 1.8em;
-  color: var(--blue-dark);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  line-height: 1.4;
 }
 
 #hero p {
