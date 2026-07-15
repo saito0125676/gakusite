@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>学サイト | 学生チームによるホームページ制作</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    if (sessionStorage.getItem('introSeen')) {
+      document.documentElement.classList.add('no-intro');
+    } else {
+      sessionStorage.setItem('introSeen', '1');
+    }
+  </script>
 </head>
 <body>
   <div class="intro-splash" aria-hidden="true">

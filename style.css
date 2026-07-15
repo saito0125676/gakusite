@@ -26,6 +26,10 @@ header {
   align-items: center;
 }
 
+.no-intro .intro-splash {
+  display: none;
+}
+
 .intro-splash {
   position: fixed;
   inset: 0;
