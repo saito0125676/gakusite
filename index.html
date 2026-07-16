@@ -210,6 +210,7 @@
 
         slot.addEventListener('pointerdown', function (e) {
           if (slot.dataset.rel !== '0') return;
+          if (e.target.closest('a')) return;
           dragStartY = e.clientY;
           slot.classList.add('is-dragging');
           slot.setPointerCapture(e.pointerId);
