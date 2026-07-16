@@ -678,6 +678,13 @@ section ul {
   cursor: grabbing;
 }
 
+.work-card-slot[data-rel="hidden"] {
+  transform: translateX(0) scale(0.6);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 @media (max-width: 720px) {
   .work-card-slot[data-rel="-1"],
   .work-card-slot[data-rel="1"] {

@@ -1,0 +1,4 @@
+:HL["/demo/gaku-site-juku/_next/static/chunks/29x4noc2o0ofv.css","style"]
+:HL["/demo/gaku-site-juku/_next/static/chunks/2n6veszsvk-kr.css","style"]
+:HL["/demo/gaku-site-juku/_next/static/chunks/1-lab6321nuey.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"w1AGQHLTFP6NJ0zk5CGyp"}
