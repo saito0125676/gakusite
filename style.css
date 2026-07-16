@@ -999,6 +999,23 @@ footer {
   background-color: #f4f4f4;
 }
 
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+
+.footer-social .app-icon-link {
+  gap: 0;
+}
+
+.footer-social .app-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 .consult-float {
   position: fixed;
   right: 20px;
