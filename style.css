@@ -683,7 +683,7 @@ section ul {
     justify-items: center;
     align-items: start;
     max-width: 620px;
-    padding: 24px 0;
+    padding: 24px 20px;
     overflow: hidden;
   }
 
@@ -708,7 +708,7 @@ section ul {
   }
 
   .work-card-slot[data-rel="0"] {
-    transform: translateX(0) scale(1.2) translateY(var(--drag-y));
+    transform: translateX(0) scale(1.08) translateY(var(--drag-y));
     z-index: 2;
   }
 }
