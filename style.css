@@ -645,6 +645,7 @@ section ul {
   min-width: 0;
   max-width: 620px;
   padding: 24px 0;
+  overflow: hidden;
 }
 
 .work-card-slot {
