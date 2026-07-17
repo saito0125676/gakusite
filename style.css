@@ -638,6 +638,7 @@ section ul {
 
 .works-track {
   display: grid;
+  justify-content: center;
   justify-items: center;
   align-items: start;
   flex: 1 1 auto;
