@@ -898,6 +898,142 @@ section ul {
   line-height: 1.7;
 }
 
+.pricing-zero-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 32px;
+  padding: 34px 28px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #7a0c14, #d32f2f 55%, #7a0c14);
+  border: 2px solid #ffd166;
+  box-shadow: 0 10px 34px rgba(211, 47, 47, 0.45), inset 0 0 44px rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.pricing-zero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 209, 102, 0.22), transparent 62%);
+  pointer-events: none;
+}
+
+.pricing-zero-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pricing-zero-label {
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  font-size: 0.95em;
+}
+
+.pricing-zero-amount {
+  color: #fff;
+  font-size: 3.2em;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.pricing-zero-amount small {
+  font-size: 0.35em;
+  font-weight: bold;
+  margin-left: 2px;
+  color: #fff;
+}
+
+.pricing-zero-divider {
+  width: 1px;
+  height: 76px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.pricing-plan {
+  margin-top: 24px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid var(--blue-light);
+  border-radius: 8px;
+  padding: 22px 26px;
+}
+
+.pricing-plan-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--blue-light);
+}
+
+.pricing-plan-name {
+  font-weight: bold;
+  color: var(--blue-dark);
+  font-size: 1.1em;
+}
+
+.pricing-plan-price {
+  font-weight: 900;
+  color: var(--blue);
+  font-size: 1.6em;
+  white-space: nowrap;
+}
+
+.pricing-plan-price small {
+  font-size: 0.55em;
+  font-weight: bold;
+}
+
+.pricing-features {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pricing-features li {
+  position: relative;
+  padding-left: 26px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.pricing-features li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .pricing-zero-banner {
+    gap: 22px;
+    padding: 26px 14px;
+  }
+
+  .pricing-zero-amount {
+    font-size: 2.3em;
+  }
+
+  .pricing-zero-divider {
+    height: 56px;
+  }
+}
+
 .pricing-guarantee {
   display: flex;
   align-items: center;
@@ -932,6 +1068,102 @@ section ul {
 
 .pricing-guarantee strong {
   font-size: 1.1em;
+}
+
+.compare-wrap {
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+.compare-table {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(130px, 1.1fr) minmax(130px, 1.1fr);
+  min-width: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(20, 40, 63, 0.12);
+}
+
+.compare-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 10px;
+  font-size: 0.95em;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--blue-light);
+  text-align: center;
+}
+
+.compare-table .compare-cell:nth-last-child(-n+3) {
+  border-bottom: none;
+}
+
+.compare-head {
+  padding: 14px 10px;
+  font-weight: 900;
+  border-bottom: none;
+}
+
+.compare-head--label {
+  background-color: var(--blue-light);
+}
+
+.compare-head--self {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.compare-head--other {
+  background-color: #8fa3bb;
+  color: #fff;
+}
+
+.compare-label {
+  background-color: var(--blue-dark);
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.compare-self {
+  background-color: #fff;
+  font-weight: bold;
+  color: var(--blue-dark);
+  border-left: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+.compare-other {
+  background-color: var(--blue-light);
+  color: #556;
+}
+
+.compare-icon {
+  font-weight: bold;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.compare-icon--good {
+  color: var(--accent);
+}
+
+.compare-icon--bad {
+  color: #9aa7b5;
+}
+
+@media (max-width: 500px) {
+  .compare-cell {
+    padding: 12px 6px;
+    font-size: 0.82em;
+  }
+
+  .compare-table {
+    min-width: 420px;
+  }
 }
 
 .contact-links {
