@@ -1161,8 +1161,8 @@ section ul {
 }
 
 .compare-head--other {
-  background-color: #8fa3bb;
-  color: #fff;
+  background-color: #d7dde5;
+  color: var(--blue-dark);
 }
 
 .compare-label {
