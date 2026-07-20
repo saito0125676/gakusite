@@ -1182,7 +1182,7 @@ section ul {
 
 .compare-other {
   background-color: var(--blue-light);
-  color: #556;
+  color: #3c4a5e;
 }
 
 .compare-icon {
@@ -1196,7 +1196,7 @@ section ul {
 }
 
 .compare-icon--bad {
-  color: #9aa7b5;
+  color: #78859a;
 }
 
 @media (max-width: 500px) {
