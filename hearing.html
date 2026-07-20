@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ヒアリングシート | 学サイト</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('reveal-ready');</script>
+  <style>
+    .hearing-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .hearing-wrap form {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 12px rgba(20, 40, 63, 0.08);
+      border: 1px solid var(--blue-light);
+    }
+    .hearing-wrap fieldset {
+      border: none;
+      padding: 0;
+      margin: 0 0 32px;
+    }
+    .hearing-wrap legend {
+      display: flex;
+      align-items: center;
+      color: var(--blue-dark);
+      font-weight: bold;
+      font-size: 17px;
+      padding: 0;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+    .hearing-wrap label.field-label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--blue-dark);
+      margin: 16px 0 6px;
+    }
+    .hearing-wrap label.field-label .required {
+      color: #E76F51;
+      font-size: 12px;
+      margin-left: 6px;
+      font-weight: normal;
+      border: 1px solid #E76F51;
+      border-radius: 4px;
+      padding: 1px 6px;
+    }
+    .hearing-wrap input[type="text"],
+    .hearing-wrap input[type="email"],
+    .hearing-wrap input[type="tel"],
+    .hearing-wrap select,
+    .hearing-wrap textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 15px;
+      border: 1px solid var(--blue-light);
+      border-radius: 6px;
+      font-family: inherit;
+      background: #fff;
+      color: #333;
+    }
+    .hearing-wrap textarea { resize: vertical; min-height: 90px; }
+    .hearing-wrap input:focus,
+    .hearing-wrap select:focus,
+    .hearing-wrap textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(63, 193, 201, 0.15);
+    }
+    .hearing-wrap .checkbox-group,
+    .hearing-wrap .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .hearing-wrap .checkbox-group label,
+    .hearing-wrap .radio-group label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: normal;
+      color: #333;
+      cursor: pointer;
+    }
+    .hearing-wrap .checkbox-group input,
+    .hearing-wrap .radio-group input {
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--blue-dark);
+    }
+    .hearing-wrap button.submit-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--blue-dark);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.2s;
+    }
+    .hearing-wrap button.submit-btn:hover { background: var(--blue); }
+    .hearing-wrap button.submit-btn:disabled { opacity: 0.6; cursor: default; }
+    .hearing-wrap .privacy-note {
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      margin-top: 14px;
+    }
+    /* honeypot field - hidden from real users, catches bots */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+    }
+    #form-message {
+      display: none;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      text-align: center;
+    }
+    #form-message.success {
+      display: block;
+      background: var(--accent-light);
+      color: #1A7A72;
+      border: 1px solid var(--accent);
+    }
+    #form-message.error {
+      display: block;
+      background: #FDEDEC;
+      color: #C0392B;
+      border: 1px solid #E76F51;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo"><a href="index.html" aria-label="学サイト">
+      <svg class="logo-svg" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
+        <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
+        <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
+        <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
+      </svg>
+    </a></h1>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </label>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="about.html">私たちについて</a>
+      <a href="service.html">サービス</a>
+      <a href="pricing.html">料金</a>
+      <a href="faq.html">よくある質問</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hearing" class="section-card">
+      <div class="hearing-wrap">
+        <h2>ヒアリングシート</h2>
+        <p>お客様のご希望を丁寧にお伺いし、想いの伝わるホームページ制作に役立てます。ご記入いただける範囲で構いませんので、よろしくお願いいたします。</p>
+
+        <div id="form-message"></div>
+
+        <form id="hearingForm" action="https://formspree.io/f/xojgwjzn" method="POST">
+
+          <!-- honeypot: bots fill this, humans don't see it -->
+          <div class="hp-field">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <fieldset>
+            <legend>1. お客様情報</legend>
+
+            <label class="field-label" for="company">会社名・店舗名<span class="required">必須</span></label>
+            <input type="text" id="company" name="company" required>
+
+            <label class="field-label" for="contact_name">ご担当者名<span class="required">必須</span></label>
+            <input type="text" id="contact_name" name="contact_name" required>
+
+            <label class="field-label" for="phone">ご連絡先(電話)</label>
+            <input type="tel" id="phone" name="phone">
+
+            <label class="field-label" for="email">ご連絡先(メール)<span class="required">必須</span></label>
+            <input type="email" id="email" name="email" required>
+
+            <label class="field-label" for="industry">業種</label>
+            <input type="text" id="industry" name="industry">
+          </fieldset>
+
+          <fieldset>
+            <legend>2. ホームページを作る目的</legend>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="purpose[]" value="集客"> 新規のお客様を増やしたい(集客)</label>
+              <label><input type="checkbox" name="purpose[]" value="ブランディング"> 会社・お店の信頼感を高めたい(ブランディング)</label>
+              <label><input type="checkbox" name="purpose[]" value="予約・問い合わせ増加"> 予約・問い合わせを増やしたい</label>
+              <label><input type="checkbox" name="purpose[]" value="採用"> 採用活動に活用したい</label>
+              <label><input type="checkbox" name="purpose[]" value="リニューアル"> 既存のサイトが古いので刷新したい</label>
+            </div>
+            <label class="field-label" for="purpose_other">その他</label>
+            <input type="text" id="purpose_other" name="purpose_other">
+          </fieldset>
+
+          <fieldset>
+            <legend>3. 掲載したいページ</legend>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="pages[]" value="トップページ"> トップページ</label>
+              <label><input type="checkbox" name="pages[]" value="会社概要"> 会社概要・お店紹介</label>
+              <label><input type="checkbox" name="pages[]" value="サービス紹介"> サービス・商品紹介</label>
+              <label><input type="checkbox" name="pages[]" value="料金"> 料金・プラン</label>
+              <label><input type="checkbox" name="pages[]" value="実績"> 実績・お客様の声</label>
+              <label><input type="checkbox" name="pages[]" value="FAQ"> よくある質問(FAQ)</label>
+              <label><input type="checkbox" name="pages[]" value="お問い合わせ"> お問い合わせ・アクセス</label>
+            </div>
+            <label class="field-label" for="pages_other">その他</label>
+            <input type="text" id="pages_other" name="pages_other">
+          </fieldset>
+
+          <fieldset>
+            <legend>4. 文章・写真などの素材</legend>
+
+            <label class="field-label">文章(コピー)のご用意</label>
+            <div class="radio-group">
+              <label><input type="radio" name="text_prep" value="ご自身で用意する"> ご自身で用意する</label>
+              <label><input type="radio" name="text_prep" value="仮の文章を作成してほしい"> どちらでもいいので仮の文章を作成してほしい</label>
+              <label><input type="radio" name="text_prep" value="相談しながら決めたい"> 相談しながら決めたい</label>
+            </div>
+
+            <label class="field-label">写真・画像のご用意</label>
+            <div class="radio-group">
+              <label><input type="radio" name="photo_prep" value="ご自身で用意する"> ご自身で用意する</label>
+              <label><input type="radio" name="photo_prep" value="フリー素材で用意してほしい"> フリー素材などで用意してほしい</label>
+              <label><input type="radio" name="photo_prep" value="撮影から相談したい"> 撮影から相談したい</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>5. デザインのご希望</legend>
+            <label class="field-label">会社・お店にどんな印象を持ってほしいですか?</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="impression[]" value="信頼感・誠実さ"> 信頼感・誠実さ</label>
+              <label><input type="checkbox" name="impression[]" value="先進的・革新的"> 先進的・革新的</label>
+              <label><input type="checkbox" name="impression[]" value="親しみやすさ・温かみ"> 親しみやすさ・温かみ</label>
+              <label><input type="checkbox" name="impression[]" value="高級感・洗練さ"> 高級感・洗練さ</label>
+            </div>
+
+            <label class="field-label" for="design_note">お好みの色味やイメージ・参考サイトなどあればご記入ください</label>
+            <textarea id="design_note" name="design_note"></textarea>
+          </fieldset>
+
+          <fieldset>
+            <legend>6. ドメイン・サーバー</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="domain_status" value="取得済み"> すでに取得済みのドメインがある</label>
+              <label><input type="radio" name="domain_status" value="新規取得希望"> 新しく取得してほしい</label>
+            </div>
+            <label class="field-label" for="domain_name">ドメイン名 / ご希望名(あれば)</label>
+            <input type="text" id="domain_name" name="domain_name">
+
+            <div class="checkbox-group" style="margin-top:12px;">
+              <label><input type="checkbox" name="server[]" value="サーバーが分からない"> サーバーが分からない・お任せしたい</label>
+              <label><input type="checkbox" name="server[]" value="サーバー契約済み"> サーバーはすでに契約している</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>7. スケジュール</legend>
+
+            <label class="field-label" for="deadline">ご希望の公開時期</label>
+            <input type="text" id="deadline" name="deadline" placeholder="例:2026年9月頃">
+          </fieldset>
+
+          <fieldset>
+            <legend>8. その他・ご要望</legend>
+            <textarea name="other_notes" rows="4"></textarea>
+          </fieldset>
+
+          <button type="submit" class="submit-btn">この内容で送信する</button>
+          <p class="privacy-note">ご入力いただいた情報は、お見積もり・ご提案のみに使用いたします。</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-social">
+      <a class="app-icon-link" href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
+        <span class="app-icon app-icon--instagram" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <circle cx="17.4" cy="6.6" r="1.1" fill="white" stroke="none"></circle>
+          </svg>
+        </span>
+      </a>
+      <a class="app-icon-link" href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer" aria-label="公式LINEを開く">
+        <span class="app-icon app-icon--line" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="white">
+            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <p>&copy; 2026 学サイト</p>
+  </footer>
+
+  <a class="consult-float" href="contact.html">
+    <span class="consult-float-dot" aria-hidden="true"></span>
+    無料相談受け付け中
+  </a>
+  <script src="reveal.js" defer></script>
+
+  <script>
+    document.getElementById('hearingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const messageBox = document.getElementById('form-message');
+      const submitBtn = form.querySelector('.submit-btn');
+
+      // honeypot check
+      if (form.website.value !== '') {
+        return; // silently drop bot submissions
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error('送信に失敗しました');
+          return res.json();
+        })
+        .then(() => {
+          messageBox.className = 'success';
+          messageBox.textContent = '送信が完了しました。ご入力ありがとうございました。担当者より折り返しご連絡いたします。';
+          messageBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          form.reset();
+          form.style.display = 'none';
+        })
+        .catch(() => {
+          messageBox.className = 'error';
+          messageBox.textContent = '送信に失敗しました。恐れ入りますが、時間をおいて再度お試しいただくか、直接メールにてご連絡ください。';
+          messageBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'この内容で送信する';
+        });
+    });
+  </script>
+</body>
+</html>
