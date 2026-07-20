@@ -963,9 +963,9 @@ section ul {
   margin-top: 32px;
   padding: 34px 28px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #7a0c14, #d32f2f 55%, #7a0c14);
-  border: 2px solid #ffd166;
-  box-shadow: 0 10px 34px rgba(211, 47, 47, 0.45), inset 0 0 44px rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue) 55%, var(--blue-dark));
+  border: 2px solid var(--accent);
+  box-shadow: 0 10px 34px rgba(63, 193, 201, 0.35), inset 0 0 44px rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
@@ -973,7 +973,7 @@ section ul {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 209, 102, 0.22), transparent 62%);
+  background: radial-gradient(circle at 50% 0%, rgba(63, 193, 201, 0.3), transparent 62%);
   pointer-events: none;
 }
 
