@@ -955,7 +955,6 @@ section ul {
 }
 
 .pricing-zero-banner {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -963,18 +962,7 @@ section ul {
   margin-top: 32px;
   padding: 34px 28px;
   border-radius: 16px;
-  background: linear-gradient(135deg, var(--blue-dark), var(--blue) 55%, var(--blue-dark));
-  border: 2px solid var(--accent);
-  box-shadow: 0 10px 34px rgba(63, 193, 201, 0.35), inset 0 0 44px rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.pricing-zero-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(63, 193, 201, 0.3), transparent 62%);
-  pointer-events: none;
+  background-color: var(--blue-dark);
 }
 
 .pricing-zero-item {
