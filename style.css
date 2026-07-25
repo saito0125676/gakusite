@@ -1321,42 +1321,27 @@ footer {
   z-index: 1000;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background-color: #16a34a;
-  color: white;
+  justify-content: center;
   text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 999px;
+  background-color: #dc2626;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 0;
   font-weight: bold;
   font-size: 0.9em;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .consult-float:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.45);
-}
-
-.consult-float-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: white;
-  flex-shrink: 0;
-  animation: consult-float-pulse 1.6s ease-in-out infinite;
-}
-
-@keyframes consult-float-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  background-color: #b91c1c;
 }
 
 @media (max-width: 500px) {
   .consult-float {
     right: 12px;
     bottom: 12px;
-    padding: 10px 16px;
+    padding: 11px 18px;
     font-size: 0.8em;
   }
 }
