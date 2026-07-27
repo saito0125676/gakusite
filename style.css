@@ -87,6 +87,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1400px;
   animation: intro-splash-out 0.6s ease-in 1.6s forwards;
 }
 
@@ -94,6 +95,7 @@ header {
   position: relative;
   width: min(80vw, 640px);
   aspect-ratio: 740 / 310;
+  transform-style: preserve-3d;
 }
 
 .intro-logo {
@@ -101,12 +103,52 @@ header {
   height: 100%;
   display: block;
   overflow: visible;
+  transform-style: preserve-3d;
+}
+
+.intro-splash .logo-sq--white {
+  animation-name: intro-roll-in-left-3d;
+}
+
+.intro-splash .logo-sq--turq {
+  animation-name: intro-roll-in-right-3d;
+}
+
+@keyframes intro-roll-in-left-3d {
+  0% {
+    opacity: 0;
+    transform: translateX(-160px) translateZ(-520px) rotateY(-75deg) rotate(-340deg) scale(0.7);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(6px) translateZ(0) rotateY(10deg) rotate(-2deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateZ(0) rotateY(0) rotate(-4deg) scale(1);
+  }
+}
+
+@keyframes intro-roll-in-right-3d {
+  0% {
+    opacity: 0;
+    transform: translateX(160px) translateZ(-520px) rotateY(75deg) rotate(340deg) scale(0.7);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(-6px) translateZ(0) rotateY(-10deg) rotate(5deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateZ(0) rotateY(0) rotate(3deg) scale(1);
+  }
 }
 
 .intro-particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  transform-style: preserve-3d;
 }
 
 .intro-particle {
@@ -119,7 +161,7 @@ header {
   background: var(--p-color, #3fc1c9);
   opacity: 0;
   box-shadow: 0 0 8px rgba(63, 193, 201, 0.6);
-  transform: translate(-50%, -50%) translate(var(--p-dx), var(--p-dy)) scale(0.4);
+  transform: translate(-50%, -50%) translate3d(var(--p-dx), var(--p-dy), var(--p-dz, -400px)) scale(0.4);
   animation: particle-gather 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: var(--p-delay, 0s);
 }
@@ -127,18 +169,18 @@ header {
 @keyframes particle-gather {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) translate(var(--p-dx), var(--p-dy)) scale(0.4);
+    transform: translate(-50%, -50%) translate3d(var(--p-dx), var(--p-dy), var(--p-dz, -400px)) scale(0.4);
   }
   55% {
     opacity: 1;
   }
   85% {
     opacity: 0.9;
-    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.5);
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(0.5);
   }
 }
 

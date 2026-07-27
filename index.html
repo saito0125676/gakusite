@@ -51,11 +51,13 @@
         var distance = 140 + Math.random() * 220;
         var dx = Math.cos(angle) * distance;
         var dy = Math.sin(angle) * distance;
+        var dz = -(200 + Math.random() * 500);
         var size = 3 + Math.random() * 5;
         var span = document.createElement('span');
         span.className = 'intro-particle';
         span.style.setProperty('--p-dx', dx.toFixed(1) + 'px');
         span.style.setProperty('--p-dy', dy.toFixed(1) + 'px');
+        span.style.setProperty('--p-dz', dz.toFixed(1) + 'px');
         span.style.setProperty('--p-size', size.toFixed(1) + 'px');
         span.style.setProperty('--p-color', colors[i % 2]);
         span.style.setProperty('--p-delay', (Math.random() * 0.15).toFixed(2) + 's');
