@@ -146,52 +146,6 @@ header {
   }
 }
 
-.intro-particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  transform-style: preserve-3d;
-}
-
-.intro-particle {
-  position: absolute;
-  top: 42%;
-  left: 25%;
-  width: var(--p-size, 6px);
-  height: var(--p-size, 6px);
-  border-radius: 50%;
-  background: var(--p-color, #e2643f);
-  opacity: 0;
-  box-shadow: 0 0 8px rgba(226, 100, 63, 0.6);
-  transform: translate(-50%, -50%) translate3d(var(--p-dx), var(--p-dy), var(--p-dz, -400px)) scale(0.4);
-  animation: particle-gather 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: var(--p-delay, 0s);
-}
-
-@keyframes particle-gather {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate3d(var(--p-dx), var(--p-dy), var(--p-dz, -400px)) scale(0.4);
-  }
-  55% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(0.5);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .intro-particles {
-    display: none;
-  }
-}
-
 @keyframes intro-splash-out {
   0% {
     opacity: 1;

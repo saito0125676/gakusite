@@ -31,7 +31,6 @@
 <body>
   <div class="intro-splash" aria-hidden="true">
     <div class="intro-logo-wrap">
-      <div class="intro-particles" id="introParticles"></div>
       <svg class="intro-logo" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg">
         <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
         <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#B8923F" stroke-width="14" stroke-linejoin="round"/>
@@ -39,33 +38,6 @@
       </svg>
     </div>
   </div>
-  <script>
-    (function () {
-      var container = document.getElementById('introParticles');
-      if (!container) return;
-      var colors = ['#ffffff', '#b8923f'];
-      var count = 36;
-      var frag = document.createDocumentFragment();
-      for (var i = 0; i < count; i++) {
-        var angle = Math.random() * Math.PI * 2;
-        var distance = 140 + Math.random() * 220;
-        var dx = Math.cos(angle) * distance;
-        var dy = Math.sin(angle) * distance;
-        var dz = -(200 + Math.random() * 500);
-        var size = 3 + Math.random() * 5;
-        var span = document.createElement('span');
-        span.className = 'intro-particle';
-        span.style.setProperty('--p-dx', dx.toFixed(1) + 'px');
-        span.style.setProperty('--p-dy', dy.toFixed(1) + 'px');
-        span.style.setProperty('--p-dz', dz.toFixed(1) + 'px');
-        span.style.setProperty('--p-size', size.toFixed(1) + 'px');
-        span.style.setProperty('--p-color', colors[i % 2]);
-        span.style.setProperty('--p-delay', (Math.random() * 0.15).toFixed(2) + 's');
-        frag.appendChild(span);
-      }
-      container.appendChild(frag);
-    })();
-  </script>
 
   <header>
     <h1 class="logo"><a href="index.html" aria-label="学サイト">
