@@ -508,15 +508,15 @@ section ul {
   }
   55% {
     transform: scale(1.18);
-    background-color: var(--ink);
+    background-color: var(--coral);
     color: white;
-    box-shadow: 0 0 0 8px rgba(255, 205, 90, 0.3), 0 0 26px 8px rgba(255, 205, 90, 0.55);
+    box-shadow: 0 0 0 8px rgba(184, 146, 63, 0.25), 0 0 20px 6px rgba(184, 146, 63, 0.4);
   }
   100% {
     transform: scale(1);
-    background-color: var(--ink);
+    background-color: var(--coral);
     color: white;
-    box-shadow: 0 0 14px 3px rgba(255, 205, 90, 0.45);
+    box-shadow: 0 0 10px 2px rgba(184, 146, 63, 0.3);
   }
 }
 
@@ -934,7 +934,7 @@ section ul {
   margin-top: 32px;
   padding: 34px 28px;
   border-radius: 16px;
-  background-color: var(--ink-dark);
+  background-color: var(--coral);
 }
 
 .pricing-zero-item {
@@ -1319,23 +1319,12 @@ footer > p {
   cursor: pointer;
   transition: width 0.2s ease;
   z-index: 1000;
+  background-color: var(--coral);
   box-shadow: -2px 0 8px rgba(36, 31, 26, 0.15);
 }
 
 .side-cta:hover {
   width: 72px;
-}
-
-.side-cta-bg {
-  position: absolute;
-  top: -40%;
-  left: -100%;
-  width: 300%;
-  height: 180%;
-  background: repeating-conic-gradient(
-    var(--coral) 0deg 15deg,
-    transparent 15deg 30deg
-  );
 }
 
 .side-cta a {
