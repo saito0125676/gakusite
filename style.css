@@ -1332,12 +1332,9 @@ footer > p {
   left: -100%;
   width: 300%;
   height: 180%;
-  background: repeating-linear-gradient(
-    45deg,
-    #d9b968 0px,
-    #d9b968 24px,
-    var(--coral) 24px,
-    var(--coral) 48px
+  background: repeating-conic-gradient(
+    var(--coral) 0deg 15deg,
+    transparent 15deg 30deg
   );
 }
 
