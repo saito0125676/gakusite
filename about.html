@@ -87,7 +87,31 @@
     <p>&copy; 2026 学サイト</p>
   </footer>
 
-  <a class="consult-float" href="contact.html">無料相談受け付け中</a>
+  <div class="side-cta">
+    <div class="side-cta-bg"></div>
+    <a href="contact.html">
+      <span>無料相談受け付け中</span>
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      var tab = document.querySelector('.side-cta');
+      var bg = document.querySelector('.side-cta-bg');
+      if (!tab || !bg) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var angle = 0;
+      var speed = 0.3;
+      tab.addEventListener('mouseenter', function () { speed = 1.4; });
+      tab.addEventListener('mouseleave', function () { speed = 0.3; });
+      function tick() {
+        angle += speed;
+        bg.style.transform = 'rotate(' + angle + 'deg)';
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
   <script src="reveal.js" defer></script>
 </body>
 </html>
