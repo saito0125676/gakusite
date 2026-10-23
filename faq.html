@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>よくある質問 | 学サイト(ガクサイト)</title>
   <meta name="description" content="学サイト(ガクサイト)のよくある質問。制作期間、料金の支払いタイミング、解約について、学生運営の品質などにお答えします。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>document.documentElement.classList.add('reveal-ready');</script>
 </head>
@@ -12,9 +15,9 @@
   <header>
     <h1 class="logo"><a href="index.html" aria-label="学サイト">
       <svg class="logo-svg" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
-        <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
-        <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
-        <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
+        <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#3D3229" stroke-width="14" stroke-linejoin="round"/>
+        <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#B8923F" stroke-width="14" stroke-linejoin="round"/>
+        <text class="logo-text" x="465" y="278" font-family="'Noto Sans JP', Arial, sans-serif" font-size="54" font-weight="900" letter-spacing="4" fill="#3D3229">GAKU SITE</text>
       </svg>
     </a></h1>
     <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
@@ -70,6 +73,16 @@
   </main>
 
   <footer>
+    <svg class="footer-signature" aria-hidden="true" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="footer-sig-mask" maskUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="680" height="260" fill="white"/>
+          <rect x="229.78" y="90.36" width="218.79" height="76.78" fill="black" rx="2"/>
+        </mask>
+      </defs>
+      <text x="340" y="150" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="58" letter-spacing="-3" fill="currentColor">gakusite</text>
+      <path d="M 175 158 Q 260 178 340 172 Q 420 166 505 158" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" mask="url(#footer-sig-mask)"/>
+    </svg>
     <div class="footer-social">
       <a class="app-icon-link" href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
         <span class="app-icon app-icon--instagram" aria-hidden="true">
@@ -91,7 +104,11 @@
     <p>&copy; 2026 学サイト</p>
   </footer>
 
-  <a class="consult-float" href="contact.html">無料相談受け付け中</a>
+  <div class="side-cta">
+    <a href="contact.html">
+      <span>無料相談受け付け中</span>
+    </a>
+  </div>
   <script src="reveal.js" defer></script>
 </body>
 </html>
