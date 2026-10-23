@@ -17,8 +17,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Oswald:wght@500;600&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
   <script>
     if (sessionStorage.getItem('introSeen')) {
       document.documentElement.classList.add('no-intro');
@@ -31,220 +31,490 @@
 <body>
   <div class="intro-splash" aria-hidden="true">
     <svg class="intro-logo" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg">
-      <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
-      <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
+      <rect class="logo-sq" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
+      <rect class="logo-sq logo-sq--b" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
       <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
     </svg>
   </div>
 
-  <header>
-    <h1 class="logo"><a href="index.html" aria-label="学サイト">
-      <svg class="logo-svg" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
-        <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
-        <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
-        <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
-      </svg>
-    </a></h1>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
-    <label for="nav-toggle" class="nav-toggle" aria-label="メニューを開く">
-      <span></span><span></span><span></span>
-    </label>
-    <nav>
-      <a href="index.html">ホーム</a>
-      <a href="about.html">私たちについて</a>
-      <a href="service.html">サービス</a>
-      <a href="pricing.html">料金</a>
-      <a href="faq.html">よくある質問</a>
-      <a href="contact.html">お問い合わせ</a>
-    </nav>
+  <div class="bg-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-logo"><a href="index.html" aria-label="学サイト トップへ">
+        <svg viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
+          <rect class="logo-sq" x="120" y="140" width="180" height="180" fill="none" stroke="#1F3A5F" stroke-width="14" stroke-linejoin="round"/>
+          <rect class="logo-sq logo-sq--b" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
+          <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#1F3A5F">GAKU SITE</text>
+        </svg>
+      </a></h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+      <label for="nav-toggle" class="nav-toggle" aria-label="メニューを開く"><span></span><span></span><span></span></label>
+      <nav class="global-nav" aria-label="グローバルナビ">
+        <a href="index.html" aria-current="page">ホーム</a>
+        <a href="about.html">私たちについて</a>
+        <a href="service.html">サービス</a>
+        <a href="pricing.html">料金</a>
+        <a href="faq.html">よくある質問</a>
+        <a class="btn btn--primary" href="contact.html">お問い合わせ <span class="arrow">→</span></a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="hero">
-      <div class="hero-bg-shapes" aria-hidden="true">
-        <span class="hero-sq hero-sq--grey" style="--sq-top:-9%; --sq-left:2%; --sq-size:230px; --sq-rot:-18deg; --sq-rot-span:70deg; --sq-dx:40px; --sq-dy:30px; --sq-duration:22s;"></span>
-        <span class="hero-sq" style="--sq-top:0%; --sq-left:-4%; --sq-size:280px; --sq-rot:8deg; --sq-rot-span:-60deg; --sq-dx:-30px; --sq-dy:35px; --sq-duration:26s; --sq-delay:-4s;"></span>
-        <span class="hero-sq hero-sq--grey" style="--sq-top:20%; --sq-left:32%; --sq-size:200px; --sq-rot:-8deg; --sq-rot-span:55deg; --sq-dx:35px; --sq-dy:-25px; --sq-duration:24s; --sq-delay:-8s;"></span>
-        <span class="hero-sq" style="--sq-top:16%; --sq-left:28%; --sq-size:220px; --sq-rot:12deg; --sq-rot-span:-65deg; --sq-dx:-40px; --sq-dy:30px; --sq-duration:20s; --sq-delay:-2s;"></span>
-        <span class="hero-sq" style="--sq-top:34%; --sq-left:44%; --sq-size:120px; --sq-rot:15deg; --sq-rot-span:80deg; --sq-dx:25px; --sq-dy:20px; --sq-duration:18s; --sq-delay:-6s;"></span>
-        <span class="hero-sq" style="--sq-top:6%; --sq-left:86%; --sq-size:70px; --sq-rot:20deg; --sq-rot-span:-90deg; --sq-dx:-20px; --sq-dy:25px; --sq-duration:16s; --sq-delay:-3s;"></span>
-        <span class="hero-sq hero-sq--grey" style="--sq-top:52%; --sq-left:5%; --sq-size:60px; --sq-rot:15deg; --sq-rot-span:75deg; --sq-dx:20px; --sq-dy:-20px; --sq-duration:15s; --sq-delay:-9s;"></span>
-        <span class="hero-sq" style="--sq-top:64%; --sq-left:80%; --sq-size:140px; --sq-rot:-15deg; --sq-rot-span:60deg; --sq-dx:-30px; --sq-dy:25px; --sq-duration:23s; --sq-delay:-11s;"></span>
+    <!-- ===== ヒーロー ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <!-- 背景動画:assets/videos/hero.mp4 を置くと再生。無い間は poster の静止画を表示 -->
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/photos/hero.jpg">
+          <source src="assets/videos/hero.mp4" type="video/mp4">
+        </video>
       </div>
-      <p class="hero-catch">ホームページ制作<br>「検索しても出てこない」を解決します<br>学生チームだからこそ低価格×スピード対応</p>
-      <h2>学生チームがつくる、想いの伝わるホームページ。</h2>
-      <p>「<ruby>学サイト<rt>がくさいと</rt></ruby>」は、現役学生だけで運営するホームページ制作チームです。<br>企画・デザイン・コーディングまで、学生ならではのフットワークの軽さと柔軟な発想で、あなたのお店やお店の魅力をカタチにします。</p>
-    </section>
+      <span class="splash splash--b" aria-hidden="true"></span>
+      <span class="deco-sq" style="--s:110px; top:14%; right:5%; --c:#fff; --o:.7; --r:12deg;" aria-hidden="true"></span>
+      <span class="deco-sq" style="--s:70px; top:22%; right:10%; --c:#fff; --o:.5; --r:-8deg; --delay:-6s;" aria-hidden="true"></span>
+      <button type="button" class="hero-video-toggle" aria-label="背景動画を一時停止" hidden>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </button>
 
-    <section id="works">
-      <h2>こんなサイトを作れます</h2>
-      <p>塾・教室の魅力が伝わるホームページの一例です。業種やご要望に合わせてデザインをご提案します。</p>
-      <div class="works-carousel">
-        <button type="button" class="works-nav works-nav--prev" aria-label="前の実績を見る">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <div class="works-track" id="worksTrack">
-          <div class="work-card-slot" data-index="0">
-            <div class="work-card">
-              <a class="mock-browser mock-browser--live" href="meiyo-juku.html" target="_blank" rel="noopener">
-                <div class="mock-browser-bar">
-                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-                </div>
-                <div class="mock-frame">
-                  <iframe src="meiyo-juku.html" title="明蓉個別学院サイト例のプレビュー" loading="lazy" tabindex="-1"></iframe>
-                </div>
-              </a>
-              <h3>学習塾サイト例</h3>
-              <p>教室の雰囲気や講師紹介、時間割をわかりやすく掲載したデザイン。</p>
-              <a class="work-card-cta" href="meiyo-juku.html" target="_blank" rel="noopener">実際のデザインを見る →</a>
-            </div>
-          </div>
-
-          <div class="work-card-slot" data-index="1">
-            <div class="work-card">
-              <a class="mock-browser mock-browser--live" href="otonowa.html" target="_blank" rel="noopener">
-                <div class="mock-browser-bar">
-                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-                </div>
-                <div class="mock-frame">
-                  <iframe src="otonowa.html" title="おとのわ音楽教室サイト例のプレビュー" loading="lazy" tabindex="-1"></iframe>
-                </div>
-              </a>
-              <h3>音楽・ピアノ教室サイト例</h3>
-              <p>レッスンの様子や発表会の写真を中心に、温かみのある雰囲気を演出。</p>
-              <a class="work-card-cta" href="otonowa.html" target="_blank" rel="noopener">実際のデザインを見る →</a>
-            </div>
-          </div>
-
-          <div class="work-card-slot" data-index="2">
-            <div class="work-card">
-              <a class="mock-browser mock-browser--live" href="demo/gaku-site-juku/" target="_blank" rel="noopener">
-                <div class="mock-browser-bar">
-                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-                </div>
-                <div class="mock-frame">
-                  <iframe src="demo/gaku-site-juku/" title="学サイト塾サイト例のプレビュー" loading="lazy" tabindex="-1"></iframe>
-                </div>
-              </a>
-              <h3>学習塾サイト例(複数ページ版)</h3>
-              <p>コース別の詳細ページや合格実績ギャラリー、スクロールアニメーションまで盛り込んだ多ページ構成の一例。</p>
-              <a class="work-card-cta" href="demo/gaku-site-juku/" target="_blank" rel="noopener">実際のデザインを見る →</a>
-            </div>
+      <div class="container">
+        <div class="hero-copy">
+          <p class="hero-hand">想いを、カタチに</p>
+          <h2 class="hero-title" id="hero-title"><span class="c-blue">検索</span>で見つかる<br><span class="c-teal">ホームページ</span>を、<br>学生チームの手で。</h2>
+          <p class="hero-text">「<ruby>学サイト<rt>がくさいと</rt></ruby>」は、現役学生だけで運営するホームページ制作チームです。企画・デザイン・コーディングまで、フットワークの軽さと柔軟な発想で、あなたのお店や教室の魅力をカタチにします。</p>
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="contact.html">無料で相談してみる <span class="arrow">→</span></a>
+            <a class="btn btn--secondary" href="pricing.html">料金プランを見る <span class="arrow">→</span></a>
           </div>
         </div>
-        <button type="button" class="works-nav works-nav--next" aria-label="次の実績を見る">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
+      </div>
+    </section>
+
+    <!-- ===== 対象のお客様 + 数字 ===== -->
+    <section class="intro-band" aria-label="対象のお客様と料金のポイント">
+      <div class="container">
+        <div>
+          <p class="for-you-head"><span class="hand">For you!</span>こんなお客様をサポートします</p>
+          <ul class="for-you-list">
+            <li>
+              <svg viewBox="0 0 72 72" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="36" cy="36" r="32" fill="#e3f7f8" stroke="none"/>
+                <path d="M14 26c8-4 16-4 22 1v26c-6-5-14-5-22-1z" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M58 26c-8-4-16-4-22 1v26c6-5 14-5 22-1z" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M19 33c4-1.5 8-1.5 12 0M19 40c4-1.5 8-1.5 12 0" stroke="#3fc1c9"/>
+                <path d="M50 14l6 6-14 14-7 1 1-7z" fill="#fff" stroke="#1e7fe0"/>
+              </svg>
+              学習塾
+            </li>
+            <li>
+              <svg viewBox="0 0 72 72" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="36" cy="36" r="32" fill="#e3f7f8" stroke="none"/>
+                <path d="M30 48V22l22-5v26" stroke="#1f3a5f"/>
+                <ellipse cx="25" cy="48" rx="6" ry="4.5" fill="#3fc1c9" stroke="#1f3a5f"/>
+                <ellipse cx="47" cy="43" rx="6" ry="4.5" fill="#3fc1c9" stroke="#1f3a5f"/>
+                <path d="M30 29l22-5" stroke="#1e7fe0"/>
+              </svg>
+              習い事教室
+            </li>
+            <li>
+              <svg viewBox="0 0 72 72" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="36" cy="36" r="32" fill="#e3f7f8" stroke="none"/>
+                <path d="M18 32v22h36V32" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M15 22h42l3 8c0 3-3 5-6 5s-6-2-6-5c0 3-3 5-6 5s-6-2-6-5c0 3-3 5-6 5s-6-2-6-5c0 3-3 5-6 5s-6-2-6-5z" fill="#3fc1c9" stroke="#1f3a5f"/>
+                <path d="M30 54V42h12v12" stroke="#1e7fe0"/>
+              </svg>
+              お店・飲食店
+            </li>
+            <li>
+              <svg viewBox="0 0 72 72" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="36" cy="36" r="32" fill="#e3f7f8" stroke="none"/>
+                <path d="M20 56V18h22v38M42 30h12v26" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M26 25h4M34 25h4M26 33h4M34 33h4M26 41h4M34 41h4M47 38h3M47 45h3" stroke="#1e7fe0"/>
+                <path d="M14 56h46" stroke="#1f3a5f"/>
+                <path d="M28 56v-7h6v7" stroke="#3fc1c9"/>
+              </svg>
+              中小企業
+            </li>
+          </ul>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <p class="stat-label">製作費</p>
+            <p class="stat-value">0<small>円</small></p>
+            <p class="stat-note">解約費も無料</p>
+          </div>
+          <div class="stat">
+            <p class="stat-label">月額プラン</p>
+            <p class="stat-value">1<small>万円</small></p>
+            <p class="stat-note">サーバー・ドメイン込み</p>
+          </div>
+          <div class="stat">
+            <p class="stat-label">LP制作</p>
+            <p class="stat-value"><span class="pre">最短</span>24<small>時間</small></p>
+            <p class="stat-note">簡易サイトの場合</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== サービス ===== -->
+    <section class="section" aria-labelledby="service-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <span class="eyebrow">SERVICE</span>
+            <h2 class="section-title" id="service-title">サービス紹介</h2>
+          </div>
+          <a class="text-link" href="service.html">サービスの詳細を見る <span class="circle-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-illust">
+              <svg viewBox="0 0 200 120" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="10" y="10" width="140" height="96" rx="6" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M10 26h140" stroke="#1f3a5f"/>
+                <circle cx="20" cy="18" r="2" fill="#1f3a5f" stroke="none"/><circle cx="28" cy="18" r="2" fill="#1f3a5f" stroke="none"/>
+                <rect x="20" y="34" width="62" height="36" rx="3" fill="#e3f7f8" stroke="#3fc1c9"/>
+                <path d="M92 40h46M92 50h36M92 60h42" stroke="#1e7fe0"/>
+                <rect x="20" y="78" width="36" height="18" rx="3" stroke="#1e7fe0"/>
+                <rect x="62" y="78" width="36" height="18" rx="3" stroke="#1e7fe0"/>
+                <rect x="104" y="78" width="36" height="18" rx="3" stroke="#1e7fe0"/>
+                <rect x="140" y="40" width="46" height="76" rx="8" fill="#fff" stroke="#1f3a5f"/>
+                <rect x="147" y="50" width="32" height="20" rx="2" fill="#e3f7f8" stroke="#3fc1c9"/>
+                <path d="M148 78h30M148 86h22M148 94h26" stroke="#1e7fe0"/>
+              </svg>
+            </div>
+            <h3>ホームページ新規制作</h3>
+            <p>企業サイト・お店のサイト・LPまで。目的に合わせて企画から制作します。</p>
+            <ul class="check-list">
+              <li>オリジナルデザイン</li>
+              <li>スマホ対応(レスポンシブ)</li>
+              <li>ページ数の上限なし</li>
+            </ul>
+          </article>
+          <article class="service-card">
+            <div class="service-illust">
+              <svg viewBox="0 0 200 120" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="20" y="14" width="130" height="90" rx="6" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M20 30h130" stroke="#1f3a5f"/>
+                <path d="M34 46h60M34 58h80M34 70h50" stroke="#1e7fe0"/>
+                <rect x="34" y="80" width="40" height="12" rx="6" fill="#127f89" stroke="none"/>
+                <circle cx="152" cy="80" r="30" fill="#e3f7f8" stroke="#3fc1c9"/>
+                <path d="M138 74a15 15 0 0 1 26-6l3 3M166 86a15 15 0 0 1-26 6l-3-3" stroke="#1f3a5f"/>
+                <path d="M167 63v8h-8M137 97v-8h8" stroke="#1f3a5f"/>
+              </svg>
+            </div>
+            <h3>保守運用・更新サポート</h3>
+            <p>公開後の修正や更新もおまかせ。サーバーやドメインの管理もまとめて対応します。</p>
+            <ul class="check-list">
+              <li>月5回まで修正・更新無料</li>
+              <li>サーバー管理</li>
+              <li>独自ドメイン取得</li>
+            </ul>
+          </article>
+          <article class="service-card">
+            <div class="service-illust">
+              <svg viewBox="0 0 200 120" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M30 52h18l46-26v68L48 68H30z" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M38 68l8 28h12l-6-26" fill="#fff" stroke="#1f3a5f"/>
+                <path d="M104 46c8 6 8 22 0 28M114 38c14 10 14 34 0 44" stroke="#3fc1c9"/>
+                <rect x="132" y="12" width="56" height="36" rx="10" fill="#e3f7f8" stroke="#1e7fe0"/>
+                <path d="M146 48l-4 10 12-10" fill="#e3f7f8" stroke="#1e7fe0"/>
+                <circle cx="148" cy="30" r="2.5" fill="#1e7fe0" stroke="none"/><circle cx="160" cy="30" r="2.5" fill="#1e7fe0" stroke="none"/><circle cx="172" cy="30" r="2.5" fill="#1e7fe0" stroke="none"/>
+                <rect x="144" y="70" width="40" height="40" rx="10" fill="#fff" stroke="#1f3a5f"/>
+                <rect x="153" y="79" width="22" height="22" rx="6" stroke="#a6c94a"/>
+                <circle cx="164" cy="90" r="5" stroke="#a6c94a"/>
+              </svg>
+            </div>
+            <h3>集客・情報発信のご提案</h3>
+            <p>SNSやチラシと連動して、ホームページに人が集まる仕組みをご提案します。</p>
+            <ul class="check-list">
+              <li>Instagram・LINEとの連携</li>
+              <li>チラシ・QRコードとの連動</li>
+              <li>検索で見つかるサイト構成</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 強み ===== -->
+    <section class="section section--tint strength" aria-labelledby="strength-title">
+      <span class="watermark" aria-hidden="true">STRENGTH</span>
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">STRENGTH</span>
+          <h2 class="section-title" id="strength-title">学サイトの強み</h2>
+        </div>
+        <div class="feature-grid">
+          <!-- feature-01.jpg は文字入りの画像のため、重ね文字は非表示(読み上げ用に残す) -->
+          <a class="feature-card feature-card--image-only" href="about.html">
+            <img src="assets/photos/feature-01.jpg" alt="" width="900" height="1200" loading="lazy">
+            <span class="feature-label" aria-hidden="true">STRENGTH 01</span>
+            <span class="feature-num-bg" aria-hidden="true">#01</span>
+            <div class="feature-body">
+              <div class="feature-title"><span class="num">#01</span><h3>学生の感性</h3><span class="circle-arrow" aria-hidden="true">›</span></div>
+              <p>「きれいだけど無難」ではなく、思わず目を引くデザインに。若い世代に刺さる感性を、そのままホームページに込めます。</p>
+            </div>
+          </a>
+          <!-- feature-02.jpg も文字入りの画像のため、重ね文字は非表示 -->
+          <a class="feature-card feature-card--teal feature-card--image-only" href="pricing.html">
+            <img src="assets/photos/feature-02.jpg" alt="" width="900" height="1200" loading="lazy">
+            <span class="feature-label" aria-hidden="true">STRENGTH 02</span>
+            <span class="feature-num-bg" aria-hidden="true">#02</span>
+            <div class="feature-body">
+              <div class="feature-title"><span class="num">#02</span><h3>続けやすい料金</h3><span class="circle-arrow" aria-hidden="true">›</span></div>
+              <p>製作費・解約費は無料。サーバー管理と独自ドメインを含む月額10,000円のみで、追加料金はかかりません。</p>
+            </div>
+          </a>
+          <a class="feature-card feature-card--lime" href="service.html">
+            <img src="assets/photos/feature-03.jpg" alt="" width="900" height="1200" loading="lazy">
+            <span class="feature-label" aria-hidden="true">STRENGTH 03</span>
+            <span class="feature-num-bg" aria-hidden="true">#03</span>
+            <div class="feature-body">
+              <div class="feature-title"><span class="num">#03</span><h3>スピード対応</h3><span class="circle-arrow" aria-hidden="true">›</span></div>
+              <p>LPなどの簡易サイトは最短24時間、複数ページのサイトも最短1週間。学生ならではのフットワークで素早く形にします。</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 制作実績 ===== -->
+    <section class="section" aria-labelledby="works-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <span class="eyebrow">WORKS</span>
+            <h2 class="section-title" id="works-title">こんなサイトを作れます</h2>
+            <p class="section-lead">塾・教室の魅力が伝わるホームページの一例です。業種やご要望に合わせてデザインをご提案します。</p>
+          </div>
+        </div>
+        <div class="works-grid">
+          <a class="work-card" href="meiyo-juku.html" target="_blank" rel="noopener">
+            <div class="work-thumb">
+              <div class="work-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="work-frame"><iframe src="meiyo-juku.html" title="学習塾サイト例のプレビュー" loading="lazy" tabindex="-1"></iframe></div>
+            </div>
+            <div class="work-meta">
+              <div><h3>学習塾サイト例</h3><p class="work-tags">講師紹介 / 時間割 / 1ページ構成</p></div>
+              <span class="circle-arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+          <a class="work-card" href="otonowa.html" target="_blank" rel="noopener">
+            <div class="work-thumb">
+              <div class="work-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="work-frame"><iframe src="otonowa.html" title="音楽教室サイト例のプレビュー" loading="lazy" tabindex="-1"></iframe></div>
+            </div>
+            <div class="work-meta">
+              <div><h3>音楽・ピアノ教室サイト例</h3><p class="work-tags">写真中心 / 温かみのあるデザイン</p></div>
+              <span class="circle-arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+          <a class="work-card" href="demo/gaku-site-juku/" target="_blank" rel="noopener">
+            <div class="work-thumb">
+              <div class="work-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="work-frame"><iframe src="demo/gaku-site-juku/" title="学習塾サイト例(複数ページ版)のプレビュー" loading="lazy" tabindex="-1"></iframe></div>
+            </div>
+            <div class="work-meta">
+              <div><h3>学習塾サイト例(複数ページ版)</h3><p class="work-tags">コース別ページ / 合格実績 / アニメーション</p></div>
+              <span class="circle-arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 私たちについて ===== -->
+    <section class="section section--tint about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-text">
+          <span class="eyebrow">ABOUT US</span>
+          <h2 class="section-title" id="about-title">私たちについて</h2>
+          <p>「学サイト」は、現在大学3年生の4人が中心となって走り出したチームです。授業や独学で身につけたWeb制作のスキルを武器に、いずれは学生発の会社として独立することを目標に活動しています。</p>
+          <p>同世代・若い世代に届く感性で、お客様の「伝えたい」をカタチにします。</p>
+          <a class="btn btn--navy" href="about.html">私たちのことを詳しく見る <span class="arrow">→</span></a>
+        </div>
+        <div class="about-visual">
+          <span class="dots" aria-hidden="true"></span>
+          <div class="about-photo"><img src="assets/photos/team.jpg" alt="学サイトの運営メンバー" width="1600" height="900" loading="lazy"></div>
+          <span class="deco-sq" aria-hidden="true"></span>
+          <span class="deco-sq" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ + 料金 ===== -->
+    <section class="section faq-price" aria-label="よくある質問と料金">
+      <div class="container">
+        <div>
+          <div class="section-head">
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section-title">よくある質問</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary><span class="q">Q.</span>どのくらいの期間で完成しますか?</summary>
+              <p class="a">LPなど簡易サイトは最短24時間で対応可能です。複数ページ構成の本格的なサイトは、ヒアリングから最短1週間を目安にしています。</p>
+            </details>
+            <details class="faq-item">
+              <summary><span class="q">Q.</span>月額以外に追加料金はかかりますか?</summary>
+              <p class="a">いいえ、追加料金は一切かかりません。製作費は無料で初期費用もかからず、サーバー管理・独自ドメイン取得を含む月額10,000円のみです。</p>
+            </details>
+            <details class="faq-item">
+              <summary><span class="q">Q.</span>相談だけでも大丈夫ですか?</summary>
+              <p class="a">もちろんです。ご相談・お見積りは無料です。Instagramや公式LINE、メールからお気軽にご連絡ください。</p>
+            </details>
+          </div>
+          <p class="faq-more"><a class="text-link" href="faq.html">すべての質問を見る <span class="circle-arrow" aria-hidden="true">→</span></a></p>
+        </div>
+        <div>
+          <div class="section-head">
+            <span class="eyebrow">PRICE</span>
+            <h2 class="section-title">料金プラン</h2>
+          </div>
+          <div class="price-card">
+            <span class="deco-sq" aria-hidden="true"></span>
+            <h3>月額プラン</h3>
+            <p class="price-main">10,000<small>円 / 月</small></p>
+            <p class="price-free">製作費も、解約費も無料です。</p>
+            <ul class="check-list">
+              <li>ページ数上限なし</li>
+              <li>月5回まで修正・更新無料</li>
+              <li>サーバー管理・独自ドメイン取得</li>
+            </ul>
+            <a class="btn" href="pricing.html">料金の詳細を見る <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-band" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta-box">
+          <span class="splash" aria-hidden="true"></span>
+          <span class="deco-sq" aria-hidden="true"></span>
+          <div class="cta-illust">
+            <!-- 線画イラスト:相談の様子 -->
+            <svg viewBox="0 0 260 190" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 170h240" stroke="#1f3a5f"/>
+              <rect x="70" y="80" width="120" height="78" rx="6" fill="#fff" stroke="#1f3a5f"/>
+              <rect x="80" y="90" width="100" height="58" rx="2" fill="#e3f7f8" stroke="#1e7fe0"/>
+              <path d="M90 104h50M90 116h70M90 128h40" stroke="#1e7fe0"/>
+              <path d="M56 158h148l-8 12H64z" fill="#fff" stroke="#1f3a5f"/>
+              <rect x="16" y="20" width="76" height="44" rx="12" fill="#fff" stroke="#1e7fe0"/>
+              <path d="M36 64l-4 12 14-12" fill="#fff" stroke="#1e7fe0"/>
+              <path d="M30 37h48M30 48h32" stroke="#3fc1c9"/>
+              <rect x="166" y="10" width="80" height="50" rx="12" fill="#3fc1c9" stroke="#1f3a5f"/>
+              <path d="M222 60l6 12-16-12" fill="#3fc1c9" stroke="#1f3a5f"/>
+              <path d="M184 30c4-6 12-6 14 0 2-6 10-6 14 0 2 6-14 16-14 16s-16-10-14-16z" fill="#fff" stroke="#1f3a5f"/>
+              <path d="M214 130h22v28a6 6 0 0 1-6 6h-10a6 6 0 0 1-6-6z" fill="#fff" stroke="#1f3a5f"/>
+              <path d="M236 138h4a5 5 0 0 1 0 10h-4" stroke="#1f3a5f"/>
+              <path d="M220 122c0-4 4-4 4-8M228 122c0-4 4-4 4-8" stroke="#3fc1c9"/>
+              <path d="M30 170v-30M30 150c-10-2-14-12-12-20 8 2 12 10 12 20zM30 144c8-2 12-10 10-18-8 2-10 10-10 18z" fill="#e8f3d2" stroke="#a6c94a"/>
+            </svg>
+          </div>
+          <div class="cta-copy">
+            <h2 id="cta-title">まずは<em>無料</em>でご相談ください!</h2>
+            <p>ご相談・お見積りは無料です。<br>「何から始めればいいか分からない」という段階でもお気軽にどうぞ。</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn--primary" href="contact.html">無料で相談する <span class="arrow">→</span></a>
+            <a class="btn btn--line" href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer">LINEで相談する <span class="arrow">→</span></a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-social">
-      <a class="app-icon-link" href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-        <span class="app-icon app-icon--instagram" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
-            <circle cx="12" cy="12" r="4.2"></circle>
-            <circle cx="17.4" cy="6.6" r="1.1" fill="white" stroke="none"></circle>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <svg viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
+            <rect x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round" transform="rotate(-4 210 230)"/>
+            <rect x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round" transform="rotate(3 320 290)"/>
+            <text x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
           </svg>
-        </span>
-      </a>
-      <a class="app-icon-link" href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer" aria-label="公式LINEを開く">
-        <span class="app-icon app-icon--line" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="21" height="21" fill="white">
-            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
-          </svg>
-        </span>
-      </a>
+          <p>学生チームによるホームページ制作</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビ">
+          <a href="index.html">ホーム</a>
+          <a href="about.html">私たちについて</a>
+          <a href="service.html">サービス</a>
+          <a href="pricing.html">料金</a>
+          <a href="faq.html">よくある質問</a>
+          <a href="contact.html">お問い合わせ</a>
+        </nav>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <circle cx="17.4" cy="6.6" r="1.1" fill="white" stroke="none"></circle>
+            </svg>
+          </a>
+          <a href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer" aria-label="公式LINEを開く">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="white" aria-hidden="true">
+              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <p class="footer-bottom">&copy; 2026 学サイト</p>
     </div>
-    <p>&copy; 2026 学サイト</p>
   </footer>
 
-  <a class="consult-float" href="contact.html">無料相談受け付け中</a>
+  <a class="consult-float" href="contact.html">無料相談受け付け中 <span aria-hidden="true">→</span></a>
 
   <script>
     (function () {
-      var track = document.getElementById('worksTrack');
-      if (!track) return;
-      var slots = Array.prototype.slice.call(track.querySelectorAll('.work-card-slot'));
-      var activeIndex = 1;
+      // ヘッダーの影
+      var header = document.querySelector('.site-header');
+      function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 8); }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
 
-      function updatePositions() {
-        var n = slots.length;
-        slots.forEach(function (slot) {
-          var idx = parseInt(slot.dataset.index, 10);
-          var rel = (idx - activeIndex + n) % n;
-          if (rel > 1 && rel < n - 1) {
-            slot.dataset.rel = 'hidden';
-            return;
-          }
-          if (rel === n - 1) rel = -1;
-          slot.dataset.rel = String(rel);
-        });
-      }
-
-      function rotate(direction) {
-        var n = slots.length;
-        activeIndex = (activeIndex + (direction === 'next' ? 1 : -1) + n) % n;
-        updatePositions();
-      }
-
-      updatePositions();
-
-      var autoplayTimer = null;
-
-      function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(function () { rotate('next'); }, 4500);
-      }
-
-      function stopAutoplay() {
-        if (autoplayTimer) {
-          clearInterval(autoplayTimer);
-          autoplayTimer = null;
-        }
-      }
-
-      document.querySelector('.works-nav--next').addEventListener('click', function () { rotate('next'); startAutoplay(); });
-      document.querySelector('.works-nav--prev').addEventListener('click', function () { rotate('prev'); startAutoplay(); });
-
-      var carousel = document.querySelector('.works-carousel');
-      carousel.addEventListener('mouseenter', stopAutoplay);
-      carousel.addEventListener('mouseleave', startAutoplay);
-
-      slots.forEach(function (slot) {
-        var dragStartY = null;
-
-        slot.addEventListener('pointerdown', function (e) {
-          if (slot.dataset.rel !== '0') return;
-          if (e.target.closest('a')) return;
-          dragStartY = e.clientY;
-          slot.classList.add('is-dragging');
-          slot.setPointerCapture(e.pointerId);
-          stopAutoplay();
-        });
-
-        slot.addEventListener('pointermove', function (e) {
-          if (dragStartY === null) return;
-          var deltaY = e.clientY - dragStartY;
-          deltaY = Math.max(-50, Math.min(50, deltaY));
-          slot.style.setProperty('--drag-y', deltaY + 'px');
-        });
-
-        function endDrag() {
-          if (dragStartY === null) return;
-          dragStartY = null;
-          slot.classList.remove('is-dragging');
-          slot.style.setProperty('--drag-y', '0px');
-          startAutoplay();
-        }
-
-        slot.addEventListener('pointerup', endDrag);
-        slot.addEventListener('pointercancel', endDrag);
+      // メニュー内のリンクを押したら閉じる
+      var toggle = document.getElementById('nav-toggle');
+      document.querySelectorAll('.global-nav a').forEach(function (a) {
+        a.addEventListener('click', function () { toggle.checked = false; });
       });
 
-      startAutoplay();
+      // 背景動画:読み込めたときだけ停止ボタンを出す。動きを減らす設定なら止めて静止画に
+      var video = document.querySelector('.hero-video');
+      var videoBtn = document.querySelector('.hero-video-toggle');
+      if (video && videoBtn) {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+        function syncBtn() {
+          videoBtn.classList.toggle('is-paused', video.paused);
+          videoBtn.setAttribute('aria-label', video.paused ? '背景動画を再生' : '背景動画を一時停止');
+        }
+        video.addEventListener('loadeddata', function () {
+          videoBtn.hidden = false;
+          if (reduce.matches) video.pause();
+          syncBtn();
+        });
+        video.addEventListener('play', syncBtn);
+        video.addEventListener('pause', syncBtn);
+        videoBtn.addEventListener('click', function () {
+          if (video.paused) { video.play(); } else { video.pause(); }
+        });
+        if (reduce.matches) video.removeAttribute('autoplay');
+      }
+
+      // 実績プレビュー(iframe)を枠の幅に合わせて縮小
+      var frames = document.querySelectorAll('.work-frame');
+      if ('ResizeObserver' in window) {
+        var ro = new ResizeObserver(function (entries) {
+          entries.forEach(function (e) {
+            e.target.style.setProperty('--scale', e.contentRect.width / 1280);
+          });
+        });
+        frames.forEach(function (f) { ro.observe(f); });
+      }
     })();
   </script>
   <script src="reveal.js" defer></script>
