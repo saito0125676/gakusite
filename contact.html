@@ -7,104 +7,135 @@
   <meta name="description" content="学サイト(ガクサイト)へのお問い合わせはこちら。ホームページ制作のご相談・お見積りは無料です。Instagram・公式LINE・メールで受け付けています。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Oswald:wght@500;600&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
   <script>document.documentElement.classList.add('reveal-ready');</script>
 </head>
 <body>
-  <header>
-    <h1 class="logo"><a href="index.html" aria-label="学サイト">
-      <svg class="logo-svg" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
-        <rect class="logo-sq logo-sq--white" x="120" y="140" width="180" height="180" fill="none" stroke="#3D3229" stroke-width="14" stroke-linejoin="round"/>
-        <rect class="logo-sq logo-sq--turq" x="230" y="200" width="180" height="180" fill="none" stroke="#B8923F" stroke-width="14" stroke-linejoin="round"/>
-        <text class="logo-text" x="465" y="278" font-family="'Noto Sans JP', Arial, sans-serif" font-size="54" font-weight="900" letter-spacing="4" fill="#3D3229">GAKU SITE</text>
-      </svg>
-    </a></h1>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
-    <label for="nav-toggle" class="nav-toggle" aria-label="メニューを開く">
-      <span></span><span></span><span></span>
-    </label>
-    <nav>
-      <a href="index.html">ホーム</a>
-      <a href="about.html">私たちについて</a>
-      <a href="service.html">サービス</a>
-      <a href="pricing.html">料金</a>
-      <a href="faq.html">よくある質問</a>
-      <a href="contact.html">お問い合わせ</a>
-    </nav>
+  <div class="bg-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+  <header class="site-header">
+    <div class="container">
+      <p class="site-logo"><a href="index.html" aria-label="学サイト トップへ">
+        <svg viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
+          <rect x="120" y="140" width="180" height="180" fill="none" stroke="#1F3A5F" stroke-width="14" stroke-linejoin="round" transform="rotate(-4 210 230)"/>
+          <rect x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round" transform="rotate(3 320 290)"/>
+          <text x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#1F3A5F">GAKU SITE</text>
+        </svg>
+      </a></p>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+      <label for="nav-toggle" class="nav-toggle" aria-label="メニューを開く"><span></span><span></span><span></span></label>
+      <nav class="global-nav" aria-label="グローバルナビ">
+        <a href="index.html">ホーム</a>
+        <a href="about.html">私たちについて</a>
+        <a href="service.html">サービス</a>
+        <a href="pricing.html">料金</a>
+        <a href="faq.html">よくある質問</a>
+        <a class="btn btn--primary" href="contact.html" aria-current="page">お問い合わせ <span class="arrow">→</span></a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="contact" class="section-card">
-      <h2>お問い合わせ</h2>
-      <p>ホームページ制作のご相談・お見積りは無料です。お気軽にお問い合わせください。</p>
-      <ul class="contact-links">
-        <li>Email: <a href="mailto:gakusite.f4@gmail.com">gakusite.f4@gmail.com</a></li>
-      </ul>
+    <section class="page-hero" aria-labelledby="page-title">
+      <span class="watermark" aria-hidden="true">CONTACT</span>
+      <span class="splash" aria-hidden="true"></span>
+      <span class="deco-sq deco-sq--a" aria-hidden="true"></span>
+      <span class="deco-sq deco-sq--b" aria-hidden="true"></span>
+      <div class="container">
+        <ol class="breadcrumb"><li><a href="index.html">ホーム</a></li><li aria-current="page">お問い合わせ</li></ol>
+        <span class="eyebrow">CONTACT</span>
+        <h1 class="page-title" id="page-title">お問い合わせ</h1>
+        <p class="page-lead">ホームページ制作のご相談・お見積りは無料です。お気軽にお問い合わせください。</p>
+      </div>
+    </section>
 
-      <p>ご相談の際、事前に<a href="hearing.html">ヒアリングシート</a>にご記入いただけるとスムーズです(任意)。</p>
+    <section class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">HOW TO CONTACT</span>
+          <h2 class="section-title" id="contact-title">ご連絡方法</h2>
+          <p class="section-lead">メール・公式LINE・Instagramのいずれかから、ご都合のよい方法でご連絡ください。</p>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:gakusite.f4@gmail.com">
+            <span class="contact-icon contact-icon--mail"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+            <h3>メール</h3>
+            <p class="contact-value">gakusite.f4@gmail.com</p>
+            <span class="circle-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="contact-card" href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer">
+            <span class="contact-icon contact-icon--line"><svg viewBox="0 0 24 24" width="30" height="30" fill="white" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path></svg></span>
+            <h3>公式LINE</h3>
+            <p>友だち追加して、トークでご相談ください</p>
+            <span class="circle-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="contact-card" href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">
+            <span class="contact-icon contact-icon--insta"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="white" stroke="none"></circle></svg></span>
+            <h3>Instagram</h3>
+            <p>DMからもご相談いただけます</p>
+            <span class="circle-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
 
-      <div class="app-links">
-        <a class="app-icon-link" href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-          <span class="app-icon app-icon--instagram" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="2">
+        <div class="hearing-banner">
+          <svg viewBox="0 0 96 96" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="48" cy="48" r="46" fill="#fff" stroke="none"/>
+            <rect x="26" y="18" width="44" height="60" rx="5" fill="#fff" stroke="#1f3a5f"/>
+            <rect x="38" y="13" width="20" height="10" rx="3" fill="#3fc1c9" stroke="#1f3a5f"/>
+            <path d="M34 38l3 3 6-6M34 52l3 3 6-6M34 66l3 3 6-6" stroke="#127f89"/>
+            <path d="M48 39h14M48 53h14M48 67h10" stroke="#1e7fe0"/>
+          </svg>
+          <div>
+            <h3>ヒアリングシートのご記入(任意)</h3>
+            <p>ご相談の際、事前にヒアリングシートにご記入いただけるとスムーズです。</p>
+          </div>
+          <a class="btn btn--primary" href="hearing.html">ヒアリングシートへ <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <svg viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="学サイト">
+            <rect x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round" transform="rotate(-4 210 230)"/>
+            <rect x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round" transform="rotate(3 320 290)"/>
+            <text x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
+          </svg>
+          <p>学生チームによるホームページ制作</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビ">
+          <a href="index.html">ホーム</a>
+          <a href="about.html">私たちについて</a>
+          <a href="service.html">サービス</a>
+          <a href="pricing.html">料金</a>
+          <a href="faq.html">よくある質問</a>
+          <a href="contact.html">お問い合わせ</a>
+        </nav>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
               <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
               <circle cx="12" cy="12" r="4.2"></circle>
               <circle cx="17.4" cy="6.6" r="1.1" fill="white" stroke="none"></circle>
             </svg>
-          </span>
-          <span class="app-icon-label">Instagram</span>
-        </a>
-
-        <a class="app-icon-link" href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer" aria-label="公式LINEを開く">
-          <span class="app-icon app-icon--line" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="30" height="30" fill="white">
+          </a>
+          <a href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer" aria-label="公式LINEを開く">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="white" aria-hidden="true">
               <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
             </svg>
-          </span>
-          <span class="app-icon-label">公式LINE</span>
-        </a>
+          </a>
+        </div>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <svg class="footer-signature" aria-hidden="true" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <mask id="footer-sig-mask" maskUnits="userSpaceOnUse">
-          <rect x="0" y="0" width="680" height="260" fill="white"/>
-          <rect x="229.78" y="90.36" width="218.79" height="76.78" fill="black" rx="2"/>
-        </mask>
-      </defs>
-      <text x="340" y="150" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="58" letter-spacing="-3" fill="currentColor">gakusite</text>
-      <path d="M 175 158 Q 260 178 340 172 Q 420 166 505 158" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" mask="url(#footer-sig-mask)"/>
-    </svg>
-    <div class="footer-social">
-      <a class="app-icon-link" href="https://www.instagram.com/gaku.site?igsh=bHA1OHV0bTI4MHNl&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-        <span class="app-icon app-icon--instagram" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
-            <circle cx="12" cy="12" r="4.2"></circle>
-            <circle cx="17.4" cy="6.6" r="1.1" fill="white" stroke="none"></circle>
-          </svg>
-        </span>
-      </a>
-      <a class="app-icon-link" href="https://lin.ee/yzBPLJO" target="_blank" rel="noopener noreferrer" aria-label="公式LINEを開く">
-        <span class="app-icon app-icon--line" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="21" height="21" fill="white">
-            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
-          </svg>
-        </span>
-      </a>
+      <p class="footer-bottom">&copy; 2026 学サイト</p>
     </div>
-    <p>&copy; 2026 学サイト</p>
   </footer>
 
-  <div class="side-cta">
-    <a href="contact.html">
-      <span>無料相談受け付け中</span>
-    </a>
-  </div>
+  <script src="site.js" defer></script>
   <script src="reveal.js" defer></script>
 </body>
 </html>
