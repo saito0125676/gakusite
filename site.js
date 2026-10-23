@@ -1,5 +1,62 @@
 // 学サイト 全ページ共通スクリプト
 (function () {
+  // オープニング動画:自動再生が許される無音で流し、「音を出す」で音声をオンにする
+  var intro = document.querySelector('.intro-splash--video');
+  if (intro) {
+    var root = document.documentElement;
+    var introVideo = intro.querySelector('.intro-video');
+    var soundBtn = intro.querySelector('.intro-sound');
+    var reduceIntro = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var finished = true;
+    var endIntro = function () {
+      if (finished) return;
+      finished = true;
+      introVideo.pause();
+      intro.classList.add('is-done');
+      root.classList.remove('intro-playing');
+    };
+    // withSound:ボタンのクリックから呼ぶときは音つきで再生できる
+    var startIntro = function (withSound) {
+      finished = false;
+      root.classList.remove('no-intro');
+      root.classList.add('intro-playing');
+      intro.classList.remove('is-done');
+      introVideo.currentTime = 0;
+      introVideo.muted = !withSound;
+      soundBtn.hidden = !!withSound;
+      intro.classList.remove('is-still');
+      // 自動再生を止められたとき(低電力モードなど):動画の最後のロゴを静止画で見せてからフェード
+      var showStill = function () {
+        intro.classList.add('is-still');
+        setTimeout(endIntro, 1600);
+      };
+      introVideo.play().catch(function () {
+        // 音つきが止められたら無音で流し直す
+        if (!withSound) { showStill(); return; }
+        introVideo.muted = true;
+        soundBtn.hidden = false;
+        introVideo.play().catch(showStill);
+      });
+    };
+    introVideo.addEventListener('ended', endIntro);
+    introVideo.addEventListener('error', endIntro);
+    soundBtn.addEventListener('click', function () {
+      introVideo.muted = false;
+      soundBtn.hidden = true;
+    });
+    if (root.classList.contains('no-intro') || reduceIntro) {
+      intro.classList.add('is-done');
+    } else {
+      startIntro(false);
+    }
+
+    // テスト用:いつでもイントロを再生し直すボタン
+    var replayBtn = document.querySelector('.intro-replay');
+    if (replayBtn) {
+      replayBtn.addEventListener('click', function () { startIntro(true); });
+    }
+  }
+
   // ヘッダーの影
   var header = document.querySelector('.site-header');
   if (header) {
@@ -62,5 +119,73 @@
       });
     });
     frames.forEach(function (f) { ro.observe(f); });
+  }
+
+  // ガクザメ:ときどき画面を横切る。z-index:-1 なので、何もない空白でだけ見える
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // chara-sheet.js と同じドット絵(36×17、右向き)
+    var SHARK = [
+      '................OO..................',
+      '...............ODDO.................',
+      'OO............ODDDO.................',
+      'ODO..........ODDDDO.................',
+      'ODDO........ODDDDDDOOOO.............',
+      '.ODDO...OOOODDDDDDDDDDDOOOO.........',
+      '.ODDDOOODDDDDDDDDDDDDDDDDDDOOO......',
+      '..ODDDDBBBBBBBBBBBBBBBGBGBBBBBOOO...',
+      '..ODBBBBBBBBBBBBBBBBBBGBGBBBBWEBBO..',
+      '...OBBBBBBBBBBBBBBBBBBGBGBBBBBBBBBO.',
+      '..OBBBBBLLLLLLLLLLLLLLLLLLLLLMMMMOO.',
+      '.OBBBOOLLLLLLLLLLLLLLLLLLLLLLTOTOO..',
+      '.OBBO..OOLLLLLLLLLLLLLLOOOOOOO......',
+      'OBBO.....OOOOBBBBBBOOOO.............',
+      'OBO..........OBBBBO.................',
+      'OO............OBBO..................',
+      '...............OO...................'
+    ];
+    var COLORS = { O: '#0b1e37', D: '#5b6e88', B: '#7f93ad', L: '#e6edf3', G: '#5b6e88', E: '#061426', W: '#ffffff', M: '#0b1e37', T: '#ffffff' };
+    // しっぽ(左 7 列)だけ上下にずらした 2 コマを作り、交互に表示してしっぽを振る
+    var drawShark = function (tailDy) {
+      var c = document.createElement('canvas');
+      c.width = 36; c.height = 19;
+      var x = c.getContext('2d');
+      SHARK.forEach(function (row, y) {
+        for (var i = 0; i < row.length; i++) {
+          if (!COLORS[row[i]]) continue;
+          x.fillStyle = COLORS[row[i]];
+          x.fillRect(i, y + 1 + (i < 7 ? tailDy : 0), 1, 1);
+        }
+      });
+      return c;
+    };
+    var swimmer = document.createElement('div');
+    swimmer.className = 'gakuzame-swim';
+    swimmer.setAttribute('aria-hidden', 'true');
+    var bob = document.createElement('div');
+    bob.className = 'gakuzame-bob';
+    bob.appendChild(drawShark(-1));
+    bob.appendChild(drawShark(1));
+    swimmer.appendChild(bob);
+    document.body.appendChild(swimmer);
+
+    var swim = function () {
+      var html = document.documentElement;
+      if (!document.hidden && !html.classList.contains('intro-playing')) {
+        var toLeft = Math.random() < .5;
+        var w = swimmer.offsetWidth;
+        var vw = window.innerWidth;
+        var y = Math.round(window.innerHeight * (.15 + Math.random() * .7));
+        var from = toLeft ? vw + 20 : -w - 20;
+        var to = toLeft ? -w - 20 : vw + 20;
+        swimmer.classList.toggle('is-left', toLeft);
+        swimmer.style.opacity = 1;
+        swimmer.animate(
+          [{ transform: 'translate(' + from + 'px,' + y + 'px)' }, { transform: 'translate(' + to + 'px,' + y + 'px)' }],
+          { duration: 9000 + Math.random() * 5000, easing: 'linear' }
+        ).onfinish = function () { swimmer.style.opacity = 0; };
+      }
+      setTimeout(swim, 20000 + Math.random() * 20000);
+    };
+    setTimeout(swim, 4000 + Math.random() * 4000);
   }
 })();

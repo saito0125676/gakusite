@@ -114,6 +114,33 @@ h1, h2, h3, p { margin: 0; }
   animation: intro-splash-out .6s ease-in 1.6s forwards;
 }
 .intro-logo { width: min(80vw, 640px); height: auto; overflow: visible; }
+
+/* オープニング動画:時間で消さず、再生が終わったら site.js が .is-done を付けてフェードアウト */
+.intro-splash--video { animation: none; transition: opacity .6s ease, visibility .6s; }
+.intro-splash--video.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+.intro-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* 自動再生できないときは、動画の最後のコマ(ロゴ)を静止画で表示 */
+.intro-splash--video.is-still { background: #c9d9e8 url("assets/intro-whale-end.jpg") center / cover no-repeat; }
+.intro-splash--video.is-still .intro-video,
+.intro-splash--video.is-still .intro-controls { display: none; }
+.intro-controls { position: absolute; right: 20px; bottom: 20px; display: flex; gap: 10px; }
+.intro-btn {
+  height: 40px; padding: 0 18px; border-radius: 999px; cursor: pointer;
+  font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .05em;
+  color: #fff; background: rgba(20,40,63,.45); border: 1px solid rgba(255,255,255,.6);
+  backdrop-filter: blur(4px); transition: background-color .2s;
+}
+.intro-btn:hover { background: rgba(20,40,63,.7); }
+.intro-btn[hidden] { display: none; }
+html.intro-playing { overflow: hidden; }
+/* テスト用:イントロ再生ボタン(公開前に index.html のボタンと一緒に削除) */
+.intro-replay {
+  position: fixed; left: 20px; bottom: 20px; z-index: 90;
+  height: 44px; padding: 0 18px; border: 0; border-radius: 999px; cursor: pointer;
+  font: inherit; font-size: 13px; font-weight: 700; color: #fff; background: var(--navy);
+  box-shadow: 0 6px 18px rgba(20,40,63,.3);
+}
+.intro-replay:hover { background: var(--ink); }
 @keyframes intro-splash-out {
   0% { opacity: 1; visibility: visible; }
   99% { opacity: 0; visibility: visible; }
@@ -900,6 +927,22 @@ h1, h2, h3, p { margin: 0; }
   .page-about .number-grid { max-width: 400px; margin: 0 auto; }
   .page-about .number-card .number-text { min-height: 0; }
 }
+
+/* ---------- ガクザメ(ときどき空白を泳ぐ。site.js と連動) ---------- */
+/* z-index:-1 で一番下に置き、背景のあるセクションやカード・文字の下に隠れるようにする */
+.gakuzame-swim { position: fixed; left: 0; top: 0; z-index: -1; pointer-events: none; opacity: 0; }
+.gakuzame-bob { position: relative; width: 108px; height: 57px; animation: gakuzame-bob 1.6s ease-in-out infinite alternate; }
+.gakuzame-swim.is-left .gakuzame-bob canvas { transform: scaleX(-1); }
+.gakuzame-bob canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  image-rendering: pixelated; image-rendering: crisp-edges;
+  animation: gakuzame-wag-a .5s steps(1) infinite;
+}
+.gakuzame-bob canvas + canvas { animation-name: gakuzame-wag-b; }
+@keyframes gakuzame-bob { from { transform: translateY(-4px); } to { transform: translateY(4px); } }
+@keyframes gakuzame-wag-a { 0% { visibility: visible; } 50% { visibility: hidden; } }
+@keyframes gakuzame-wag-b { 0% { visibility: hidden; } 50% { visibility: visible; } }
+@media (max-width: 760px) { .gakuzame-bob { width: 72px; height: 38px; } }
 
 /* ---------- 動きを減らす設定 ---------- */
 @media (prefers-reduced-motion: reduce) {

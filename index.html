@@ -29,12 +29,12 @@
   </script>
 </head>
 <body>
-  <div class="intro-splash" aria-hidden="true">
-    <svg class="intro-logo" viewBox="80 100 740 310" xmlns="http://www.w3.org/2000/svg">
-      <rect class="logo-sq" x="120" y="140" width="180" height="180" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
-      <rect class="logo-sq logo-sq--b" x="230" y="200" width="180" height="180" fill="none" stroke="#3FC1C9" stroke-width="14" stroke-linejoin="round"/>
-      <text class="logo-text" x="465" y="278" font-family="Arial, sans-serif" font-size="54" font-weight="bold" letter-spacing="4" fill="#FFFFFF">GAKU SITE</text>
-    </svg>
+  <!-- オープニング動画(セッション中の初回のみ。終わったら自動で消える) -->
+  <div class="intro-splash intro-splash--video">
+    <video class="intro-video" src="assets/intro-whale.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+    <div class="intro-controls">
+      <button class="intro-btn intro-sound" type="button">音を出す</button>
+    </div>
   </div>
 
   <div class="bg-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
@@ -468,6 +468,9 @@
   </footer>
 
   <a class="consult-float" href="contact.html">無料相談受け付け中 <span aria-hidden="true">→</span></a>
+
+  <!-- テスト用:イントロ動画を再生し直すボタン。公開前に削除 -->
+  <button class="intro-replay" type="button">▶ イントロを再生(テスト用)</button>
 
   <script src="site.js" defer></script>
   <script src="reveal.js" defer></script>
