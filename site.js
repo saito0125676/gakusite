@@ -39,6 +39,20 @@
     });
   }
 
+  // 追従の相談ボタン:CTA 帯やフッターが画面に入ったら隠す(ボタンの重なり防止)
+  var floatBtn = document.querySelector('.consult-float');
+  var floatTargets = document.querySelectorAll('.cta-band, .site-footer');
+  if (floatBtn && floatTargets.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { visible.add(e.target); } else { visible.delete(e.target); }
+      });
+      floatBtn.classList.toggle('is-hidden', visible.size > 0);
+    });
+    floatTargets.forEach(function (t) { io.observe(t); });
+  }
+
   // 実績プレビュー(iframe)を枠の幅に合わせて縮小
   var frames = document.querySelectorAll('.work-frame');
   if (frames.length && 'ResizeObserver' in window) {

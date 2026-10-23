@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>私たちについて | 学サイト(ガクサイト)</title>
-  <meta name="description" content="「学サイト」(ガクサイト)は、現役大学生が運営するホームページ制作チームです。私たちの強みや運営メンバーについてご紹介します。">
+  <meta name="description" content="「学サイト」(ガクサイト)は、現役大学生が運営するホームページ制作チームです。私たちの想いや強みをご紹介します。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Oswald:wght@500;600&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Oswald:wght@500;600&family=Klee+One:wght@600&family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="chara-sheet.css">
   <script>document.documentElement.classList.add('reveal-ready');</script>
 </head>
-<body>
-  <div class="bg-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<body class="page-about">
 
   <header class="site-header">
     <div class="container">
@@ -37,9 +37,13 @@
   </header>
 
   <main>
-    <section class="page-hero" aria-labelledby="page-title">
+    <section class="page-hero sea-section" aria-labelledby="page-title">
+      <!-- 画像:sea-hero.jpg / .webp(推奨 1920×1080)明るい浅瀬や水平線。水平線は中央〜やや右に。ヒーローなので遅延読み込みしない -->
+      <picture class="sea-bg sea-bg--hero">
+        <source srcset="assets/photos/sea-hero.webp" type="image/webp">
+        <img src="assets/photos/sea-hero.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+      </picture>
       <span class="watermark" aria-hidden="true">ABOUT US</span>
-      <span class="splash" aria-hidden="true"></span>
       <span class="deco-sq deco-sq--a" aria-hidden="true"></span>
       <span class="deco-sq deco-sq--b" aria-hidden="true"></span>
       <div class="container">
@@ -48,6 +52,7 @@
         <h1 class="page-title" id="page-title">私たちについて</h1>
         <p class="page-lead">現役大学生のチームが、想いの伝わるホームページをつくっています。</p>
       </div>
+      <svg class="wave wave--bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44c180 30 360 30 540 6s360-40 540-14 270 30 360 18v26H0z" fill="#fff"/></svg>
     </section>
 
     <section class="section" aria-labelledby="about-start">
@@ -56,12 +61,24 @@
           <div class="split-text">
             <span class="eyebrow">OUR STORY</span>
             <h2 class="section-title" id="about-start">学生発、これから起業へ。</h2>
-            <p>「<ruby>学サイト<rt>がくさいと</rt></ruby>」は、現在大学3年生の4人が中心となって走り出したチームです。</p>
-            <p>授業や独学で身につけたWeb制作のスキルを武器に、いずれは学生発の会社として独立することを目標に活動しています。</p>
+            <!-- 仮の文章です。差し替えてください -->
+            <p>「<ruby>学サイト<rt>がくさいと</rt></ruby>」は、地元の塾や教室のホームページが何年も更新されないまま残っているのを見て、「自分たちの手で変えられないか」と思ったことから始まりました。</p>
+            <p>大切にしているのは、見た目のきれいさだけでなく、教室の想いが生徒や保護者にまっすぐ届くこと。お客様と一緒に悩み、一緒に形にするつもりで、一つひとつのサイトをつくっています。</p>
           </div>
           <div class="about-visual">
             <span class="dots" aria-hidden="true"></span>
-            <div class="about-photo"><img src="assets/photos/team.jpg" alt="学サイトの運営メンバー" width="1600" height="900"></div>
+            <span class="ripple" aria-hidden="true"></span>
+            <!-- 画像:sea-story.jpg / .webp(推奨 1600×900)波打ち際や水面の光。ブロブ形状で切り抜いて表示 -->
+            <div class="about-photo">
+              <picture>
+                <source srcset="assets/photos/sea-story.webp" type="image/webp">
+                <img src="assets/photos/sea-story.jpg" alt="" width="1600" height="900" loading="lazy">
+              </picture>
+              <svg class="about-photo-mark" viewBox="100 120 330 280" aria-hidden="true">
+                <rect x="120" y="140" width="180" height="180" fill="none" stroke="#fff" stroke-width="14" stroke-linejoin="round" transform="rotate(-4 210 230)"/>
+                <rect x="230" y="200" width="180" height="180" fill="none" stroke="#e8f8fb" stroke-width="14" stroke-linejoin="round" transform="rotate(3 320 290)"/>
+              </svg>
+            </div>
             <span class="deco-sq" aria-hidden="true"></span>
             <span class="deco-sq" aria-hidden="true"></span>
           </div>
@@ -69,7 +86,13 @@
       </div>
     </section>
 
-    <section class="section section--tint" aria-labelledby="about-strength">
+    <section class="section sea-section sea-section--surface" aria-labelledby="about-strength">
+      <!-- 画像:sea-surface.jpg / .webp(推奨 1920×600)水面のテクスチャ。強みセクションと CTA の背景で共用 -->
+      <picture class="sea-bg sea-bg--surface">
+        <source srcset="assets/photos/sea-surface.webp" type="image/webp">
+        <img src="assets/photos/sea-surface.jpg" alt="" width="1920" height="600" loading="lazy">
+      </picture>
+      <svg class="wave wave--top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44c180 30 360 30 540 6s360-40 540-14 270 30 360 18v26H0z" fill="#fff"/></svg>
       <span class="watermark" aria-hidden="true">STRENGTH</span>
       <div class="container">
         <div class="section-head section-head--center">
@@ -77,57 +100,171 @@
           <h2 class="section-title" id="about-strength">私たちの強み</h2>
         </div>
         <div class="quote-box">
-          <p>制作会社にありがちな<strong>「きれいだけど無難」</strong>なデザインではなく、学生だからこそ分かる、<strong>思わず目を引き人を惹きつけるデザイン</strong>にこだわっています。同世代・若い世代に刺さる感性を、そのままお客様のホームページに落とし込みます。</p>
+          <p>制作会社にありがちな<strong>「きれいだけど無難」</strong>ではなく、<wbr><strong>思わず目を引き、人を惹きつけるデザイン</strong>を。</p>
         </div>
+        <!-- 強みの文言は仮です -->
+        <ul class="strength-grid">
+          <li class="strength-item">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="32" cy="32" r="30" fill="#e3f7f8" stroke="none"/>
+              <rect x="13" y="17" width="38" height="26" rx="3" fill="#fff"/>
+              <path d="M26 49h12M32 43v6"/>
+              <path d="M32 22.5l2.2 4.6 5 .6-3.7 3.4 1 5-4.5-2.5-4.5 2.5 1-5-3.7-3.4 5-.6z"/>
+            </svg>
+            <h3>若い世代に刺さるデザイン</h3>
+            <p>同世代の感覚で、<wbr>生徒や保護者の目に<wbr>留まるデザインを<wbr>提案します。</p>
+          </li>
+          <li class="strength-item">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="32" cy="32" r="30" fill="#e3f7f8" stroke="none"/>
+              <path d="M38 30h12a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-2v5l-5-5h-7a4 4 0 0 1-4-4v-2" fill="#fff"/>
+              <path d="M14 16h22a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H22l-6 6v-6h-2a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z" fill="#fff"/>
+              <path d="M17 24h16M17 29h10"/>
+            </svg>
+            <h3>相談から制作まで<wbr>同じメンバーが担当</h3>
+            <p>最初にお話しした<wbr>メンバーが、<wbr>そのまま制作まで<wbr>責任を持ちます。</p>
+          </li>
+          <li class="strength-item">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="32" cy="32" r="30" fill="#e3f7f8" stroke="none"/>
+              <circle cx="32" cy="36" r="15" fill="#fff"/>
+              <path d="M28 15h8M32 15v6M32 36v-8M32 36l6 4M45 21l3-3"/>
+            </svg>
+            <h3>学生ならではの<wbr>価格とスピード感</h3>
+            <p>学生チームだから<wbr>できる価格で、<wbr>ご相談から<wbr>すばやく形にします。</p>
+          </li>
+        </ul>
       </div>
+      <svg class="wave wave--bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44c180 30 360 30 540 6s360-40 540-14 270 30 360 18v26H0z" fill="#fff"/></svg>
     </section>
 
-    <section class="section" aria-labelledby="about-member">
+    <section class="section sea-section sea-section--deep" aria-labelledby="about-numbers">
+      <!-- 画像:sea-deep.jpg / .webp(推奨 1920×800)少し深い青の海中。光の差し込みは上側に -->
+      <picture class="sea-bg sea-bg--deep">
+        <source srcset="assets/photos/sea-deep.webp" type="image/webp">
+        <img src="assets/photos/sea-deep.jpg" alt="" width="1920" height="800" loading="lazy">
+      </picture>
+      <svg class="wave wave--top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44c180 30 360 30 540 6s360-40 540-14 270 30 360 18v26H0z" fill="#fff"/></svg>
       <div class="container">
         <div class="section-head section-head--center">
-          <span class="eyebrow">MEMBER</span>
-          <h2 class="section-title" id="about-member">運営メンバー</h2>
-          <p class="section-lead">現役大学3年生、4名体制で運営しています。</p>
+          <span class="eyebrow">NUMBERS</span>
+          <h2 class="section-title" id="about-numbers">数字で見る学サイト</h2>
         </div>
         <div class="number-grid">
           <div class="number-card">
-            <svg viewBox="0 0 64 64" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="32" cy="32" r="30" fill="#e3f7f8" stroke="none"/>
-              <circle cx="24" cy="25" r="6" fill="#fff" stroke="#1f3a5f"/><circle cx="40" cy="25" r="6" fill="#fff" stroke="#1f3a5f"/>
-              <path d="M13 46c1-7 5-11 11-11s10 4 11 11M29 46c1-7 5-11 11-11s10 4 11 11" stroke="#1e7fe0"/>
+              <circle cx="24" cy="25" r="6" fill="#fff"/><circle cx="40" cy="25" r="6" fill="#fff"/>
+              <path d="M13 46c1-7 5-11 11-11s10 4 11 11M29 46c1-7 5-11 11-11s10 4 11 11"/>
             </svg>
+            <p class="stat-label">運営メンバー</p>
             <p class="stat-value">4<small>名</small></p>
-            <p>少人数だから、相談から制作まで同じメンバーが担当します</p>
+            <p class="number-text">少人数だから、<wbr>ご相談への返事も<wbr>スピーディーです</p>
           </div>
           <div class="number-card">
-            <svg viewBox="0 0 64 64" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="32" cy="32" r="30" fill="#e3f7f8" stroke="none"/>
-              <path d="M10 26l22-10 22 10-22 10z" fill="#fff" stroke="#1f3a5f"/>
-              <path d="M20 31v10c4 4 20 4 24 0V31" stroke="#1e7fe0"/>
-              <path d="M52 27v12" stroke="#3fc1c9"/>
+              <path d="M10 26l22-10 22 10-22 10z" fill="#fff"/>
+              <path d="M20 31v10c4 4 20 4 24 0V31"/>
+              <path d="M52 27v12"/>
             </svg>
-            <p class="stat-value"><span class="pre">大学</span>3<small>年生</small></p>
-            <p>授業と独学で学んだWeb制作のスキルを活かしています</p>
+            <p class="stat-label">現役大学生</p>
+            <p class="stat-value">3<small>年生</small></p>
+            <p class="number-text">授業と独学で<wbr>学んだスキルを<wbr>制作に活かしています</p>
           </div>
+          <!-- 「目標 1社」は仮の表現です -->
           <div class="number-card">
-            <svg viewBox="0 0 64 64" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="32" cy="32" r="30" fill="#e3f7f8" stroke="none"/>
-              <path d="M32 12c8 6 11 16 9 26H23c-2-10 1-20 9-26z" fill="#fff" stroke="#1f3a5f"/>
-              <circle cx="32" cy="26" r="4" stroke="#1e7fe0"/>
-              <path d="M23 38l-6 6 7 1M41 38l6 6-7 1M28 44l4 8 4-8" stroke="#3fc1c9"/>
+              <path d="M32 12c8 6 11 16 9 26H23c-2-10 1-20 9-26z" fill="#fff"/>
+              <circle cx="32" cy="26" r="4"/>
+              <path d="M23 38l-6 6 7 1M41 38l6 6-7 1M28 44l4 8 4-8"/>
             </svg>
-            <p class="stat-value" style="font-size:30px;">GOAL</p>
-            <p>学生発の会社として独立することを目指しています</p>
+            <p class="stat-label">目標</p>
+            <p class="stat-value">1<small>社</small></p>
+            <p class="number-text">学生発の会社として<wbr>独立することを<wbr>目指しています</p>
           </div>
         </div>
       </div>
+      <svg class="wave wave--bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44c180 30 360 30 540 6s360-40 540-14 270 30 360 18v26H0z" fill="#fff"/></svg>
     </section>
 
+
+
+    <section class="section" aria-labelledby="about-mascot">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">MASCOT</span>
+          <h2 class="section-title" id="about-mascot">マスコット紹介</h2>
+          <p class="section-lead">学サイトの海にすむ、<wbr>ちょっと食いしん坊なサメです。</p>
+        </div>
+
+        <!-- キャラシート本体(文章・数値はそのまま書き換えOK) -->
+        <article class="cs" aria-label="キャラクター紹介：ガクザメ">
+          <div class="cs-window cs-sheet">
+
+            <header class="cs-head">
+              <span>CHARACTER</span>
+              <span class="cs-no">No.001</span>
+            </header>
+
+            <div class="cs-body">
+              <figure class="cs-portrait">
+                <div class="cs-stage">
+                  <canvas class="cs-canvas" data-cs-sprite width="96" height="72" role="img" aria-label="海の中を泳ぐドット絵のサメ"></canvas>
+                </div>
+                <figcaption class="cs-plate">
+                  <span class="cs-en">GAKU SHARK</span>
+                  <span class="cs-name">ガクザメ</span>
+                </figcaption>
+              </figure>
+
+              <div class="cs-info">
+                <dl class="cs-meta">
+                  <dt>LV</dt><dd class="cs-lv">3</dd>
+                  <dt>CLASS</dt><dd>Web制作見習い</dd>
+                  <dt>TYPE</dt><dd>みず／デザイン</dd>
+                  <dt>HOME</dt><dd>学サイトの海</dd>
+                </dl>
+
+                <div>
+                  <h3 class="cs-label">STATUS</h3>
+                  <!-- --v に 0〜10 の数値。10 のときは is-max を付けると金色になる -->
+                  <ul class="cs-stats">
+                    <li class="cs-stat" style="--v:9"><span>デザイン</span><span class="cs-bar" aria-hidden="true"></span><span class="cs-num">9</span></li>
+                    <li class="cs-stat" style="--v:7"><span>コーディング</span><span class="cs-bar" aria-hidden="true"></span><span class="cs-num">7</span></li>
+                    <li class="cs-stat is-max" style="--v:10"><span>相談しやすさ</span><span class="cs-bar" aria-hidden="true"></span><span class="cs-num">10</span></li>
+                    <li class="cs-stat" style="--v:8"><span>スピード</span><span class="cs-bar" aria-hidden="true"></span><span class="cs-num">8</span></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 class="cs-label">SKILL</h3>
+                  <ul class="cs-skills">
+                    <li class="cs-skill"><div><b>ひとめぼれデザイン</b><span>思わず目を引く、若い感性のデザインで攻める</span></div></li>
+                    <li class="cs-skill"><div><b>さいごまで伴走</b><span>相談から公開まで、同じメンバーがずっと担当</span></div></li>
+                    <li class="cs-skill"><div><b>学生プライス</b><span>学生ならではの価格とフットワークで動く</span></div></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <p class="cs-msg">「きれいだけど無難」なサイトを見つけると、思わずかじりたくなる。<br>好物はお客さんの「こうしたい」という想い。</p>
+
+          </div>
+        </article>
+      </div>
+    </section>
 
     <!-- ===== CTA ===== -->
     <section class="cta-band" aria-labelledby="cta-title">
       <div class="container">
         <div class="cta-box">
+          <!-- 画像:sea-surface.jpg / .webp を共用(強みセクションと同じ画像) -->
+          <picture class="sea-bg sea-bg--cta">
+            <source srcset="assets/photos/sea-surface.webp" type="image/webp">
+            <img src="assets/photos/sea-surface.jpg" alt="" width="1920" height="600" loading="lazy">
+          </picture>
           <span class="splash" aria-hidden="true"></span>
           <span class="deco-sq" aria-hidden="true"></span>
           <div class="cta-illust">
@@ -204,6 +341,7 @@
   <a class="consult-float" href="contact.html">無料相談受け付け中 <span aria-hidden="true">→</span></a>
 
   <script src="site.js" defer></script>
+  <script src="chara-sheet.js" defer></script>
   <script src="reveal.js" defer></script>
 </body>
 </html>

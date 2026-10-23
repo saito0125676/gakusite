@@ -1,0 +1,163 @@
+/* =========================================================
+   キャラシート（レトロなドット絵のサメ）
+   すべて .cs 配下にスコープしているので、サイトの他の要素には影響しません。
+   色はサイトのCSS変数（--sea-*）があればそれを使います。
+   ========================================================= */
+.cs {
+  --cs-panel: var(--sea-deep, #0b3c5d);
+  --cs-panel-2: #0a3150;
+  --cs-ink: #e8f6ff;
+  --cs-sub: #9cc4d8;
+  --cs-frame: #e8f6ff;
+  --cs-accent: var(--sea-light, #5fb4c9);
+  --cs-gold: #ffd84a;
+  --cs-bar-off: #1a4a6e;
+  --cs-shadow: #062338;
+  --cs-pixel: "Press Start 2P", "Courier New", monospace;
+  --cs-dot: "DotGothic16", "Hiragino Sans", "Yu Gothic", sans-serif;
+
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  color: var(--cs-ink);
+  font-family: var(--cs-dot);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+.cs *, .cs *::before, .cs *::after { box-sizing: border-box; }
+
+/* 角がドットで欠けたウィンドウ枠 */
+.cs-window {
+  position: relative;
+  background: var(--cs-panel);
+  border: 3px solid var(--cs-frame);
+  box-shadow:
+    0 0 0 3px var(--cs-panel),
+    6px 6px 0 3px var(--cs-shadow);
+  border-radius: 6px;
+}
+
+.cs-sheet { padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: clamp(16px, 2.6vw, 24px); }
+
+.cs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed rgba(232, 246, 255, .25);
+  font-family: var(--cs-pixel);
+  font-size: 10px;
+  color: var(--cs-accent);
+}
+.cs-head .cs-no { color: var(--cs-sub); }
+
+.cs-body {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(18px, 3vw, 32px);
+  align-items: start;
+}
+
+/* ---------- 左：ポートレート ---------- */
+.cs-portrait { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.cs-stage {
+  border: 3px solid var(--cs-frame);
+  border-radius: 4px;
+  background: #134671;
+  overflow: hidden;
+}
+.cs-canvas {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+.cs-plate { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.cs-en { font-family: var(--cs-pixel); font-size: 10px; color: var(--cs-accent); letter-spacing: 0.08em; }
+.cs-name { font-size: clamp(22px, 3.4vw, 30px); line-height: 1.2; }
+
+/* ---------- 右：ステータス ---------- */
+.cs-info { min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+
+.cs-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+.cs-meta dt { font-family: var(--cs-pixel); font-size: 10px; line-height: 2.2; color: var(--cs-sub); }
+.cs-meta dd { margin: 0; font-size: 16px; }
+.cs-meta .cs-lv { font-family: var(--cs-pixel); font-size: 14px; color: var(--cs-gold); }
+
+.cs-label {
+  margin: 0 0 10px;
+  font-family: var(--cs-pixel);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--cs-accent);
+  letter-spacing: 0.08em;
+}
+
+.cs-stats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.cs-stat {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr) 2.2em;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+/* 10マスのゲージ。--v（0〜10）で量が決まる */
+.cs-bar {
+  height: 12px;
+  background:
+    repeating-linear-gradient(to right, transparent 0 calc(10% - 3px), var(--cs-panel) calc(10% - 3px) 10%),
+    linear-gradient(to right, var(--cs-accent) 0 calc(var(--v, 5) * 10%), var(--cs-bar-off) calc(var(--v, 5) * 10%) 100%);
+}
+.cs-stat.is-max .cs-bar {
+  background:
+    repeating-linear-gradient(to right, transparent 0 calc(10% - 3px), var(--cs-panel) calc(10% - 3px) 10%),
+    linear-gradient(to right, var(--cs-gold) 0 100%);
+}
+.cs-num { font-family: var(--cs-pixel); font-size: 11px; text-align: right; font-variant-numeric: tabular-nums; }
+.cs-stat.is-max .cs-num { color: var(--cs-gold); }
+
+.cs-skills { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.cs-skill { display: grid; grid-template-columns: 1em minmax(0, 1fr); gap: 8px; }
+.cs-skill::before { content: "▶"; font-size: 10px; line-height: 2.2; color: var(--cs-gold); }
+.cs-skill b { display: block; font-weight: 400; font-size: 16px; }
+.cs-skill span { display: block; font-size: 13px; color: var(--cs-sub); line-height: 1.7; }
+
+/* ---------- 下：セリフ枠 ---------- */
+.cs-msg {
+  position: relative;
+  margin: 0;
+  padding: 16px 44px 16px 20px;
+  background: var(--cs-panel-2);
+  border: 3px solid var(--cs-frame);
+  border-radius: 4px;
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+.cs-msg::after {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  font-size: 11px;
+  color: var(--cs-gold);
+  animation: cs-blink 1s steps(2) infinite;
+}
+@keyframes cs-blink { 50% { opacity: 0; } }
+
+@media (max-width: 640px) {
+  .cs-body { grid-template-columns: minmax(0, 1fr); }
+  .cs-portrait { max-width: 360px; width: 100%; margin-inline: auto; }
+  .cs-stat { grid-template-columns: 6.5em minmax(0, 1fr) 2em; font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-msg::after { animation: none; }
+}
