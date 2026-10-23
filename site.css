@@ -135,9 +135,14 @@ h1, h2, h3, p { margin: 0; }
 /* ---------- ヘッダー ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 100;
+  transition: box-shadow .25s ease;
+}
+/* 背景のすりガラスは疑似要素に置く(ヘッダー本体に backdrop-filter を付けると、
+   全画面メニュー(position: fixed)がヘッダーの高さに閉じ込められるため) */
+.site-header::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
   background: rgba(255,255,255,.94);
   backdrop-filter: blur(8px);
-  transition: box-shadow .25s ease;
 }
 .site-header.is-scrolled { box-shadow: 0 2px 12px rgba(20,40,63,.08); }
 .site-header .container {
@@ -178,8 +183,10 @@ h1, h2, h3, p { margin: 0; }
     opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
   }
   .global-nav a:not(.btn) { font-size: 20px; font-weight: 700; }
+  .global-nav a:not(.btn)::after { background: #fff; }
   .global-nav .btn { background: #fff; color: var(--cta); }
   .nav-toggle-input:checked ~ .global-nav { opacity: 1; visibility: visible; }
+  html:has(.nav-toggle-input:checked) { overflow: hidden; }
   .nav-toggle-input:checked + .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle-input:checked + .nav-toggle span:nth-child(2) { opacity: 0; }
   .nav-toggle-input:checked + .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
