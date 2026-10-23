@@ -59,7 +59,13 @@ body {
   line-height: 1.9;
   letter-spacing: .03em;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+}
+
+/* 横スクロール防止。iOS Safari は body の overflow-x: hidden だけでは効かないため html にも指定。
+   hidden だと sticky ヘッダーが効かなくなるので clip を使う(非対応ブラウザは hidden で代用) */
+html, body { overflow-x: hidden; }
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
 }
 
 @media (max-width: 760px) {
@@ -219,7 +225,11 @@ h1, h2, h3, p { margin: 0; }
 }
 
 /* ---------- セクション共通 ---------- */
-.section { padding: var(--section-y) 0; position: relative; }
+/* はみ出す飾り(透かし文字・ドット・四角形)をセクション内で切る */
+.section { padding: var(--section-y) 0; position: relative; overflow-x: hidden; }
+@supports (overflow: clip) {
+  .section { overflow-x: clip; }
+}
 .section--tint { background: var(--bg-tint); }
 
 .section-head { margin-bottom: 56px; }
