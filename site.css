@@ -89,22 +89,6 @@ h1, h2, h3, p { margin: 0; }
   clip: rect(0 0 0 0); white-space: nowrap;
 }
 
-/* ---------- 背景の縦ライン ---------- */
-.bg-lines {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  max-width: calc(var(--container) + var(--gutter) * 2);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-.bg-lines span { border-left: 1px solid #edf2f6; }
-.bg-lines span:last-child { border-right: 1px solid #edf2f6; }
-@media (max-width: 760px) { .bg-lines { display: none; } }
-
 /* ---------- イントロ(現行を継承) ---------- */
 .no-intro .intro-splash { display: none; }
 .intro-splash {
