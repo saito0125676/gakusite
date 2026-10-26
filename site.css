@@ -72,7 +72,8 @@ html, body { overflow-x: hidden; }
   body { font-size: 15px; }
 }
 
-img { max-width: 100%; display: block; }
+/* height: auto がないと、HTML の height 属性のまま縦に引き伸ばされる */
+img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 h1, h2, h3, p { margin: 0; }
 
