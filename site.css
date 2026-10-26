@@ -105,26 +105,8 @@ h1, h2, h3, p { margin: 0; }
 .intro-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 /* 自動再生できないときは、動画の最後のコマ(ロゴ)を静止画で表示 */
 .intro-splash--video.is-still { background: #c9d9e8 url("assets/intro-whale-end.jpg") center / cover no-repeat; }
-.intro-splash--video.is-still .intro-video,
-.intro-splash--video.is-still .intro-controls { display: none; }
-.intro-controls { position: absolute; right: 20px; bottom: 20px; display: flex; gap: 10px; }
-.intro-btn {
-  height: 40px; padding: 0 18px; border-radius: 999px; cursor: pointer;
-  font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .05em;
-  color: #fff; background: rgba(20,40,63,.45); border: 1px solid rgba(255,255,255,.6);
-  backdrop-filter: blur(4px); transition: background-color .2s;
-}
-.intro-btn:hover { background: rgba(20,40,63,.7); }
-.intro-btn[hidden] { display: none; }
+.intro-splash--video.is-still .intro-video { display: none; }
 html.intro-playing { overflow: hidden; }
-/* テスト用:イントロ再生ボタン(公開前に index.html のボタンと一緒に削除) */
-.intro-replay {
-  position: fixed; left: 20px; bottom: 20px; z-index: 90;
-  height: 44px; padding: 0 18px; border: 0; border-radius: 999px; cursor: pointer;
-  font: inherit; font-size: 13px; font-weight: 700; color: #fff; background: var(--navy);
-  box-shadow: 0 6px 18px rgba(20,40,63,.3);
-}
-.intro-replay:hover { background: var(--ink); }
 @keyframes intro-splash-out {
   0% { opacity: 1; visibility: visible; }
   99% { opacity: 0; visibility: visible; }

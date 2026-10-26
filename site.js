@@ -1,11 +1,10 @@
 // 学サイト 全ページ共通スクリプト
 (function () {
-  // オープニング動画:自動再生が許される無音で流し、「音を出す」で音声をオンにする
+  // オープニング動画:自動再生が許される無音で流し、終わったらフェードアウト
   var intro = document.querySelector('.intro-splash--video');
   if (intro) {
     var root = document.documentElement;
     var introVideo = intro.querySelector('.intro-video');
-    var soundBtn = intro.querySelector('.intro-sound');
     var reduceIntro = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var finished = true;
     var endIntro = function () {
@@ -15,45 +14,22 @@
       intro.classList.add('is-done');
       root.classList.remove('intro-playing');
     };
-    // withSound:ボタンのクリックから呼ぶときは音つきで再生できる
-    var startIntro = function (withSound) {
+    var startIntro = function () {
       finished = false;
-      root.classList.remove('no-intro');
       root.classList.add('intro-playing');
-      intro.classList.remove('is-done');
-      introVideo.currentTime = 0;
-      introVideo.muted = !withSound;
-      soundBtn.hidden = !!withSound;
-      intro.classList.remove('is-still');
+      introVideo.muted = true;
       // 自動再生を止められたとき(低電力モードなど):動画の最後のロゴを静止画で見せてからフェード
-      var showStill = function () {
+      introVideo.play().catch(function () {
         intro.classList.add('is-still');
         setTimeout(endIntro, 1600);
-      };
-      introVideo.play().catch(function () {
-        // 音つきが止められたら無音で流し直す
-        if (!withSound) { showStill(); return; }
-        introVideo.muted = true;
-        soundBtn.hidden = false;
-        introVideo.play().catch(showStill);
       });
     };
     introVideo.addEventListener('ended', endIntro);
     introVideo.addEventListener('error', endIntro);
-    soundBtn.addEventListener('click', function () {
-      introVideo.muted = false;
-      soundBtn.hidden = true;
-    });
     if (root.classList.contains('no-intro') || reduceIntro) {
       intro.classList.add('is-done');
     } else {
-      startIntro(false);
-    }
-
-    // テスト用:いつでもイントロを再生し直すボタン
-    var replayBtn = document.querySelector('.intro-replay');
-    if (replayBtn) {
-      replayBtn.addEventListener('click', function () { startIntro(true); });
+      startIntro();
     }
   }
 
