@@ -660,7 +660,22 @@ html.intro-playing { overflow: hidden; }
 .flow-body { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 28px; text-align: left; }
 .flow-body h3 { font-size: 18px; font-weight: 700; }
 .flow-body p { margin-top: 6px; font-size: 14px; color: var(--ink-sub); }
+/* ガクガエルがステップを跳んでいく(flow-frog.js と連動。JS が動くときだけ .has-frog が付く) */
+.flow-steps.has-frog::before { bottom: auto; height: var(--flow-line, 0px); transition: height .4s ease-out; }
+.flow-steps.has-frog > li:not(.flow-frog) { opacity: 0; transform: translateX(24px); transition: opacity .45s ease-out, transform .45s ease-out; }
+.flow-steps.has-frog > li.is-in { opacity: 1; transform: none; }
+.flow-steps.has-frog > li.is-in .flow-num { animation: flow-num-pop .4s ease-out; }
+@keyframes flow-num-pop { 0% { transform: scale(.6); } 70% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.flow-frog { position: absolute; left: 0; top: 0; z-index: 3; width: 52px; height: 38px; pointer-events: none; }
+.flow-frog-body { width: 100%; height: 100%; transform-origin: 50% 100%; animation: flow-frog-idle 1.4s ease-in-out infinite alternate; }
+.flow-frog-body canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
+.flow-frog-body.is-jump { animation: none; transform: scale(.92, 1.1); }
+.flow-frog-body.is-land { animation: flow-frog-land .3s ease-out, flow-frog-idle 1.4s ease-in-out .3s infinite alternate; }
+@keyframes flow-frog-idle { from { transform: scale(1, 1); } to { transform: scale(1.03, .96); } }
+@keyframes flow-frog-land { 0% { transform: scale(1.15, .8); } 60% { transform: scale(.96, 1.05); } 100% { transform: scale(1, 1); } }
+
 @media (max-width: 560px) {
+  .flow-frog { width: 44px; height: 32px; }
   .flow-steps::before { left: 23px; }
   .flow-steps li { grid-template-columns: 48px 1fr; gap: 16px; }
   .flow-num { width: 48px; height: 48px; }

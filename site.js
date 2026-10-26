@@ -98,7 +98,8 @@
   }
 
   // ガクザメ:ときどき画面を横切る。z-index:-1 なので、何もない空白でだけ見える
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // <body data-gakuzame> のページ(トップ・私たちについて)だけで泳がせる
+  if (document.body.hasAttribute('data-gakuzame') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // chara-sheet.js と同じドット絵(36×17、右向き)
     var SHARK = [
       '................OO..................',

@@ -26,6 +26,12 @@
 }
 .cs *, .cs *::before, .cs *::after { box-sizing: border-box; }
 
+/* カエル版：ゲージや見出しを池の緑に */
+.cs--frog {
+  --cs-accent: #8fd16a;
+  --cs-bar-off: #1c4a3e;
+}
+
 /* 角がドットで欠けたウィンドウ枠 */
 .cs-window {
   position: relative;
