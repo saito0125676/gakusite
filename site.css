@@ -483,6 +483,8 @@ html.intro-playing { overflow: hidden; }
 .about-visual .deco-sq { --s: 90px; left: -30px; bottom: -30px; }
 .about-visual .deco-sq + .deco-sq { --s: 70px; --c: var(--blue); left: 10px; bottom: -50px; --r: 14deg; --delay: -5s; }
 .about-visual .dots { right: -20px; top: -30px; }
+/* 枠の形や飾りまで入った画像をそのまま見せる */
+.about-visual--image-only img { width: 100%; height: auto; }
 @media (max-width: 960px) { .about .container { grid-template-columns: 1fr; gap: 48px; } .about-visual { order: -1; } }
 
 /* ---------- FAQ + 料金 ---------- */
