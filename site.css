@@ -307,25 +307,11 @@ html.intro-playing { overflow: hidden; }
 .hero-copy { max-width: 620px; }
 .hero .deco-sq, .hero .splash { z-index: 1; }
 
-.hero-video-toggle {
-  position: absolute; z-index: 2; right: 24px; bottom: 24px;
-  width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: rgba(20,40,63,.55); color: #fff; backdrop-filter: blur(4px);
-  transition: background-color .2s;
-}
-.hero-video-toggle:hover { background: rgba(20,40,63,.8); }
-.hero-video-toggle[hidden] { display: none; }
-.hero-video-toggle .icon-play { display: none; }
-.hero-video-toggle.is-paused .icon-play { display: block; }
-.hero-video-toggle.is-paused .icon-pause { display: none; }
-
 @media (max-width: 760px) {
   .hero { min-height: 560px; padding: 48px 0 72px; align-items: flex-end; }
   .hero-media::after {
     background: linear-gradient(0deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.25) 100%);
   }
-  .hero-video-toggle { top: 16px; bottom: auto; right: 16px; }
   .hero .deco-sq { display: none; }
 }
 .hero-hand {
