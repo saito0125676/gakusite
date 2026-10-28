@@ -3,6 +3,7 @@
    <canvas data-cs-sprite> を見つけて、海の中で泳ぐサメを描きます。
    <canvas data-cs-sprite="frog"> なら、夕焼けの池にいるカエルを描きます。
    <canvas data-cs-sprite="octo"> なら、海の底でゆれるタコを描きます。
+   <canvas data-cs-sprite="pig"> なら、晴れた牧場にいるブタの貯金箱を描きます。
    ・画面外にあるときは描画を止めます
    ・「動きを減らす」設定の人には止まった1枚絵を表示します
    ========================================================= */
@@ -372,7 +373,115 @@
     };
   }
 
-  const SCENES = { shark: makeShark, frog: makeFrog, octo: makeOcto };
+  // ---------- ブタ（晴れた牧場） ----------
+  // 34×23 のブタの貯金箱（右向き）。楕円を組み合わせて作り、まわりにふちどりを付ける
+  function buildPig() {
+    const PW = 34, PH = 23, g = [];
+    for (let r = 0; r < PH; r++) g.push(new Array(PW).fill(null));
+    const set = (x, y, c) => { if (x >= 0 && x < PW && y >= 0 && y < PH) g[y][x] = c; };
+    for (let y = 0; y < PH; y++) for (let x = 0; x < PW; x++) {
+      if (((x - 16) / 11) ** 2 + ((y - 12) / 7.5) ** 2 <= 1) {
+        let c = 'p';
+        if (y > 15.5) c = 's';
+        if (((x - 12) / 4) ** 2 + ((y - 8) / 1.6) ** 2 <= 1) c = 'h';
+        set(x, y, c);
+      }
+    }
+    for (let y = 10; y <= 14; y++) for (let x = 27; x <= 29; x++) set(x, y, 'n');
+    set(29, 10, 'p'); set(29, 14, 'p'); set(28, 11, 'd'); set(28, 13, 'd');
+    [[22, 2], [21, 3], [22, 3], [20, 4], [21, 4], [22, 4], [23, 4]].forEach(([x, y]) => set(x, y, 'p'));
+    set(21, 4, 'n'); set(22, 4, 'n');
+    set(23, 8, 'w'); set(24, 8, 'k'); set(23, 9, 'k'); set(24, 9, 'k');
+    set(24, 12, 'n'); set(25, 12, 'n');
+    for (let x = 14; x <= 18; x++) set(x, 5, 'k'); // 背中の投入口
+    [8, 9, 10, 20, 21, 22].forEach(lx => { for (let ly = 18; ly <= 20; ly++) set(lx, ly, 's'); set(lx, 21, 'f'); });
+    [[4, 11], [3, 11], [2, 10], [3, 9], [4, 9]].forEach(([x, y]) => set(x, y, 'p'));
+    const out = g.map(row => row.slice());
+    for (let y = 0; y < PH; y++) for (let x = 0; x < PW; x++) {
+      if (g[y][x]) continue;
+      if ([[1, 0], [-1, 0], [0, 1], [0, -1]].some(([ox, oy]) => g[y + oy] && g[y + oy][x + ox])) out[y][x] = 'o';
+    }
+    return out.map(row => row.map(c => c || '.').join(''));
+  }
+  const PIG_MAP = { o: '#4a1a33', p: '#f7a8bd', h: '#ffd6e0', s: '#e07f9d', n: '#f08aa8', d: '#b8506f', k: '#2a0f1f', w: '#ffffff', f: '#a8466a' };
+  const R = {
+    sky: ['#4f9fe0', '#69b3ea', '#86c8f0', '#a6dcf6'], sun: '#fff1a8', cloud: '#ffffff', cloud2: '#d6ecf9',
+    hill: '#4e9a5a', grass: '#6cbf4c', grassTop: '#92dc62', grass2: '#58a53e', sprout: '#3f8a30',
+    coin: '#f5d04a', coinRim: '#8a5a10', coinHi: '#fff6c0', spark: '#fff6a0'
+  };
+  const GRASS = 52;
+  const CLOUDS = [[8, 9, .8], [50, 5, .5], [72, 19, .65]];
+
+  let pigAssets = null;
+  function pigScene() {
+    if (pigAssets) return pigAssets;
+    // 空と太陽（雲より奥）
+    const bg = document.createElement('canvas'); bg.width = W; bg.height = H;
+    const b = bg.getContext('2d');
+    const img = b.createImageData(W, H);
+    paintBands(img, 0, H, R.sky.map((c, i) => [i * 11, hex(c)]));
+    b.putImageData(img, 0, 0);
+    b.fillStyle = R.sun;
+    b.fillRect(80, 6, 7, 7); b.fillRect(79, 7, 9, 5); b.fillRect(81, 5, 5, 9);
+    // 丘と草原（雲より手前）
+    const fg = document.createElement('canvas'); fg.width = W; fg.height = H;
+    const f = fg.getContext('2d');
+    for (let x = 0; x < W; x++) {
+      const top = 43 + Math.round(2.6 * Math.sin(x / 8) + 1.7 * Math.sin(x / 3.7));
+      f.fillStyle = R.hill; f.fillRect(x, top, 1, GRASS - top);
+    }
+    f.fillStyle = R.grass; f.fillRect(0, GRASS, W, H - GRASS);
+    f.fillStyle = R.grassTop; f.fillRect(0, GRASS, W, 1);
+    const hash = (x, y) => Math.abs(Math.sin(x * 12.9898 + y * 78.233) * 43758.5453) % 1;
+    f.fillStyle = R.grass2;
+    for (let y = GRASS + 1; y < H; y++) for (let x = 0; x < W; x++) if (hash(x, y) < .06) f.fillRect(x, y, 1, 1);
+    f.fillStyle = R.sprout;
+    [[12, 57], [67, 55], [84, 64], [22, 68], [52, 66]].forEach(([x, y]) => {
+      f.fillRect(x, y - 1, 1, 1); f.fillRect(x + 2, y - 1, 1, 1); f.fillRect(x + 1, y, 1, 1);
+    });
+    [[7, 60, '#fff'], [16, 66, '#ffe066'], [81, 58, '#ff9ec0'], [89, 68, '#fff'], [62, 69, '#ffe066'], [26, 56, '#fff']].forEach(([x, y, c]) => {
+      f.fillStyle = R.sprout; f.fillRect(x, y + 1, 1, 1);
+      f.fillStyle = c; f.fillRect(x - 1, y, 3, 1); f.fillRect(x, y - 1, 1, 3);
+      f.fillStyle = '#ffd23c'; f.fillRect(x, y, 1, 1);
+    });
+    pigAssets = { bg, fg, pig: toCanvas(buildPig(), false, PIG_MAP) };
+    return pigAssets;
+  }
+
+  function makePig(ctx) {
+    const a = pigScene();
+    return function draw(t) {
+      ctx.drawImage(a.bg, 0, 0);
+      // 流れる雲
+      for (const [x0, y, v] of CLOUDS) {
+        const x = Math.floor(((x0 + t * v * 3) % (W + 18)) - 15);
+        ctx.fillStyle = R.cloud; ctx.fillRect(x + 3, y, 6, 1); ctx.fillRect(x, y + 1, 13, 2);
+        ctx.fillStyle = R.cloud2; ctx.fillRect(x + 1, y + 3, 11, 1);
+      }
+      ctx.drawImage(a.fg, 0, 0);
+      // ブタ：ぽよぽよ上下する
+      const px = 31, py = GRASS - 19 + (Math.floor(t * 1.5) % 2);
+      ctx.fillStyle = R.grass2; ctx.fillRect(px + 6, GRASS + 3, 22, 2);
+      // 3秒ごとに、空からコインが落ちて背中の投入口へ
+      const p = (t % 3) / 3;
+      if (p < .45) {
+        const k = (p / .45) ** 2, cx = px + 14, cy = Math.floor(-6 + (py + 12) * k);
+        ctx.fillStyle = R.coinRim; ctx.fillRect(cx + 1, cy, 3, 1); ctx.fillRect(cx, cy + 1, 5, 3); ctx.fillRect(cx + 1, cy + 4, 3, 1);
+        ctx.fillStyle = R.coin; ctx.fillRect(cx + 1, cy + 1, 3, 3);
+        ctx.fillStyle = R.coinHi; ctx.fillRect(cx + 1, cy + 1, 1, 1);
+      }
+      ctx.drawImage(a.pig, px, py);
+      // コインが入った瞬間のきらり
+      if (p >= .45 && p < .7) {
+        const sx = px + 16, sy = py + 1, r = p < .57 ? 2 : 3;
+        ctx.fillStyle = R.spark;
+        ctx.fillRect(sx, sy - r, 1, 1); ctx.fillRect(sx, sy + r - 4, 1, 1); ctx.fillRect(sx - r, sy - 1, 1, 1); ctx.fillRect(sx + r, sy - 1, 1, 1);
+        ctx.fillStyle = '#fff'; ctx.fillRect(sx, sy - 1, 1, 1);
+      }
+    };
+  }
+
+  const SCENES = { shark: makeShark, frog: makeFrog, octo: makeOcto, pig: makePig };
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setup(cv) {
@@ -408,6 +517,7 @@
   function sprite(name) {
     if (name === 'frog') return toCanvas(FROG, false, FROG_MAP);
     if (name === 'octo') return toCanvas(OCTO, false, OCTO_MAP);
+    if (name === 'pig') return toCanvas(buildPig(), false, PIG_MAP);
     return toCanvas(SHARK);
   }
   window.CharaSheet = { init, sprite };
