@@ -31,6 +31,11 @@
   --cs-accent: #8fd16a;
   --cs-bar-off: #1c4a3e;
 }
+/* タコ版：ピンク */
+.cs--octo {
+  --cs-accent: #f59ab0;
+  --cs-bar-off: #3f2f55;
+}
 
 /* 角がドットで欠けたウィンドウ枠 */
 .cs-window {

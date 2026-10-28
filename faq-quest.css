@@ -1,0 +1,101 @@
+/* =========================================================
+   よくある質問（RPGの会話ウィンドウ風）
+   chara-sheet.css の .cs の色・フォント変数をそのまま使います。
+   すべて .fq 配下にスコープしています。
+   ========================================================= */
+.fq { display: flex; flex-direction: column; gap: 18px; }
+
+/* ---------- 上：はじめのあいさつ ---------- */
+.fq-intro { padding: clamp(16px, 3vw, 24px); display: flex; flex-direction: column; gap: 14px; }
+.fq-intro .cs-head { padding-bottom: 10px; }
+.fq-intro .cs-msg { background: var(--cs-panel-2); }
+
+/* ---------- 質問ウィンドウ ---------- */
+.fq-item { margin: 0; }
+.fq-q {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1.2em auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.6;
+  user-select: none;
+}
+.fq-q::-webkit-details-marker { display: none; }
+.fq-q:focus-visible { outline: 3px solid var(--cs-gold); outline-offset: 6px; }
+
+/* 選んでいるところに出る ▶ カーソル */
+.fq-cursor { font-size: 11px; color: var(--cs-gold); visibility: hidden; }
+.fq-q:hover .fq-cursor,
+.fq-q:focus-visible .fq-cursor,
+.fq-item[open] .fq-cursor { visibility: visible; }
+.fq-q:hover .fq-cursor,
+.fq-q:focus-visible .fq-cursor { animation: cs-blink 1s steps(2) infinite; }
+
+.fq-no { font-family: var(--cs-pixel); font-size: 10px; color: var(--cs-accent); letter-spacing: 0.06em; }
+
+/* 右はしの ? が、ひらくと ! になる */
+.fq-mark {
+  font-family: var(--cs-pixel);
+  font-size: 12px;
+  color: var(--cs-sub);
+}
+.fq-mark::before { content: "?"; }
+.fq-item[open] .fq-mark { color: var(--cs-gold); }
+.fq-item[open] .fq-mark::before { content: "!"; }
+
+/* ---------- 答え：キャラの顔 + セリフ枠 ---------- */
+.fq-a {
+  display: grid;
+  grid-template-columns: 144px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  margin: 14px 0 6px;
+  padding-left: clamp(0px, 3vw, 28px);
+}
+.fq-face { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.fq-face .cs-stage { width: 100%; }
+.fq-face figcaption { font-size: 13px; color: var(--cs-accent); }
+
+.fq-msg { min-height: 100%; cursor: default; }
+.fq-msg strong { font-weight: 400; color: var(--cs-gold); }
+/* 文字送りの途中は ▼ を出さない */
+.fq-msg.is-typing::after { visibility: hidden; }
+.fq-msg.is-typing { cursor: pointer; }
+.fq-ch { opacity: 0; }
+.fq-ch.is-on { opacity: 1; }
+
+/* ---------- 下：ほかに聞きたいとき ---------- */
+.fq-more { display: flex; justify-content: center; margin-top: 8px; }
+.fq-more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  color: var(--cs-ink);
+  text-decoration: none;
+  font-size: 16px;
+}
+.fq-more a::before { content: "▶"; font-size: 11px; color: var(--cs-gold); visibility: hidden; }
+.fq-more a:hover::before,
+.fq-more a:focus-visible::before { visibility: visible; animation: cs-blink 1s steps(2) infinite; }
+.fq-more a:focus-visible { outline: 3px solid var(--cs-gold); outline-offset: 6px; }
+
+@media (max-width: 560px) {
+  .fq-q { grid-template-columns: 1em minmax(0, 1fr) auto; gap: 8px; padding: 14px; }
+  .fq-no { grid-column: 2; grid-row: 1; }
+  .fq-text { grid-column: 2; grid-row: 2; }
+  .fq-cursor { grid-row: 1 / span 2; }
+  .fq-mark { grid-column: 3; grid-row: 1 / span 2; }
+  .fq-a { grid-template-columns: minmax(0, 1fr); padding-left: 0; gap: 10px; }
+  .fq-face { flex-direction: row; gap: 10px; }
+  .fq-face .cs-stage { width: 96px; flex: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fq-q:hover .fq-cursor,
+  .fq-q:focus-visible .fq-cursor,
+  .fq-more a::before { animation: none; }
+}

@@ -2,6 +2,7 @@
    キャラシート：ドット絵のキャラを描くスクリプト
    <canvas data-cs-sprite> を見つけて、海の中で泳ぐサメを描きます。
    <canvas data-cs-sprite="frog"> なら、夕焼けの池にいるカエルを描きます。
+   <canvas data-cs-sprite="octo"> なら、海の底でゆれるタコを描きます。
    ・画面外にあるときは描画を止めます
    ・「動きを減らす」設定の人には止まった1枚絵を表示します
    ========================================================= */
@@ -73,6 +74,27 @@
   };
   const FROG_MAP = { O: P.O, G: P.G, W: P.W, P: P.P, M: P.M, Y: P.Y, R: P.R };
 
+  // 22×15 のタコ（正面・頭だけ。足はうごかすので描画時に描く）
+  const OCTO = [
+    '.......OOOOOOOO.......',
+    '.....OOKKKKKKKKOO.....',
+    '....OKKHHKKKKKKKKO....',
+    '...OKHHKKKKKKKKKKKO...',
+    '...OKHKKKKKKKKKKKKO...',
+    '..OKKKKKKKKKKKKKKKKO..',
+    '..OKKKKKKKKKKKKKKKKO..',
+    '..OKKWWWKKKKKKWWWKKO..',
+    '..OKKWPPKKKKKKWPPKKO..',
+    '..OKKWPPKKKKKKWPPKKO..',
+    '..OKRRKKKKKKKKKKRRKO..',
+    '..OKKKKKKKMMKKKKKKKO..',
+    '...OKKKKKKKKKKKKKKO...',
+    '...OSKKKKKKKKKKKKSO...',
+    '..OSSSSSSSSSSSSSSSSO..'
+  ];
+  const Q = { O: '#3a1f3d', K: '#f59ab0', H: '#ffd0dc', S: '#d8708f', W: '#ffffff', P: '#14202a', R: '#ff6f8e', M: '#3a1f3d', shell: '#fbe3c4', shell2: '#d9a877', rock: '#5a6f86', rock2: '#3f5268' };
+  const OCTO_MAP = { O: Q.O, K: Q.K, H: Q.H, S: Q.S, W: Q.W, P: Q.P, R: Q.R, M: Q.M };
+
   function toCanvas(rows, flip, map) {
     map = map || MAP;
     const w = rows[0].length, h = rows.length;
@@ -127,6 +149,19 @@
 
   const WEEDS = [[6, 14], [11, 9], [70, 12], [84, 16], [89, 10]];
 
+  // 海の背景＋水面のきらめき＋ゆれる海藻（サメとタコで共通）
+  function drawSea(ctx, a, t) {
+    ctx.drawImage(a.bg, 0, 0);
+    ctx.fillStyle = C.surf;
+    for (let x = 0; x < W; x += 2) if (Math.sin(x * .4 + t * 2.4) > .55) ctx.fillRect(x, 0, 2, 1);
+    for (const [wx, wh] of WEEDS) {
+      for (let i = 0; i < wh; i++) {
+        const px = wx + Math.round(Math.sin(t * 1.6 + i * .4 + wx) * (i / wh) * 2);
+        ctx.fillStyle = i % 3 === 0 ? C.weed2 : C.weed; ctx.fillRect(px, SAND + 1 - i, 2, 1);
+      }
+    }
+  }
+
   // ---------- サメ（海） ----------
   function makeShark(ctx) {
     const a = sharkScene();
@@ -134,17 +169,7 @@
     const fish = { x: -10, y: 18, v: 9, dir: 1, wait: 2 };
 
     return function draw(t, dt) {
-      ctx.drawImage(a.bg, 0, 0);
-      // 水面のきらめき
-      ctx.fillStyle = C.surf;
-      for (let x = 0; x < W; x += 2) if (Math.sin(x * .4 + t * 2.4) > .55) ctx.fillRect(x, 0, 2, 1);
-      // 海藻
-      for (const [wx, wh] of WEEDS) {
-        for (let i = 0; i < wh; i++) {
-          const px = wx + Math.round(Math.sin(t * 1.6 + i * .4 + wx) * (i / wh) * 2);
-          ctx.fillStyle = i % 3 === 0 ? C.weed2 : C.weed; ctx.fillRect(px, SAND + 1 - i, 2, 1);
-        }
-      }
+      drawSea(ctx, a, t);
       // ときどき横切る小魚
       if (dt) {
         if (fish.wait > 0) fish.wait -= dt;
@@ -283,7 +308,71 @@
     };
   }
 
-  const SCENES = { shark: makeShark, frog: makeFrog };
+  // ---------- タコ（海の底） ----------
+  const LEGS = [3, 6, 9, 12, 15, 18];
+
+  function makeOcto(ctx) {
+    const a = sharkScene();
+    const head = toCanvas(OCTO, false, OCTO_MAP);
+    const bubbles = [];
+    let puff = 0, nextPuff = 4;
+
+    return function draw(t, dt) {
+      drawSea(ctx, a, t);
+      // 岩と貝がら
+      ctx.fillStyle = Q.rock2; ctx.fillRect(66, SAND - 3, 12, 5); ctx.fillRect(68, SAND - 5, 8, 2);
+      ctx.fillStyle = Q.rock; ctx.fillRect(67, SAND - 4, 10, 3); ctx.fillRect(69, SAND - 5, 5, 1);
+      ctx.fillStyle = Q.shell2; ctx.fillRect(20, SAND + 2, 5, 2); ctx.fillRect(21, SAND + 1, 3, 1);
+      ctx.fillStyle = Q.shell; ctx.fillRect(21, SAND + 2, 1, 1); ctx.fillRect(23, SAND + 2, 1, 1);
+
+      // ときどきふわっと浮き上がる
+      if (dt) {
+        nextPuff -= dt;
+        if (nextPuff <= 0) { puff = .9; nextPuff = 4 + Math.random() * 3; }
+        if (puff > 0) puff -= dt;
+      }
+      const lift = puff > 0 ? Math.round(Math.sin((.9 - puff) / .9 * Math.PI) * 5) : 0;
+      const ox = 37, oy = SAND - 18 + Math.round(Math.sin(t * 1.5) * 1) - lift;
+      const len = 6 + (lift > 2 ? 1 : 0);
+
+      // 足：まず縁どり、つぎに中身を塗る
+      const legX = (i, k) => ox + LEGS[i] + Math.round(Math.sin(t * 3 + i * 1.3 + k * .6) * (k / len) * 1.6);
+      ctx.fillStyle = Q.O;
+      LEGS.forEach((_, i) => {
+        for (let k = 0; k < len; k++) {
+          ctx.fillRect(legX(i, k) - 1, oy + 15 + k, 1, 1);
+          ctx.fillRect(legX(i, k) + 2, oy + 15 + k, 1, 1);
+        }
+        ctx.fillRect(legX(i, len) - 1, oy + 15 + len, 4, 1);
+      });
+      LEGS.forEach((_, i) => {
+        for (let k = 0; k < len; k++) {
+          const px = legX(i, k);
+          ctx.fillStyle = Q.K; ctx.fillRect(px, oy + 15 + k, 2, 1);
+          if (k % 2) { ctx.fillStyle = Q.S; ctx.fillRect(px + 1, oy + 15 + k, 1, 1); }
+        }
+      });
+      ctx.drawImage(head, ox, oy);
+      // まばたき
+      if ((t + 2) % 4 < .16) {
+        ctx.fillStyle = Q.K;
+        ctx.fillRect(ox + 5, oy + 7, 3, 3); ctx.fillRect(ox + 14, oy + 7, 3, 3);
+        ctx.fillStyle = Q.O;
+        ctx.fillRect(ox + 5, oy + 8, 3, 1); ctx.fillRect(ox + 14, oy + 8, 3, 1);
+      }
+      // 浮き上がるときに泡をぷくぷく
+      if (dt && puff > .5 && Math.random() < dt * 8) bubbles.push({ x: ox + 4 + Math.random() * 14, y: oy, v: 9 + Math.random() * 4 });
+      ctx.fillStyle = C.bubble;
+      for (let i = bubbles.length - 1; i >= 0; i--) {
+        const b = bubbles[i];
+        if (dt) b.y -= b.v * dt;
+        if (b.y < 1) { bubbles.splice(i, 1); continue; }
+        ctx.fillRect(Math.round(b.x + Math.sin(b.y * .3)), Math.round(b.y), 1, 1);
+      }
+    };
+  }
+
+  const SCENES = { shark: makeShark, frog: makeFrog, octo: makeOcto };
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setup(cv) {
@@ -316,7 +405,11 @@
 
   function init() { document.querySelectorAll('canvas[data-cs-sprite]').forEach(setup); }
   // ほかのスクリプト(流れのカエルなど)でドット絵だけ使えるようにする
-  function sprite(name) { return name === 'frog' ? toCanvas(FROG, false, FROG_MAP) : toCanvas(SHARK); }
+  function sprite(name) {
+    if (name === 'frog') return toCanvas(FROG, false, FROG_MAP);
+    if (name === 'octo') return toCanvas(OCTO, false, OCTO_MAP);
+    return toCanvas(SHARK);
+  }
   window.CharaSheet = { init, sprite };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

@@ -7,8 +7,10 @@
   <meta name="description" content="学サイト(ガクサイト)のよくある質問。制作期間、料金の支払いタイミング、解約について、学生運営の品質などにお答えします。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Oswald:wght@500;600&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Oswald:wght@500;600&family=Klee+One:wght@600&family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css?v=2026102802">
+  <link rel="stylesheet" href="chara-sheet.css?v=20261026">
+  <link rel="stylesheet" href="faq-quest.css?v=20261028">
   <script>document.documentElement.classList.add('reveal-ready');</script>
 </head>
 <body>
@@ -51,31 +53,108 @@
 
     <section class="section" aria-label="質問と回答">
       <div class="container">
-        <div class="faq-list faq-list--page">
-          <details class="faq-item" open>
-            <summary><span class="q">Q.</span>どのくらいの期間で完成しますか?</summary>
-            <p class="a">LPなど簡易サイトは最短24時間で対応可能です。複数ページ構成の本格的なサイトは、ヒアリングから最短1週間を目安にしています。</p>
+        <!-- RPG風のよくある質問(質問・答えはそのまま書き換えOK。サメ→カエル→タコの順に答える) -->
+        <div class="cs fq">
+          <div class="cs-window fq-intro">
+            <header class="cs-head">
+              <span>FAQ</span>
+              <span class="cs-no">6 QUESTIONS</span>
+            </header>
+            <p class="cs-msg">ようこそ、学サイトへ!<br>気になる質問をえらぶと、ガクザメ・ガクガエル・ガクだこがお答えします。</p>
+          </div>
+
+          <details class="fq-item" name="faq" open>
+            <summary class="cs-window fq-q">
+              <span class="fq-cursor" aria-hidden="true">▶</span>
+              <span class="fq-no">Q.01</span>
+              <span class="fq-text">どのくらいの期間で完成しますか?</span>
+              <span class="fq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="fq-a">
+              <figure class="fq-face">
+                <div class="cs-stage"><canvas class="cs-canvas" data-cs-sprite width="96" height="72" role="img" aria-label="海の中を泳ぐドット絵のサメ"></canvas></div>
+                <figcaption>ガクザメ</figcaption>
+              </figure>
+              <p class="cs-msg fq-msg" data-fq-type>LPなど簡易サイトは最短<strong>24時間</strong>で対応可能です。複数ページ構成の本格的なサイトは、ヒアリングから最短<strong>1週間</strong>を目安にしています。</p>
+            </div>
           </details>
-          <details class="faq-item">
-            <summary><span class="q">Q.</span>月額以外に追加料金はかかりますか?</summary>
-            <p class="a">ライト・スタンダードプランは、追加料金は一切かかりません。製作費は無料で初期費用もかからず、サーバー管理・独自ドメイン取得を含む月額料金(ライト20,000円 / スタンダード35,000円)のみです。修正・更新も、ライトは月5回、スタンダードは月7回まで無料です。予約・決済機能などが必要な場合は、オーダーメイドプランとして別途お見積りします。</p>
+          <details class="fq-item cs--frog" name="faq">
+            <summary class="cs-window fq-q">
+              <span class="fq-cursor" aria-hidden="true">▶</span>
+              <span class="fq-no">Q.02</span>
+              <span class="fq-text">月額以外に追加料金はかかりますか?</span>
+              <span class="fq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="fq-a">
+              <figure class="fq-face">
+                <div class="cs-stage"><canvas class="cs-canvas" data-cs-sprite="frog" width="96" height="72" role="img" aria-label="夕焼けの池でハスの葉に乗るドット絵のカエル"></canvas></div>
+                <figcaption>ガクガエル</figcaption>
+              </figure>
+              <p class="cs-msg fq-msg" data-fq-type>ライト・スタンダードプランは、追加料金は一切かかりません。製作費は無料で初期費用もかからず、サーバー管理・独自ドメイン取得を含む<strong>月額料金(ライト20,000円 / スタンダード35,000円)のみ</strong>です。修正・更新も、ライトは月5回、スタンダードは月7回まで無料です。予約・決済機能などが必要な場合は、オーダーメイドプランとして別途お見積りします。</p>
+            </div>
           </details>
-          <details class="faq-item">
-            <summary><span class="q">Q.</span>契約後にやめたくなったらどうなりますか?</summary>
-            <p class="a">解約費は無料です。違約金は一切かかりませんので、継続いただけない場合も、いつでも解約いただけます。</p>
+          <details class="fq-item cs--octo" name="faq">
+            <summary class="cs-window fq-q">
+              <span class="fq-cursor" aria-hidden="true">▶</span>
+              <span class="fq-no">Q.03</span>
+              <span class="fq-text">契約後にやめたくなったらどうなりますか?</span>
+              <span class="fq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="fq-a">
+              <figure class="fq-face">
+                <div class="cs-stage"><canvas class="cs-canvas" data-cs-sprite="octo" width="96" height="72" role="img" aria-label="海の底でゆれるドット絵のタコ"></canvas></div>
+                <figcaption>ガクだこ</figcaption>
+              </figure>
+              <p class="cs-msg fq-msg" data-fq-type>解約費は無料です。違約金は一切かかりませんので、継続いただけない場合も、<strong>いつでも解約</strong>いただけます。</p>
+            </div>
           </details>
-          <details class="faq-item">
-            <summary><span class="q">Q.</span>学生が運営していると聞きましたが、品質は大丈夫ですか?</summary>
-            <p class="a">Web制作を学ぶ現役学生が企画・デザイン・コーディングまで担当しています。丁寧なヒアリングをもとに、お客様に満足いただけるホームページづくりに取り組んでいます。</p>
+          <details class="fq-item" name="faq">
+            <summary class="cs-window fq-q">
+              <span class="fq-cursor" aria-hidden="true">▶</span>
+              <span class="fq-no">Q.04</span>
+              <span class="fq-text">学生が運営していると聞きましたが、品質は大丈夫ですか?</span>
+              <span class="fq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="fq-a">
+              <figure class="fq-face">
+                <div class="cs-stage"><canvas class="cs-canvas" data-cs-sprite width="96" height="72" role="img" aria-label="海の中を泳ぐドット絵のサメ"></canvas></div>
+                <figcaption>ガクザメ</figcaption>
+              </figure>
+              <p class="cs-msg fq-msg" data-fq-type>Web制作を学ぶ現役学生が企画・デザイン・コーディングまで担当しています。丁寧なヒアリングをもとに、お客様に満足いただけるホームページづくりに取り組んでいます。</p>
+            </div>
           </details>
-          <details class="faq-item">
-            <summary><span class="q">Q.</span>写真や文章の準備は必要ですか?</summary>
-            <p class="a">ご用意いただける場合はそのまま活用いたします。ご用意がない場合も、ヒアリング内容をもとにこちらでご提案しますのでご安心ください。</p>
+          <details class="fq-item cs--frog" name="faq">
+            <summary class="cs-window fq-q">
+              <span class="fq-cursor" aria-hidden="true">▶</span>
+              <span class="fq-no">Q.05</span>
+              <span class="fq-text">写真や文章の準備は必要ですか?</span>
+              <span class="fq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="fq-a">
+              <figure class="fq-face">
+                <div class="cs-stage"><canvas class="cs-canvas" data-cs-sprite="frog" width="96" height="72" role="img" aria-label="夕焼けの池でハスの葉に乗るドット絵のカエル"></canvas></div>
+                <figcaption>ガクガエル</figcaption>
+              </figure>
+              <p class="cs-msg fq-msg" data-fq-type>ご用意いただける場合はそのまま活用いたします。ご用意がない場合も、ヒアリング内容をもとにこちらでご提案しますのでご安心ください。</p>
+            </div>
           </details>
-          <details class="faq-item">
-            <summary><span class="q">Q.</span>相談だけでも大丈夫ですか?</summary>
-            <p class="a">もちろんです。ご相談・お見積りは無料です。公式LINEやメールからお気軽にご連絡ください。</p>
+          <details class="fq-item cs--octo" name="faq">
+            <summary class="cs-window fq-q">
+              <span class="fq-cursor" aria-hidden="true">▶</span>
+              <span class="fq-no">Q.06</span>
+              <span class="fq-text">相談だけでも大丈夫ですか?</span>
+              <span class="fq-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="fq-a">
+              <figure class="fq-face">
+                <div class="cs-stage"><canvas class="cs-canvas" data-cs-sprite="octo" width="96" height="72" role="img" aria-label="海の底でゆれるドット絵のタコ"></canvas></div>
+                <figcaption>ガクだこ</figcaption>
+              </figure>
+              <p class="cs-msg fq-msg" data-fq-type>もちろんです。ご相談・お見積りは<strong>無料</strong>です。公式LINEやメールからお気軽にご連絡ください。</p>
+            </div>
           </details>
+
+          <p class="fq-more"><a class="cs-window" href="contact.html">ほかにも聞きたいことがある</a></p>
         </div>
       </div>
     </section>
@@ -155,5 +234,7 @@
 
   <script src="site.js?v=2026102802" defer></script>
   <script src="reveal.js" defer></script>
+  <script src="chara-sheet.js" defer></script>
+  <script src="faq-quest.js?v=20261028" defer></script>
 </body>
 </html>
