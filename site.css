@@ -913,3 +913,11 @@ html.is-loading { overflow: hidden; }
 .demo-badge { position: absolute; left: 12px; top: 12px; z-index: 2; padding: 6px 10px; background: var(--ink); color: #fff; font: 500 12px/1 var(--f-ja); letter-spacing: .08em; }
 .work-shot { position: relative; }
 .demo-tag { display: inline-block; margin-left: 12px; padding: 5px 9px; vertical-align: middle; border: 1px solid currentColor; font: 500 12px/1 var(--f-ja); letter-spacing: .08em; color: var(--pool-deep); }
+
+/* スマホ・タブレット:ヒーローの組み上がる絵は出さず、1 画面分に */
+@media (max-width: 859px) {
+  .hero { height: auto; }
+  .hero-stick { position: relative; }
+  .note-pin, .hero-meter { display: none !important; }
+  .hero-foot .lead { display: block; }
+}
