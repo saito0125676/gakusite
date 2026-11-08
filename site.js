@@ -295,8 +295,11 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       // 格子の点
-      ctx.fillStyle = opt.dot || 'rgba(14,15,17,.14)';
-      for (var y = 1; y < rows; y++) for (var x = 1; x < cols; x++) ctx.fillRect(x * cell - .5, y * cell - .5, 1, 1);
+      // 白地では点を描かない(真っ白に見せる)。紺地など data-dot を指定したときだけ描く
+      if (opt.dot) {
+        ctx.fillStyle = opt.dot;
+        for (var y = 1; y < rows; y++) for (var x = 1; x < cols; x++) ctx.fillRect(x * cell - .5, y * cell - .5, 1, 1);
+      }
       // ときどき点滅するマス
       for (var i = 0; i < amb.length; i++) {
         var a = amb[i], v = Math.sin(t / 1000 * a.sp + a.ph);

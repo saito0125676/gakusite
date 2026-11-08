@@ -10,7 +10,7 @@
 :root {
   --paper: #ffffff;
   --paper-2: #ebebe8;
-  --white: #f4f4f2;
+  --white: #ffffff;
   --ink: #0e0f11;
   --ink-2: #4d4f54;
   --ink-3: #8c8e93;
@@ -921,3 +921,8 @@ html.is-loading { overflow: hidden; }
   .note-pin, .hero-meter { display: none !important; }
   .hero-foot .lead { display: block; }
 }
+/* 白地でもカードの輪郭が見えるように */
+.plan:not(.plan--hot):not(.plan--dark) { box-shadow: inset 0 0 0 1px rgba(14,15,17,.16); }
+.form-card, .route--light { box-shadow: inset 0 0 0 1px rgba(14,15,17,.16); }
+/* 「0円」の円が改行されないように */
+.zero b { flex: none; white-space: nowrap; }
