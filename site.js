@@ -256,6 +256,8 @@
   }
 
   // ---------- ピクセルの面(下層ページの見出し・カーソルの軌跡) ----------
+  // タッチ端末(スマホ・タブレット):背景のドットの点滅と、指に反応するマスは出さない
+  var touchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   function PixelField(canvas, opt) {
     opt = opt || {};
     var ctx = canvas.getContext('2d');
@@ -272,13 +274,14 @@
       cell = W < 700 ? (opt.cellS || 12) : (opt.cell || 16);
       cols = Math.ceil(W / cell); rows = Math.ceil(H / cell);
       amb = [];
-      var na = Math.round(cols * rows * (opt.ambient || 0.012));
+      var na = touchDevice ? 0 : Math.round(cols * rows * (opt.ambient || 0.012));
       for (var i = 0; i < na; i++) amb.push({ x: Math.floor(Math.random() * cols), y: Math.floor(Math.random() * rows), ph: Math.random() * 6.28, sp: .4 + Math.random(), c: Math.random() < .25 ? C.orange : C.pool });
       self.cols = cols; self.rows = rows; self.cell = cell; self.W = W; self.H = H;
       if (opt.onResize) opt.onResize(self);
     };
     var host = opt.host || canvas.parentNode;
     host.addEventListener('pointermove', function (e) {
+      if (touchDevice || e.pointerType !== 'mouse') return;
       var r = canvas.getBoundingClientRect();
       var cx = Math.floor((e.clientX - r.left) / cell), cy = Math.floor((e.clientY - r.top) / cell);
       var now = performance.now();
