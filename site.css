@@ -1006,3 +1006,15 @@ html.gc-on input:not([type=checkbox]):not([type=radio]):not([type=submit]), html
 .gakuzame-swim.is-follow .gakuzame-bob { width: 84px; height: 44px; }
 /* ページ遷移のマスが出ている間は、カーソルとサメを隠す */
 html.px-busy .gc, html.px-busy .gakuzame-swim, html.px-enter .gc, html.px-enter .gakuzame-swim { opacity: 0 !important; transition: opacity .12s !important; }
+
+/* ⑧ サービス一覧の演出 */
+.svc-row.fx-svc { isolation: isolate; }
+.svc-row.fx-svc.is-on { background: none; }               /* グラデーションはピクセルの波に置き換え */
+.svc-px { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.svc-row.fx-svc .svc-fig { position: relative; transition: transform .5s cubic-bezier(.2, .8, .2, 1); transform-style: preserve-3d; }
+.svc-fig-px { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; pointer-events: none; }
+/* サービスのドット絵アイコン */
+.svc-ico { width: 62%; height: 62%; image-rendering: pixelated; image-rendering: crisp-edges; }
+.svc-row:hover .svc-ico, .svc-row.is-on .svc-ico { animation: svc-hop .7s steps(2) infinite alternate; }
+@keyframes svc-hop { from { transform: translateY(0); } to { transform: translateY(-6%); } }
+@media (prefers-reduced-motion: reduce) { .svc-row .svc-ico { animation: none !important; } }

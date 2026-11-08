@@ -650,6 +650,216 @@
   })();
 
   // =========================================================
+  // ⑧-0 サービスのアイコンを、内容がひと目でわかるドット絵(16×16)に描き直す
+  //    新規制作=ブラウザ画面 / デザイン・コーディング=</> / 保守・修正・更新=歯車 / 集客・SNS=メガホン
+  // =========================================================
+  var ICON = (function () {
+    var K = '#0e0f11', P = '#3fc1c9', N = '#1f3a5f', W = '#ffffff';
+    var make = function (fn) {
+      var c = document.createElement('canvas'); c.width = c.height = 16;
+      var x = c.getContext('2d');
+      var px = function (a, b, col) { x.fillStyle = col; x.fillRect(a, b, 1, 1); };
+      var rect = function (a, b, w, h, col) { x.fillStyle = col; x.fillRect(a, b, w, h); };
+      fn(px, rect);
+      return c;
+    };
+    return {
+      build: function () {
+        return make(function (px, rect) {
+          rect(1, 1, 14, 13, K); rect(2, 4, 12, 9, W);          // 窓
+          px(2, 2, P); px(4, 2, N); px(6, 2, W);                  // タイトルバーの丸
+          rect(3, 5, 10, 4, P); rect(4, 6, 5, 1, K); rect(4, 7, 3, 1, K);   // メイン画像と見出し
+          rect(3, 10, 3, 2, N); rect(7, 10, 2, 2, N); rect(10, 10, 3, 2, N); // カード
+        });
+      },
+      code: function () {
+        return make(function (px, rect) {
+          var lt = [[5, 4], [4, 5], [3, 6], [2, 7], [2, 8], [3, 9], [4, 10], [5, 11]];
+          lt.forEach(function (p) { rect(p[0], p[1], 2, 1, K); rect(15 - p[0] - 1, p[1], 2, 1, K); });   // < と >
+          for (var i = 0; i < 10; i++) rect(9 - Math.round(i * .4), 2 + i + 1, 2, 1, P);                  // /
+        });
+      },
+      care: function () {
+        return make(function (px, rect) {
+          // 歯車:黒い本体に 8 本の歯、真ん中は水色の輪と白い穴
+          for (var y = 0; y < 16; y++) for (var x = 0; x < 16; x++) {
+            var dx = x - 7.5, dy = y - 7.5, r = Math.sqrt(dx * dx + dy * dy);
+            var ang = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 45;
+            var tooth = ang < 15 || ang > 30;
+            if (r < 1.8) continue;
+            if (r < 3.2) { px(x, y, P); continue; }
+            if (r <= 5.6 || (r <= 7.4 && tooth)) px(x, y, K);
+          }
+        });
+      },
+      reach: function () {
+        return make(function (px, rect) {
+          rect(1, 7, 2, 3, K);                                       // 持ち手
+          for (var xx = 3; xx <= 9; xx++) { var t = Math.round((xx - 3) * .6); rect(xx, 6 - t, 1, 5 + t * 2, K); }   // メガホン本体
+          rect(10, 1, 1, 15, K);                                     // 口のふち
+          [[12, 5], [12, 6], [12, 10], [12, 11], [13, 7], [13, 8], [13, 9]].forEach(function (p) { px(p[0], p[1], P); });   // 小さい波
+          [[14, 2], [14, 3], [15, 4], [15, 5], [15, 6], [15, 7], [15, 8], [15, 9], [15, 10], [15, 11], [15, 12], [14, 13], [14, 14]].forEach(function (p) { px(p[0], p[1], P); });   // 大きい波
+        });
+      }
+    };
+  })();
+  document.querySelectorAll('.svc-row').forEach(function (row) {
+    var fig = row.querySelector('.svc-fig'), h = row.querySelector('h3');
+    if (!fig || !h) return;
+    var t = h.textContent, kind = /集客|SNS|情報発信/.test(t) ? 'reach' : /保守|修正|更新/.test(t) ? 'care' : /デザイン|コーディング/.test(t) ? 'code' : 'build';
+    var svg = fig.querySelector('svg');
+    if (svg) svg.remove();
+    fig.classList.remove('svc-fig--illust');
+    var c = ICON[kind](); c.className = 'svc-ico'; c.setAttribute('aria-hidden', 'true');
+    fig.insertBefore(c, fig.firstChild);
+  });
+
+  // =========================================================
+  // ⑧ サービス一覧(.svc-row)の演出
+  //    ・行が中央に来た/マウスを乗せたとき、水色のマスが波のように広がって行を染める(nudot のピクセル遷移を小さく)
+  //    ・右のアイコンは白いマスに覆われていて、見えたらマスがランダムに消えて現れる(ジェネラティブ)
+  //    ・スクロールに合わせて、番号と見出しは左から、説明は右から寄ってくる。見出しはぼかしからくっきり
+  //    ・中央に来たとき、番号(S/001)が一瞬スクランブル
+  //    ・マウスのときは、アイコンがカーソルの位置に合わせて立体的に傾く
+  // =========================================================
+  var svcRows = document.querySelectorAll('.svc-row');
+  if (svcRows.length && !reduce) (function () {
+    var mob = window.innerWidth < 760;
+    var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    var POOL_RGB = '63,193,201';
+
+    svcRows.forEach(function (row) {
+      row.classList.add('fx-svc');
+      // ---- ピクセルの波 ----
+      var cv = document.createElement('canvas');
+      cv.className = 'svc-px'; cv.setAttribute('aria-hidden', 'true');
+      row.insertBefore(cv, row.firstChild);
+      var ctx = cv.getContext('2d');
+      var W = 0, H = 0, dpr = 1, cell = mob ? 10 : 12, cells = [], on = false, hover = false, t0 = 0, raf = 0, ox = 0, oy = 0;
+      var size = function () {
+        W = row.offsetWidth; H = row.offsetHeight; dpr = Math.min(2, window.devicePixelRatio || 1);
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        var cols = Math.ceil(W / cell), rws = Math.ceil(H / cell);
+        cells = [];
+        for (var y = 0; y < rws; y++) for (var x = 0; x < cols; x++) {
+          var fade = 1 - x / cols;                               // 右へいくほど薄く(元のグラデーションの名残)
+          if (Math.random() > .1 + fade * .45) continue;        // 右側ほどマスがまばらに
+          cells.push({ x: x * cell, y: y * cell, a: (.05 + fade * .15) * (Math.random() < .1 ? 2 : 1), r: Math.random() * .08 });
+        }
+      };
+      var draw = function (now) {
+        raf = 0;
+        var T = (now - t0) / 1000, busy = false;
+        var maxD = Math.hypot(Math.max(ox, W - ox), Math.max(oy, H - oy)) || 1;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < cells.length; i++) {
+          var c = cells[i];
+          var delay = Math.hypot(c.x - ox, c.y - oy) / maxD * .42 + c.r;
+          var k = clamp((T - delay) / .14, 0, 1);
+          if (k < 1) busy = true;
+          var v = on ? k : 1 - k;
+          if (v <= 0) continue;
+          ctx.fillStyle = 'rgba(' + POOL_RGB + ',' + (c.a * v).toFixed(3) + ')';
+          var s = (cell - 2) * (on ? .4 + .6 * k : 1);
+          ctx.fillRect(c.x + (cell - s) / 2, c.y + (cell - s) / 2, s, s);
+        }
+        if (busy) raf = requestAnimationFrame(draw);
+      };
+      var set = function (v, x, y) {
+        if (v === on) return;
+        on = v; t0 = performance.now();
+        ox = x == null ? 0 : x; oy = y == null ? H / 2 : y;
+        if (!W) size();
+        if (!raf) raf = requestAnimationFrame(draw);
+      };
+      var sync = function (x, y) { set(row.classList.contains('is-on') || hover, x, y); };
+      new MutationObserver(function () { sync(); }).observe(row, { attributes: true, attributeFilter: ['class'] });
+      if (fine) {
+        row.addEventListener('pointerenter', function (e) { var r = row.getBoundingClientRect(); hover = true; sync(e.clientX - r.left, e.clientY - r.top); });
+        row.addEventListener('pointerleave', function (e) { var r = row.getBoundingClientRect(); hover = false; sync(e.clientX - r.left, e.clientY - r.top); });
+      }
+      var lw = window.innerWidth;
+      window.addEventListener('resize', function () { if (window.innerWidth !== lw) { lw = window.innerWidth; W = 0; } });
+
+      // ---- 番号のスクランブル(中央に来たとき)----
+      var num = row.querySelector('.mono');
+      new MutationObserver(function () {
+        if (row.classList.contains('is-on') && num && num.firstChild && typeof scramble === 'function') scramble(num.firstChild, 420);
+      }).observe(row, { attributes: true, attributeFilter: ['class'] });
+
+      // ---- アイコンがピクセルで現れる ----
+      var fig = row.querySelector('.svc-fig');
+      if (fig) {
+        var mk = document.createElement('canvas');
+        mk.className = 'svc-fig-px'; mk.setAttribute('aria-hidden', 'true');
+        fig.appendChild(mk);
+        var mctx = mk.getContext('2d');
+        var bg = getComputedStyle(fig).backgroundColor;
+        var reveal = function () {
+          var fw = fig.offsetWidth, n = mob ? 8 : 12, cs = fw / n;
+          mk.width = n; mk.height = n;
+          var order = []; for (var i = 0; i < n * n; i++) order.push(i);
+          order.sort(function () { return Math.random() - .5; });
+          var s0 = null, DUR = 750;
+          var step = function (t) {
+            if (s0 === null) s0 = t;
+            var p = Math.min(1, (t - s0) / DUR), cut = Math.floor(order.length * Math.pow(p, .8));
+            mctx.clearRect(0, 0, n, n);
+            for (var j = cut; j < order.length; j++) {
+              var q = order[j];
+              mctx.fillStyle = j < cut + n ? '#3fc1c9' : bg;   // 消える直前のマスは水色に光る
+              mctx.fillRect(q % n, Math.floor(q / n), 1, 1);
+            }
+            if (p < 1) requestAnimationFrame(step); else mk.remove();
+          };
+          requestAnimationFrame(step);
+        };
+        // 最初はアイコンを覆っておく
+        mk.width = 1; mk.height = 1; mctx.fillStyle = bg; mctx.fillRect(0, 0, 1, 1);
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); setTimeout(reveal, 150); } }, { threshold: .5 });
+          io.observe(fig);
+        } else reveal();
+        // マウスのときは、カーソルに合わせて立体的に傾く
+        if (fine) {
+          row.addEventListener('pointermove', function (e) {
+            var r = fig.getBoundingClientRect();
+            var dx = clamp((e.clientX - (r.left + r.width / 2)) / 300, -1, 1), dy = clamp((e.clientY - (r.top + r.height / 2)) / 200, -1, 1);
+            fig.style.transform = 'perspective(600px) rotateY(' + (dx * 16).toFixed(1) + 'deg) rotateX(' + (-dy * 14).toFixed(1) + 'deg)';
+          });
+          row.addEventListener('pointerleave', function () { fig.style.transform = ''; });
+        }
+      }
+    });
+
+    // ---- スクロールに合わせて、左右から寄ってくる ----
+    var parts = [];
+    svcRows.forEach(function (row) {
+      var kids = row.children;
+      Array.prototype.forEach.call(kids, function (k) {
+        if (k.classList.contains('svc-px') || k.classList.contains('svc-fig')) return;
+        var isDesc = k.tagName === 'DIV' && k.querySelector('p');
+        parts.push({ row: row, el: k, dir: isDesc ? 1 : -1, h: k.querySelector('h3') });
+      });
+    });
+    var tick = function () {
+      var vh = window.innerHeight;
+      parts.forEach(function (p) {
+        var r = p.row.getBoundingClientRect();
+        if (r.bottom < -50 || r.top > vh + 50) return;
+        var q = clamp((vh - r.top) / (vh * .4), 0, 1);       // 行の上端が画面の下から 40% 上がるまで
+        var e = 1 - Math.pow(1 - q, 3);
+        p.el.style.translate = e < .999 ? ((1 - e) * p.dir * (mob ? 28 : 56)).toFixed(1) + 'px 0' : '';
+        if (p.h) p.h.style.filter = e < .999 ? 'blur(' + ((1 - e) * 8).toFixed(1) + 'px)' : '';
+      });
+    };
+    var tk = false;
+    window.addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(function () { tk = false; tick(); }); } }, { passive: true });
+    tick();
+  })();
+
+  // =========================================================
   // ④ ホバーで文字がスクランブル(マウスのときだけ)
   // =========================================================
   var POOLCH = 'アイウエオカキクケコサシスセソ#%&*+=<>/□■';
