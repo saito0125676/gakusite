@@ -926,3 +926,54 @@ html.is-loading { overflow: hidden; }
 .form-card, .route--light { box-shadow: inset 0 0 0 1px rgba(14,15,17,.16); }
 /* 「0円」の円が改行されないように */
 .zero b { flex: none; white-space: nowrap; }
+
+/* =========================================================
+   演出(fx.js)
+   ========================================================= */
+/* ① ピクセルのページ遷移 */
+html.px-enter body::after {
+  content: ''; position: fixed; inset: 0; z-index: 400; background: #0e0f11;
+  animation: px-failsafe .4s ease 2.6s forwards;   /* 万一スクリプトが動かなくても 2.6 秒で消える */
+}
+@keyframes px-failsafe { to { opacity: 0; visibility: hidden; } }
+.px-shift { position: fixed; inset: 0; z-index: 400; display: grid; pointer-events: none; }
+.px-shift.is-on { pointer-events: auto; }
+.px-c { display: block; background: #0e0f11; transform: scale(0); transition: transform .3s cubic-bezier(.55, 0, .25, 1); will-change: transform; }
+.px-c--pool { background: #3fc1c9; }
+.px-c--navy { background: #1f3a5f; }
+.px-shift.is-on .px-c { transform: scale(1.04); }
+.px-shift.no-anim .px-c, .px-shift.no-anim .px-label { transition: none !important; }
+.px-label { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; color: #fff; opacity: 0; transition: opacity .18s ease; text-align: center; }
+.px-shift.show-label .px-label { opacity: 1; }
+.px-label b { font-family: var(--f-px); font-weight: 500; font-size: clamp(44px, 9vw, 132px); line-height: 1; letter-spacing: -.02em; }
+.px-label small { font-family: "DotGothic16", var(--f-ja); font-size: 14px; letter-spacing: .12em; color: #3fc1c9; }
+.px-dots { display: flex; gap: 6px; }
+.px-dots i { width: 8px; height: 8px; background: #3fc1c9; animation: px-dot 0.9s steps(2) infinite; }
+.px-dots i:nth-child(2) { animation-delay: .15s; }
+.px-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes px-dot { 50% { opacity: .15; } }
+
+/* ② フッターの粒子ロゴ */
+.ft-word { position: relative; }
+.ft-word-cv { position: absolute; left: 0; bottom: 0; width: 100%; pointer-events: none; }
+.ft-word.is-px, .ft-word.is-px .plus { color: transparent; }
+
+/* ③ ラベル付きカーソル */
+.px-cursor { position: fixed; left: 0; top: 0; z-index: 450; pointer-events: none; }
+.px-cursor > * { position: absolute; left: 14px; top: 14px; }
+.px-cursor i { left: -5px; top: -5px; width: 10px; height: 10px; background: #3fc1c9; transform: scale(0); transition: transform .25s var(--ease); }
+.px-cursor span { padding: 8px 12px; background: #0e0f11; color: #fff; font: 500 11px/1 var(--f-mono); letter-spacing: .08em; white-space: nowrap; box-shadow: 4px 4px 0 #3fc1c9; transform: scale(0); transform-origin: 0 0; transition: transform .25s var(--ease); }
+.px-cursor.is-on i, .px-cursor.is-on span { transform: none; }
+
+/* ⑤ 入れ替わる単語 */
+.cta .display em.cycle { display: inline-block; }
+.cta .display em.is-swap { animation: px-swap .42s steps(4) both; }
+@keyframes px-swap { 0% { transform: translateY(-.06em); opacity: .4; } 100% { transform: none; opacity: 1; } }
+
+/* ⑥ ページ見出しのドットマトリクス */
+.ph .display { position: relative; }
+.ph-dots { position: absolute; left: 0; width: 100%; pointer-events: none; }
+.ph .display.is-dots, .ph .display.is-dots em { color: transparent !important; text-shadow: none !important; }
+
+/* ⑦ スクロール演出:せり上がるシート */
+.fx-sheet { position: relative; z-index: 2; will-change: clip-path; }

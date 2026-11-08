@@ -153,6 +153,7 @@
   var lenis = null;
   if (window.Lenis && !reduce) {
     lenis = new window.Lenis({ lerp: 0.11, wheelMultiplier: 1 });
+    window.__lenis = lenis;
     var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
     document.querySelectorAll('a[href="#top"]').forEach(function (a) {
@@ -587,109 +588,7 @@
   // セクションの切り替わり演出(Sui を参照)
   // =========================================================
 
-  // ① 光の縞のトランジション(専用の区間。文字には重ならない)
-  //    スクロールに合わせて、中央の線から光の帯が広がり → 漂い → たたまれて、次の見出しが現れる
-  // 見出しが出そろってから固定が外れるまでの「余韻」区間は、ホイールを重くしてゆっくり進ませる
-  var holding = [];
-  var setHold = function (i, on) {
-    if (holding[i] === on) return;
-    holding[i] = on;
-    if (lenis && lenis.virtualScroll) lenis.virtualScroll.options.wheelMultiplier = holding.indexOf(true) >= 0 ? .3 : 1;
-  };
-  document.querySelectorAll('.xsec').forEach(function (sec, xi) {
-    var cv = sec.querySelector('canvas'), ctx = cv.getContext('2d');
-    var word = sec.querySelector('.xsec-word'), en = sec.querySelector('.xsec-word .en');
-    // 目にやさしい光:細い線ではなく、ぼかした太い光の帯をゆっくり重ねる(白は使わない)
-    var COLS = [[63, 193, 201], [63, 193, 201], [42, 143, 191], [31, 58, 95], [46, 110, 140], [120, 205, 214]];
-    var W = 0, H = 0, bars = [], visible = false, raf = 0, p = 0, scrambled = false;
-    var SC = 6; // 1/6 の解像度で描いて拡大 → 自然にふんわりぼける
-    var ss = function (a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
-    var build = function () {
-      W = Math.max(1, Math.round(cv.clientWidth / SC)); H = Math.max(1, Math.round(cv.clientHeight / SC));
-      cv.width = W; cv.height = H;
-      bars = [];
-      var n = Math.max(7, Math.round(cv.clientWidth / 150));
-      for (var i = 0; i < n; i++) {
-        bars.push({
-          x: (i + .5) / n + (Math.random() - .5) * .08, w: (60 + Math.random() * 120) / SC,
-          c: COLS[Math.floor(Math.random() * COLS.length)], a: .28 + Math.random() * .3,
-          ph: Math.random(), sp: .15 + Math.random() * .25, off: Math.random() * 6.283
-        });
-      }
-    };
-    var frame = function (now) {
-      raf = 0;
-      var t = now / 1000;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, W, H);
-      var grow = ss(.02, .32, p), fold = ss(.56, .8, p); // 0.32〜0.56 は光が漂う「見せ場」
-      // 中央のやわらかい光だまり
-      var glow = clamp(grow - fold, 0, 1);
-      if (glow > .01) {
-        var rg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * .6);
-        rg.addColorStop(0, 'rgba(63,193,201,' + (.16 * glow) + ')'); rg.addColorStop(1, 'rgba(31,58,95,0)');
-        ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
-      }
-      ctx.globalCompositeOperation = 'screen';
-      for (var i = 0; i < bars.length; i++) {
-        var b = bars[i];
-        var v = clamp(grow * 1.4 - b.ph * .4, 0, 1) * (1 - clamp(fold * 1.4 - (1 - b.ph) * .4, 0, 1));
-        if (v <= .003) continue;
-        var e = 1 - Math.pow(1 - v, 3);
-        var h = H * (.15 + .85 * e), cy = H / 2 + Math.sin(t * b.sp + b.off) * H * .04, y0 = cy - h / 2;
-        var cx = b.x * W + Math.sin(t * b.sp * .7 + b.off) * W * .015, w = b.w * (.6 + .4 * e);
-        var c = b.c, col = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',';
-        // 横方向も縦方向も端がふわっと消えるよう、2 本のグラデーションを重ねる
-        var gx = ctx.createLinearGradient(cx - w, 0, cx + w, 0);
-        gx.addColorStop(0, col + '0)'); gx.addColorStop(.5, col + (b.a * v) + ')'); gx.addColorStop(1, col + '0)');
-        ctx.fillStyle = gx;
-        ctx.save();
-        ctx.beginPath(); ctx.rect(cx - w, y0, w * 2, h); ctx.clip();
-        ctx.fillRect(cx - w, y0, w * 2, h);
-        ctx.restore();
-      }
-      ctx.globalCompositeOperation = 'destination-in';
-      var gy = ctx.createLinearGradient(0, 0, 0, H);
-      gy.addColorStop(0, 'rgba(0,0,0,0)'); gy.addColorStop(.3, 'rgba(0,0,0,1)'); gy.addColorStop(.7, 'rgba(0,0,0,1)'); gy.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = gy; ctx.fillRect(0, 0, W, H);
-      ctx.globalCompositeOperation = 'source-over';
-      if (visible) raf = requestAnimationFrame(frame);
-    };
-    var update = function () {
-      var r = sec.getBoundingClientRect();
-      p = clamp(-r.top / Math.max(1, r.height - vh()), 0, 1);
-      // 次の見出し:たたまれていくのに合わせて、ぼかしから現れる
-      var show = ss(.56, .72, p); // 0.72〜1 は見出しをじっくり見せる(余韻)
-      // 見出しが出そろってから、画面の上へ半分抜けるまでをゆっくりに
-      setHold(xi, p > .7 && r.bottom > vh() * .45);
-      word.style.opacity = show;
-      word.style.filter = 'blur(' + ((1 - show) * 16).toFixed(1) + 'px)';
-      word.style.transform = 'translateY(' + ((1 - show) * 24).toFixed(1) + 'px)';
-      if (show > .2 && !scrambled && en) {
-        scrambled = true;
-        var fin = en.textContent, t0 = null, POOL_X = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#_';
-        var step = function (tm) {
-          if (t0 === null) t0 = tm;
-          var q = Math.min(1, (tm - t0) / 900), k = Math.floor(q * fin.length), s = fin.slice(0, k);
-          for (var j = k; j < fin.length; j++) s += fin[j] === ' ' ? ' ' : POOL_X[Math.floor(Math.random() * POOL_X.length)];
-          en.textContent = s;
-          if (q < 1) requestAnimationFrame(step); else en.textContent = fin;
-        };
-        requestAnimationFrame(step);
-      }
-    };
-    if (reduce) { word.style.opacity = 1; return; }
-    build();
-    window.addEventListener('resize', build);
-    onScroll(update);
-    update();
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        visible = es[0].isIntersecting;
-        if (visible && !raf) raf = requestAnimationFrame(frame);
-      }).observe(sec);
-    }
-  });
+  // (光の縞のトランジションは廃止。セクションの切り替えは fx.js の「せり上がるシート」に置き換え)
 
   // ② パネルが角丸の細い形から全幅に広がって現れる
   var clips = document.querySelectorAll('[data-clip]');

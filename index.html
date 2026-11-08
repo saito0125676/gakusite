@@ -27,10 +27,11 @@
     } catch (e) { document.documentElement.classList.add('no-intro'); }
   </script>
   <script>document.documentElement.classList.add('js');</script>
+  <script>try{var _t=JSON.parse(sessionStorage.getItem("gs:px-shift")||"null");if(_t&&Date.now()-_t.at<8000)document.documentElement.classList.add("px-enter")}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Pixelify+Sans:wght@500&family=DotGothic16&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=2026110801">
+  <link rel="stylesheet" href="site.css?v=2026110802">
 </head>
 <body id="top" data-gakuzame>
   <!-- オープニング①:クジラの動画(セッション初回のみ)→ 終わるとピクセルのロード画面へ -->
@@ -128,8 +129,7 @@
     </section>
 
     <!-- ===== マニフェスト ===== -->
-    <section class="xsec" data-theme="ink" aria-hidden="true"><div class="xsec-stick"><canvas></canvas><div class="xsec-word"><p class="mono">Next — 01 / Manifesto</p><p class="en" lang="en">Built by students.</p><p class="ja">学生が、本気でつくる。</p></div></div></section>
-    <section class="manifesto t-ink" data-theme="ink" aria-labelledby="mf-title">
+    <section data-sheet class="manifesto t-ink" data-theme="ink" aria-labelledby="mf-title">
       <div class="wrap">
         <div class="head-row" style="border-top:1px solid var(--line-2);padding-top:18px"><span class="tag tag--pool">02 / Manifesto</span><span class="mono">Why we build</span></div>
         <h2 class="display" id="mf-title" data-split data-blur><span lang="en">Pixel by pixel,<br>for the <span class="c-pool">lowest</span><br>price<span class="c-orange">.</span></span><span class="sr-only">ガクサイトの想い</span></h2>
@@ -202,8 +202,7 @@
     </section>
 
     <!-- ===== 強み(色の面が重なっていく) ===== -->
-    <section class="xsec" data-theme="ink" aria-hidden="true"><div class="xsec-stick"><canvas></canvas><div class="xsec-word"><p class="mono">Next — 05 / Strength</p><p class="en" lang="en">Why GAKU SITE+</p><p class="ja">ガクサイトが選ばれる、3つの理由。</p></div></div></section>
-    <section class="stack" aria-labelledby="st-title">
+    <section data-sheet class="stack" aria-labelledby="st-title">
       <h2 class="sr-only" id="st-title">ガクサイトの強み</h2>
       <div class="panel t-pool" data-theme="pool">
         <div class="wrap panel-in">
@@ -353,9 +352,8 @@
       </div>
     </section>
 
-    <section class="xsec" data-theme="ink" aria-hidden="true"><div class="xsec-stick"><canvas></canvas><div class="xsec-word"><p class="mono">Next — Contact</p><p class="en" lang="en">Let’s talk.</p><p class="ja">まずは、気軽に話してみよう。</p></div></div></section>
     <!-- ===== 締めの CTA ===== -->
-    <section class="cta t-pool" data-theme="pool" aria-labelledby="cta-title">
+    <section data-sheet class="cta t-pool" data-theme="pool" aria-labelledby="cta-title">
       <div class="wrap">
         <div class="head-row" style="border-top:1px solid var(--line-2);padding-top:18px">
           <span class="tag">Contact</span><span class="mono">Free consultation</span>
@@ -429,6 +427,7 @@
   <a class="btn float" href="contact.html"><span class="btn-l" data-t="無料相談受付中"><i class="dot" aria-hidden="true"></i><span>無料相談受付中</span></span><span class="btn-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
 
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="site.js?v=2026110801" defer></script>
+  <script src="site.js?v=2026110802" defer></script>
+  <script src="fx.js?v=2026110802" defer></script>
 </body>
 </html>
