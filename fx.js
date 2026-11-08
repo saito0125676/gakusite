@@ -1,5 +1,5 @@
 // ガクサイト 演出(全ページ共通)
-// ① ピクセルのページ遷移  ② フッターの粒子ロゴ  ③ ラベル付きカーソル  ④ ホバーで文字がスクランブル  ⑤ 入れ替わる単語
+// ① ピクセルのページ遷移  ② フッターの粒子ロゴ  ③ ピクセルカーソル  ④ ホバーで文字がスクランブル  ⑤ 入れ替わる単語
 // 参考:nudot(ピクセル遷移)/ revelatio(粒子ロゴ・スクランブル・カーソル)/ funtech(入れ替わる単語)
 (function () {
   'use strict';
@@ -72,6 +72,7 @@
     busy = true;
     try { sessionStorage.setItem(KEY, JSON.stringify({ label: label, at: Date.now() })); } catch (e) {}
     if (window.__lenis) { try { window.__lenis.stop(); } catch (e) {} }
+    root.classList.add('px-busy');   // 遷移中はカーソルとサメを隠す
     build(label);
     stagger(ox, oy, .32);
     void shell.offsetWidth;
@@ -88,6 +89,7 @@
     var data = null;
     try { data = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
     if (!root.classList.contains('px-enter')) return;
+    root.classList.add('px-busy');
     build(data && data.label);
     shell.classList.add('is-on', 'show-label', 'no-anim');
     root.classList.remove('px-enter');
@@ -98,6 +100,7 @@
       shell.classList.remove('no-anim', 'show-label');
       void shell.offsetWidth;
       shell.classList.remove('is-on');
+      setTimeout(function () { root.classList.remove('px-busy'); }, 520);
       setTimeout(function () { if (shell) { shell.remove(); shell = null; } }, 900);
     }, 220);
   };
@@ -129,7 +132,7 @@
   window.addEventListener('pageshow', function (e) {
     if (!e.persisted) return;
     busy = false;
-    root.classList.remove('px-enter');
+    root.classList.remove('px-enter', 'px-busy');
     if (shell) { shell.remove(); shell = null; }
     if (window.__lenis) { try { window.__lenis.start(); } catch (err) {} }
   });
@@ -515,39 +518,136 @@
   })();
 
   // =========================================================
-  // ③ ラベル付きカーソル(マウスのときだけ):data-cursor のある要素に乗ると、ラベルが付いてくる
+  // ③ ピクセルカーソル(マウスのときだけ)
+  //    ・水色の点がぴったり付いてきて、四角い枠が少し遅れて追いかける
+  //    ・リンクやボタンに乗ると、枠が四隅のカギ括弧になって、その要素の形にぴたっと合わせる(ターゲットロック)
+  //    ・実績カードなど data-cursor のある所では、ラベルがスクランブルしながら出る
+  //    ・押すと枠がきゅっと縮み、小さなピクセルがはじける
+  //    ・ボタンはカーソルの方へ少しだけ引き寄せられる(マグネット)
+  //    ・下にあるセクションの色(白・黒・水色)に合わせて、カーソルの色を変える
+  //    参考:revelatio(円カーソル・スクランブルのラベル)/ nudot(ラベル付きカーソル)
   // =========================================================
-  if (fine && !reduce) {
-    var auto = [['.arc-card', 'OPEN ↗'], ['.work a', 'VIEW ↗'], ['.route', 'GO →']];
+  if (fine && !reduce) (function () {
+    var auto = [['.arc-card', 'OPEN ↗'], ['.work a', 'VIEW ↗'], ['.route', 'GO →'], ['.chara-sheet, .cs-sheet', 'HELLO!']];
     auto.forEach(function (a) {
       document.querySelectorAll(a[0]).forEach(function (el) { if (!el.hasAttribute('data-cursor')) el.setAttribute('data-cursor', a[1]); });
     });
-    var cur = document.createElement('div');
-    cur.className = 'px-cursor';
-    cur.setAttribute('aria-hidden', 'true');
-    cur.innerHTML = '<i></i><span></span>';
-    document.body.appendChild(cur);
-    var curText = cur.querySelector('span');
-    var cx = 0, cy = 0, tx = 0, ty = 0, cRaf = 0, shown = false;
-    var loop = function () {
-      cRaf = 0;
-      cx += (tx - cx) * .35; cy += (ty - cy) * .35;
-      cur.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px)';
-      if (shown || Math.abs(tx - cx) > .5 || Math.abs(ty - cy) > .5) cRaf = requestAnimationFrame(loop);
+
+    var gc = document.createElement('div');
+    gc.className = 'gc';
+    gc.setAttribute('aria-hidden', 'true');
+    gc.innerHTML = '<div class="gc-frame"><b></b><b></b><b></b><b></b></div><i class="gc-dot"></i><span class="gc-label"></span>';
+    document.body.appendChild(gc);
+    root.classList.add('gc-on');
+    var frame = gc.querySelector('.gc-frame'), dot = gc.querySelector('.gc-dot'), label = gc.querySelector('.gc-label');
+
+    var LOCK = 'a[href], button, summary, label, .menu-btn, [role="button"]';
+    var TEXT = 'input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), textarea, select, [contenteditable="true"]';
+    var mx = -100, my = -100;                       // マウスの位置
+    var fx = -100, fy = -100, fw = 26, fh = 26;     // 枠の今の位置・大きさ(中心基準)
+    var mode = 'idle', target = null, lastLabel = '', inside = false, raf = 0, settle = 0;
+
+    var themeAt = function (el) {
+      var s = el && el.closest && el.closest('[data-theme]');
+      var t = s ? s.getAttribute('data-theme') : 'paper';
+      if (document.body.classList.contains('quest-page') && t === 'paper') t = 'ink';
+      return t;
     };
+    var setMode = function (m, t) {
+      if (mode === m && target === t) return;
+      mode = m; target = t;
+      gc.setAttribute('data-mode', m);
+      if (m === 'label') {
+        var txt = t.getAttribute('data-cursor');
+        if (txt !== lastLabel) {
+          lastLabel = txt; label.textContent = txt;
+          var n = label.firstChild; if (n && typeof scramble === 'function') scramble(n, 320);
+        }
+      }
+    };
+    var pick = function (el) {
+      if (!el || !el.closest) return setMode('idle', null);
+      if (el.closest(TEXT)) return setMode('text', null);
+      var c = el.closest('[data-cursor]');
+      if (c) return setMode('label', c);
+      var l = el.closest(LOCK);
+      if (l) {
+        var r = l.getBoundingClientRect();
+        // 大きすぎる要素(カード全体など)はロックせず、枠を少し大きくするだけ
+        if (r.width < 520 && r.height < 220) return setMode('lock', l);
+        return setMode('hover', l);
+      }
+      setMode('idle', null);
+    };
+
+    var tick = function () {
+      raf = 0;
+      var tx = mx, ty = my, tw = 26, th = 26, k = .2;
+      if (mode === 'lock' && target) {
+        var r = target.getBoundingClientRect(), pad = 7;
+        tx = r.left + r.width / 2; ty = r.top + r.height / 2;
+        tw = r.width + pad * 2; th = r.height + pad * 2; k = .28;
+      } else if (mode === 'hover') { tw = th = 46; }
+      else if (mode === 'label' || mode === 'text') { tw = th = 6; }
+      fx += (tx - fx) * k; fy += (ty - fy) * k; fw += (tw - fw) * .25; fh += (th - fh) * .25;
+      frame.style.transform = 'translate(' + (fx - fw / 2).toFixed(1) + 'px,' + (fy - fh / 2).toFixed(1) + 'px)';
+      frame.style.width = fw.toFixed(1) + 'px'; frame.style.height = fh.toFixed(1) + 'px';
+      var moving = Math.abs(tx - fx) + Math.abs(ty - fy) + Math.abs(tw - fw) + Math.abs(th - fh) > .4;
+      settle = moving ? 0 : settle + 1;
+      if (inside && (moving || mode === 'lock' || settle < 4)) raf = requestAnimationFrame(tick);
+    };
+    var kick = function () { if (!raf) raf = requestAnimationFrame(tick); };
+
     document.addEventListener('pointermove', function (e) {
       if (e.pointerType !== 'mouse') return;
-      tx = e.clientX; ty = e.clientY;
-      var t = e.target.closest && e.target.closest('[data-cursor]');
-      if (t) {
-        if (!shown) { cx = tx; cy = ty; }
-        curText.textContent = t.getAttribute('data-cursor');
-        cur.classList.add('is-on'); shown = true;
-      } else if (shown) { cur.classList.remove('is-on'); shown = false; }
-      if (!cRaf) cRaf = requestAnimationFrame(loop);
+      mx = e.clientX; my = e.clientY;
+      if (!inside) { inside = true; fx = mx; fy = my; gc.classList.add('is-in'); }
+      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      label.style.transform = 'translate(' + (mx + 16) + 'px,' + (my + 16) + 'px)';
+      gc.setAttribute('data-on', themeAt(e.target));
+      pick(e.target);
+      kick();
     }, { passive: true });
-    document.addEventListener('pointerleave', function () { cur.classList.remove('is-on'); shown = false; });
-  }
+    // スクロール中も、下にある要素に合わせて切り替える
+    window.addEventListener('scroll', function () {
+      if (!inside) return;
+      var el = document.elementFromPoint(mx, my);
+      gc.setAttribute('data-on', themeAt(el));
+      pick(el); kick();
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () { inside = false; gc.classList.remove('is-in'); });
+    document.addEventListener('mouseenter', function () { inside = true; gc.classList.add('is-in'); });
+
+    // 押したとき:枠が縮み、ピクセルがはじける
+    document.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      gc.classList.add('is-down');
+      for (var i = 0; i < 8; i++) {
+        var s = document.createElement('i');
+        s.className = 'gc-bit';
+        var a = (i / 8) * 6.283 + Math.random() * .4, d = 18 + Math.random() * 22;
+        s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
+        s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px');
+        s.style.setProperty('--dy', (Math.sin(a) * d).toFixed(1) + 'px');
+        if (i % 3 === 0) s.classList.add('gc-bit--alt');
+        gc.appendChild(s);
+        setTimeout(function (x) { return function () { x.remove(); }; }(s), 520);
+      }
+    });
+    document.addEventListener('pointerup', function () { gc.classList.remove('is-down'); });
+
+    // マグネットボタン:カーソルの方へ少しだけ引き寄せられる
+    document.querySelectorAll('.btn, .menu-btn, .ft-social a').forEach(function (b) {
+      b.classList.add('gc-mag');
+      b.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = b.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2), dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        b.style.translate = (dx * 6).toFixed(1) + 'px ' + (dy * 5).toFixed(1) + 'px';
+      });
+      b.addEventListener('pointerleave', function () { b.style.translate = ''; });
+    });
+  })();
 
   // =========================================================
   // ④ ホバーで文字がスクランブル(マウスのときだけ)

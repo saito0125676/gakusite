@@ -958,12 +958,6 @@ html.px-enter body::after {
 .ft-word-cv { position: absolute; left: 0; bottom: 0; width: 100%; pointer-events: none; }
 .ft-word.is-px, .ft-word.is-px .plus { color: transparent; }
 
-/* ③ ラベル付きカーソル */
-.px-cursor { position: fixed; left: 0; top: 0; z-index: 450; pointer-events: none; }
-.px-cursor > * { position: absolute; left: 14px; top: 14px; }
-.px-cursor i { left: -5px; top: -5px; width: 10px; height: 10px; background: #3fc1c9; transform: scale(0); transition: transform .25s var(--ease); }
-.px-cursor span { padding: 8px 12px; background: #0e0f11; color: #fff; font: 500 11px/1 var(--f-mono); letter-spacing: .08em; white-space: nowrap; box-shadow: 4px 4px 0 #3fc1c9; transform: scale(0); transform-origin: 0 0; transition: transform .25s var(--ease); }
-.px-cursor.is-on i, .px-cursor.is-on span { transform: none; }
 
 /* ⑤ 入れ替わる単語 */
 .cta .display em.cycle { display: inline-block; }
@@ -977,3 +971,38 @@ html.px-enter body::after {
 
 /* ⑦ スクロール演出:せり上がるシート */
 .fx-sheet { position: relative; z-index: 2; will-change: clip-path; }
+
+/* ③ ピクセルカーソル */
+html.gc-on, html.gc-on * { cursor: none !important; }
+html.gc-on input:not([type=checkbox]):not([type=radio]):not([type=submit]), html.gc-on textarea, html.gc-on select, html.gc-on [contenteditable=true] { cursor: text !important; }
+.gc { position: fixed; inset: 0; z-index: 460; pointer-events: none; opacity: 0; transition: opacity .25s; --c: #0e0f11; --a: #3fc1c9; }
+.gc.is-in { opacity: 1; }
+.gc[data-on=ink], .gc[data-on=orange] { --c: #ffffff; }
+.gc[data-on=pool] { --a: #0e0f11; }
+.gc[data-mode=text] { opacity: 0; }
+.gc-dot { position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; background: var(--a); transition: width .2s, height .2s, left .2s, top .2s, background-color .2s; }
+.gc[data-mode=label] .gc-dot { left: -5px; top: -5px; width: 10px; height: 10px; }
+.gc-frame { position: absolute; left: 0; top: 0; width: 26px; height: 26px; transition: opacity .2s; }
+.gc-frame b { position: absolute; width: 7px; height: 7px; border: 0 solid var(--c); transition: border-color .2s, width .2s, height .2s; }
+.gc-frame b:nth-child(1) { left: 0; top: 0; border-left-width: 2px; border-top-width: 2px; }
+.gc-frame b:nth-child(2) { right: 0; top: 0; border-right-width: 2px; border-top-width: 2px; }
+.gc-frame b:nth-child(3) { left: 0; bottom: 0; border-left-width: 2px; border-bottom-width: 2px; }
+.gc-frame b:nth-child(4) { right: 0; bottom: 0; border-right-width: 2px; border-bottom-width: 2px; }
+.gc[data-mode=lock] .gc-frame b { width: 10px; height: 10px; border-color: var(--a); }
+.gc[data-mode=hover] .gc-frame b { width: 12px; height: 12px; }
+.gc[data-mode=label] .gc-frame, .gc[data-mode=text] .gc-frame { opacity: 0; }
+.gc.is-down .gc-frame { scale: .82; }
+.gc-frame { transition: opacity .2s, scale .15s; }
+.gc-label { position: absolute; left: 0; top: 0; padding: 8px 12px; background: #0e0f11; color: #fff; font: 500 11px/1 var(--f-mono); letter-spacing: .08em; white-space: nowrap; box-shadow: 4px 4px 0 #3fc1c9; opacity: 0; scale: .4; transform-origin: 0 0; transition: opacity .2s, scale .25s var(--ease); }
+.gc[data-mode=label] .gc-label { opacity: 1; scale: 1; }
+.gc[data-on=pool] .gc-label { box-shadow: 4px 4px 0 #ffffff; }
+.gc-bit { position: absolute; width: 4px; height: 4px; margin: -2px 0 0 -2px; background: var(--a); animation: gc-bit .5s cubic-bezier(.2, .7, .3, 1) forwards; }
+.gc-bit--alt { background: var(--c); }
+@keyframes gc-bit { to { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+.gc-mag { transition: translate .45s cubic-bezier(.2, .8, .2, 1); }
+.ft-social a.gc-mag { transition: background-color .3s, translate .45s cubic-bezier(.2, .8, .2, 1); }
+/* ガクザメ:マウスのパソコンではカーソルについてくる(カーソルの少し下の層を泳ぐ) */
+.gakuzame-swim.is-follow { z-index: 455; transition: opacity .4s; will-change: transform; }
+.gakuzame-swim.is-follow .gakuzame-bob { width: 84px; height: 44px; }
+/* ページ遷移のマスが出ている間は、カーソルとサメを隠す */
+html.px-busy .gc, html.px-busy .gakuzame-swim, html.px-enter .gc, html.px-enter .gakuzame-swim { opacity: 0 !important; transition: opacity .12s !important; }

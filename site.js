@@ -699,7 +699,7 @@
   }
   runScroll();
   // ガクザメ:ときどき画面を横切る。z-index:-1 なので、何もない空白でだけ見える
-  // <body data-gakuzame> のページ(トップ・私たちについて)だけで泳がせる
+  // <body data-gakuzame> のページで泳がせる(全ページ)
   if (document.body.hasAttribute('data-gakuzame') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // chara-sheet.js と同じドット絵(36×17、右向き)
     var SHARK = [
@@ -745,6 +745,72 @@
     bob.appendChild(drawShark(1));
     swimmer.appendChild(bob);
     document.body.appendChild(swimmer);
+
+    // ---------- マウスのパソコン:カーソルについてくる ----------
+    //   カーソルの少し後ろ・下を慣性つきで追いかけ、向き・傾きを変える。
+    //   カーソルを 3 秒止めると近くの画面の端へ泳いで出ていき(読むじゃまをしない)、動かすとまた戻ってくる。
+    //   クリックすると、カーソルめがけて突進する。
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      swimmer.classList.add('is-follow');
+      var sx = -200, sy = 0, vx = 0, vy = 0, mx = -1, my = -1, left = false, tilt = 0;
+      var side = -1, cvx = 0, pmx = -1, lastFlip = 0;   // side:-1 = カーソルの左後ろ / 1 = 右後ろ
+      var lastMove = 0, lunge = 0, sRaf = 0, alive = false;
+      var sTick = function (now) {
+        sRaf = 0;
+        var vw = window.innerWidth, vh = window.innerHeight;
+        var playing = document.documentElement.classList.contains('intro-playing');
+        var idle = now - lastMove > 3000;
+        var tx, ty, maxV, acc;
+        if (now < lunge) { tx = mx; ty = my; maxV = 22; acc = .22; }
+        else if (idle) { tx = sx < vw / 2 ? -180 : vw + 180; ty = sy; maxV = 3.2; acc = .03; }   // 端へ帰る
+        else {
+          // 回り込む側は「カーソルが動いた向き」で決める(サメ自身の向きで決めると、左右に行ったり来たりしてしまう)
+          if (cvx > 1.5) side = -1; else if (cvx < -1.5) side = 1;
+          tx = mx + side * 120; ty = my + 60; maxV = 11; acc = .07;
+        }
+        var dx = tx - sx, dy = ty - sy, d = Math.hypot(dx, dy) || 1;
+        var sp = Math.min(maxV, d * .06);
+        vx += (dx / d * sp - vx) * acc; vy += (dy / d * sp - vy) * acc;
+        sx += vx; sy += vy;
+        cvx *= .9;   // カーソルの横の速さ(なめらかにした値)を少しずつ 0 へ
+        // 向き:速く泳いでいる間は進む向き、目的地の近くではカーソルの方を向く。切り替えは 0.5 秒に 1 回まで
+        var spd = Math.hypot(vx, vy);
+        var want = spd > 1.6 ? vx < 0 : (d < 60 && mx >= 0 ? mx < sx : left);
+        if (want !== left && now - lastFlip > 500) { left = want; lastFlip = now; }
+        // 傾き:ある程度の速さで泳いでいるときだけ
+        var a = spd > 1.2 ? Math.atan2(vy, Math.abs(vx) + .001) * 57.3 * Math.min(1, spd / 4) : 0;
+        tilt += (Math.max(-20, Math.min(20, a)) - tilt) * .1;
+        swimmer.classList.toggle('is-left', left);
+        swimmer.style.opacity = playing ? 0 : 1;
+        swimmer.style.transform = 'translate(' + (sx - swimmer.offsetWidth / 2).toFixed(1) + 'px,' + (sy - swimmer.offsetHeight / 2).toFixed(1) + 'px) rotate(' + (left ? -tilt : tilt).toFixed(1) + 'deg)';
+        var off = sx < -150 || sx > vw + 150;
+        if (idle && off && now > lunge) { alive = false; return; }   // 画面の外で休む
+        sRaf = requestAnimationFrame(sTick);
+      };
+      var wake = function () {
+        if (!alive) {
+          alive = true;
+          // 休んでいたら、カーソルに近い方の端から入ってくる
+          if (sx < -150 || sx > window.innerWidth + 150) { sx = mx < window.innerWidth / 2 ? -150 : window.innerWidth + 150; sy = my + 40; vx = vy = 0; }
+        }
+        if (!sRaf) sRaf = requestAnimationFrame(sTick);
+      };
+      document.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        if (pmx >= 0) cvx = cvx * .7 + (e.clientX - pmx) * .3;
+        pmx = e.clientX;
+        mx = e.clientX; my = e.clientY; lastMove = performance.now();
+        wake();
+      }, { passive: true });
+      document.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        mx = e.clientX; my = e.clientY; lastMove = performance.now();
+        lunge = performance.now() + 380;
+        wake();
+      });
+      document.documentElement.addEventListener('mouseleave', function () { lastMove = 0; });
+      return;
+    }
 
     var swim = function () {
       var html = document.documentElement;
