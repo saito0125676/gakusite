@@ -2,6 +2,7 @@
    ご依頼から納品までの流れ：ガクガエルがステップを跳んでいき、
    着地したステップを表示する(<ol class="flow-steps" data-frog>)
    ・スクロールで各ステップが画面に入ると、次のステップへ順番に跳ぶ
+   ・速くスクロールして遅れたときは、速く跳んだり数段まとめて跳んだりして追いつく
    ・「動きを減らす」設定の人には、カエルを出さず全ステップを表示
    ・chara-sheet.js(ドット絵)を先に読み込むこと
    ========================================================= */
@@ -49,11 +50,10 @@
   const first = spotOf(0);
   place({ x: first.x, y: first.y - 56 });
 
-  function hopTo(i, done) {
+  function hopTo(i, dur, done) {
     const from = pos, to = spotOf(i);
     const dist = Math.hypot(to.x - from.x, to.y - from.y);
     const arc = Math.max(36, dist * .35);
-    const dur = 560;
     let t0 = 0;
     body.classList.add('is-jump');
     function step(now) {
@@ -71,13 +71,18 @@
   function next() {
     if (hopping || landed >= target) return;
     hopping = true;
-    const i = landed + 1;
-    hopTo(i, function () {
+    const behind = target - landed;               // スクロールに対する遅れ(段数)
+    // 3 段以上遅れたら、途中の段はすぐ表示して、到達した段の 1 つ手前へ一気に跳ぶ
+    const i = behind >= 3 ? target - 1 : landed + 1;
+    for (let k = landed + 1; k < i; k++) steps[k].classList.add('is-in');
+    if (i - 1 > landed) setLine(i - 1);
+    const dur = behind > 1 ? 300 : 480;           // 遅れているときは速く跳ぶ
+    hopTo(i, dur, function () {
       landed = i;
       steps[i].classList.add('is-in');
       setLine(i);
       hopping = false;
-      setTimeout(next, 120);
+      setTimeout(next, target > landed ? 0 : 100);
     });
   }
 
@@ -88,7 +93,7 @@
       io.unobserve(e.target);
     });
     next();
-  }, { rootMargin: '0px 0px -30% 0px' });
+  }, { rootMargin: '0px 0px -12% 0px' });
   steps.forEach(function (li) { io.observe(li); });
 
   // 画面幅が変わったら、いまの位置に置き直す

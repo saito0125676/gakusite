@@ -99,3 +99,76 @@
   .fq-q:focus-visible .fq-cursor,
   .fq-more a::before { animation: none; }
 }
+
+/* =========================================================
+   ページ全体を RPG 風に(body.quest-page)
+   夜の海のような紺地 + ドットの方眼。見出しはドット文字、
+   枠はすべて会話ウィンドウ(白い二重線 + ずらした影)でそろえる。
+   ========================================================= */
+body.quest-page {
+  --qp-bg: #06243a;
+  --qp-deep: #041a2b;
+  --qp-panel: #0b3c5d;
+  --qp-shadow: #062338;
+  --qp-ink: #e8f6ff;
+  --qp-sub: #9cc4d8;
+  --qp-gold: #ffd84a;
+  --qp-pixel: "Press Start 2P", "Courier New", monospace;
+  --qp-dot: "DotGothic16", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --line: rgba(232,246,255,.16); --line-2: rgba(232,246,255,.3); --ink-2: var(--qp-sub); --ink-3: #6f9bb2;
+  background-color: var(--qp-bg);
+  background-image: radial-gradient(rgba(232,246,255,.07) 1px, transparent 1.6px);
+  background-size: 16px 16px;
+  color: var(--qp-ink);
+}
+.quest-page .ph, .quest-page .sec, .quest-page .cta { background: transparent; color: var(--qp-ink); }
+.quest-page ::selection { background: var(--qp-gold); color: var(--qp-shadow); }
+
+/* 会話ウィンドウの枠(共通) */
+.quest-page .ph-foot,
+.quest-page .route {
+  background: var(--qp-panel);
+  border: 3px solid var(--qp-ink);
+  box-shadow: 0 0 0 3px var(--qp-panel), 6px 6px 0 3px var(--qp-shadow);
+}
+
+/* ---------- ページの見出し ---------- */
+.quest-page .crumb { font-family: var(--qp-pixel); font-size: 9px; letter-spacing: .04em; color: var(--qp-sub); }
+.quest-page .ph .display { font-family: var(--qp-pixel); font-weight: 400; letter-spacing: 0; line-height: 1.15; font-size: clamp(44px, 10vw, 150px); text-shadow: 6px 6px 0 var(--qp-shadow); }
+.quest-page .ph .display em { font-family: var(--qp-pixel); color: var(--qp-gold); }
+.quest-page .ph-foot { padding: clamp(18px, 3vw, 28px); margin-top: clamp(40px, 5vw, 64px); font-family: var(--qp-dot); }
+.quest-page .ph-foot h1 { font-family: var(--qp-dot); font-weight: 400; color: var(--qp-ink); }
+.quest-page .ph-foot h1::before { content: "▶"; display: inline-block; margin-right: .6em; font-size: .6em; vertical-align: .2em; color: var(--qp-gold); animation: cs-blink 1s steps(2) infinite; }
+.quest-page .ph-foot .lead { font-family: var(--qp-dot); letter-spacing: .02em; color: var(--qp-sub); }
+
+/* ---------- 光の帯のつなぎ:紺にそろえる ---------- */
+.quest-page .xsec { background: var(--qp-deep); }
+.quest-page .xsec-word .mono { color: var(--qp-gold); font-family: var(--qp-pixel); font-size: 10px; }
+.quest-page .xsec-word .en { font-family: var(--qp-pixel); font-weight: 400; letter-spacing: 0; font-size: clamp(28px, 5vw, 72px); line-height: 1.3; }
+.quest-page .xsec-word .ja { font-family: var(--qp-dot); }
+
+/* ---------- 締めの相談(CTA) ---------- */
+.quest-page .cta .tag, .quest-page .cta .head-row .mono { font-family: var(--qp-pixel); font-size: 9px; color: var(--qp-sub); }
+.quest-page .cta .display { font-family: var(--qp-pixel); font-weight: 400; letter-spacing: 0; line-height: 1.3; font-size: clamp(28px, 6vw, 92px); text-shadow: 5px 5px 0 var(--qp-shadow); }
+.quest-page .cta .display em { font-family: var(--qp-pixel); color: var(--qp-gold); }
+.quest-page .cta .h-ja { font-family: var(--qp-dot); font-weight: 400; }
+.quest-page .routes { gap: 24px; }
+.quest-page .route { font-family: var(--qp-dot); color: var(--qp-ink); overflow: hidden; }
+.quest-page .route::before { background: var(--qp-gold); }
+.quest-page .route:hover { color: var(--qp-shadow); }
+.quest-page .route--line::before { background: var(--line-green); }
+.quest-page .route--line:hover { color: #fff; }
+.quest-page .route-top { font-family: var(--qp-pixel); font-size: 9px; color: var(--qp-sub); }
+.quest-page .route:hover .route-top { color: inherit; }
+.quest-page .route h3 { font-family: var(--qp-dot); font-weight: 400; }
+.quest-page .route h3::before { content: "▶ "; color: var(--qp-gold); font-size: .6em; vertical-align: .2em; }
+.quest-page .route:hover h3::before { color: inherit; }
+.quest-page .cta-band { border-top: 3px dashed rgba(232,246,255,.3); }
+.quest-page .cta-band .m-item { font-family: var(--qp-pixel); font-weight: 400; letter-spacing: 0; font-size: clamp(22px, 3.6vw, 56px); padding-right: .6em; }
+.quest-page .cta-band .m-item.px { font-family: var(--qp-dot); font-size: clamp(28px, 4.4vw, 68px); }
+.quest-page .cta-band .m-sq { background: var(--qp-gold); }
+
+/* ---------- フッター ---------- */
+.quest-page .ft { background: var(--qp-deep); }
+@media (max-width: 760px) { .quest-page .routes { gap: 20px; } }
+.quest-page .hd-nav a[aria-current="page"] .n { color: var(--qp-gold); }
