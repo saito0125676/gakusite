@@ -341,6 +341,16 @@
       var cols = f.cols, rows = f.rows, mob = f.W < 860;
       var x0 = mob ? 1 : Math.round(cols * .6), x1 = mob ? cols - 2 : cols - Math.round(cols * .05);
       var y0 = mob ? Math.round(rows * .2) : Math.round(rows * .17), y1 = mob ? Math.round(rows * .5) : Math.round(rows * .66);
+      if (mob) {
+        // スマホ:上の帯(GAKU SITE+)の下から、見出しの少し上までに収める(文字と重ねない)
+        var cr = hc.getBoundingClientRect();
+        var hud = hero.querySelector('.hero-hud'), ttl = hero.querySelector('.hero-title');
+        if (hud && ttl) {
+          var topPx = hud.getBoundingClientRect().bottom - cr.top + 12;
+          var botPx = ttl.getBoundingClientRect().top - cr.top - 28;
+          y0 = Math.ceil(topPx / f.cell); y1 = Math.floor(botPx / f.cell);
+        }
+      }
       var grid = {};
       var set = function (x, y, c) { if (x >= x0 && x <= x1 && y >= y0 && y <= y1) grid[x + ',' + y] = c; };
       var rect = function (ax, ay, bx, by, c) { for (var y = ay; y <= by; y++) for (var x = ax; x <= bx; x++) set(x, y, c); };
@@ -352,7 +362,7 @@
       var ny = y0 + 5;                                       // ナビ
       rect(x0 + 3, ny - 1, x0 + 4, ny, C.pool); rect(x0 + 5, ny, x0 + 6, ny + 1, C.ink);
       for (var k = 0; k < 4; k++) rect(x1 - 4 - k * 5, ny, x1 - 2 - k * 5 - 1, ny, C.ink);
-      var hy0 = y0 + 9, hy1 = hy0 + Math.max(13, Math.round(gh * .42));  // ヒーロー
+      var hy0 = y0 + 9, hy1 = hy0 + Math.max(mob ? 6 : 13, Math.round(gh * .42));  // ヒーロー
       rect(x0 + 3, hy0, x1 - 3, hy1, C.pool);
       var tw = Math.round((gw - 6) * .62);
       rect(x0 + 6, hy0 + 3, x0 + 6 + tw, hy0 + 4, C.ink);
@@ -386,11 +396,16 @@
         if (!a) return;
         var left = a[0], top = a[1];
         if (n.getAttribute('data-at') === 'design') left -= n.offsetWidth;
+        // スマホ:03・04 は絵の下端の右・左に分けて、重ならないようにする
+        if (mob && n.getAttribute('data-at') === 'launch') { left = (x1 - 1) * cellPx - n.offsetWidth; top = y1 * cellPx - n.offsetHeight - 8; }
+        if (mob && n.getAttribute('data-at') === 'code') { left = (x0 + 2) * cellPx; top = y1 * cellPx - n.offsetHeight - 8; }
         left = clamp(left, 8, f.W - n.offsetWidth - 8);
         n.style.left = left + 'px'; n.style.top = top + 'px';
       });
     };
-    var field = new PixelField(hc, { host: hero.querySelector('.hero-stick'), ambient: .006, cell: 10, cellS: 8, onResize: layout });
+    var field = new PixelField(hc, { host: hero.querySelector('.hero-stick'), ambient: .006, cell: 10, cellS: 6, onResize: layout });
+    // フォントの読み込みで見出しの位置が変わるので、読み込み後に配置し直す
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { field.resize(); });
     field.extra = function (ctx) {
       var cell = field.cell;
       var n = Math.floor(clamp(.1 + heroP * 1.15, 0, 1) * build.length);
